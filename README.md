@@ -1,2 +1,2 @@
-# roamin-rabbit
-E-sim Shop
+# roaming-rabit
+e-sim shop
