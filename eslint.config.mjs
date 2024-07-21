@@ -19,7 +19,6 @@ const compat = new FlatCompat({
 });
 
 export default [...fixupConfigRules(compat.extends(
-    "@babel/plugin-proposal-private-property-in-object",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -42,7 +41,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint  --fix src/**/*",
-    "format": "prettier src/**/*.js --write. --config ./.prettierrc"
+    "format": "prettier src/**/*.js --write. --config ./.prettierrc",
+    "env-dev": "chmod +x switch_env.sh && ./switch_env.sh -e dev",
+    "env-stg": "chmod +x switch_env.sh && ./switch_env.sh -e stg",
+    "env-prod": "chmod +x switch_env.sh && ./switch_env.sh -e prod"
   },
   "eslintConfig": {
     "extends": []
@@ -72,6 +74,7 @@
     "globals": "^15.8.0",
     "husky": "^9.1.1",
     "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.6",
     "typescript-eslint": "^7.16.1"
   }
 }

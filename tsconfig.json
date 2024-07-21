@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "target": "es5",
     "lib": [
       "dom",
@@ -19,14 +20,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "paths": {
-        "@pages/*": ["./src/pages/*"],
-        "@components/*": ["./src/components/*"],
-        "@interface/*": ["./src/interface/*"],
-        "@services/*": ["./src/services/*"],
-    },
   },
   "include": [
-    "src"
-, "react-app-env.d.ts", "setupTests.ts"  ]
+    "src/**/*", "react-app-env.d.ts", "setupTests.ts"  ]
 }
