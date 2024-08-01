@@ -66,11 +66,7 @@ export default [...fixupConfigRules(compat.extends(
     rules: {
         quotes: ["error", "single"],
         "eol-last": 1,
-        "no-unused-vars": ["error", {
-            vars: "all",
-            args: "after-used",
-            ignoreRestSiblings: false,
-        }],
+        "no-unused-vars": "off",
 
         "prettier/prettier": ["error", {}, {
             usePrettierrc: true,
