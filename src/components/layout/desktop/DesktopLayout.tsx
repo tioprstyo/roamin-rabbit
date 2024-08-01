@@ -1,11 +1,8 @@
+import { CommingSoon } from 'components';
 import React from 'react';
 
 const DesktopLayout = () => {
-  return (
-    <div>
-      <div>DesktopLayout</div>
-    </div>
-  );
+  return <CommingSoon />;
 };
 
 export default DesktopLayout;

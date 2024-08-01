@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
-import { LoginPage, RegisterPage, VerifikasiPage, HomePage, EsimPage, ListingPage } from 'pages';
+import { BrowserRouter } from 'react-router-dom';
+import Router from 'routes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -11,14 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/verifikasi" element={<VerifikasiPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/manage" element={<EsimPage />} />
-        <Route path="/listing" element={<ListingPage />} />
-      </Routes>
+      <Router />
     </BrowserRouter>
   </React.StrictMode>,
 );
