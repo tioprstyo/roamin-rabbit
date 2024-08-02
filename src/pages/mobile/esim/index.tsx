@@ -2,6 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import NoSimImage from 'assets/img/no-sim.png';
 import { useNavigate } from 'react-router-dom';
+import { HEADER_TYPE } from 'interfaces';
+import { Header } from 'components';
 
 const MEsim = () => {
   const navigate = useNavigate();
@@ -9,9 +11,7 @@ const MEsim = () => {
 
   return (
     <>
-      <div className='header p-4 flex items-center justify-center'>
-        <h1 className='ml-[20px] text-2xl font-extrabold'>My eSIM</h1>
-      </div>
+      <Header headerType={HEADER_TYPE.NORMAL} headerTitle='My eSIM' />
       <div className='content-wrapper'>
         <div className='flex flex-wrap'>
           <div className='w-full'>

@@ -1,1 +1,2 @@
-export * from './Footer';
+export * from './BottomNavigation';
+export * from './Header';
