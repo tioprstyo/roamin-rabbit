@@ -1,3 +1,5 @@
+import { Header } from 'components';
+import { HEADER_TYPE } from 'interfaces';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +10,7 @@ const HomePage = () => {
     <>
       <div className='main-wrapper max-w-screen-md mx-auto'>
         <div className='header p-4 flex items-center '>
-          <div className='w-[62.1px] h-[62.1px] bg-[#FFEC69] rounded-[9px]'></div>
+          <div className='w-[62.1px] h-[62.1px] bg-[#FFEC69] rounded-[9px]' />
           <h1 className='ml-[20px] text-2xl font-extrabold'>Roaming Rabbit</h1>
         </div>
         <div className='content-wrapper p-4'>

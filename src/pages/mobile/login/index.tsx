@@ -1,3 +1,5 @@
+import { Header } from 'components';
+import { HEADER_TYPE } from 'interfaces';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -6,15 +8,12 @@ const MLogin = () => {
   const navigate = useNavigate();
 
   const Login = () => {
-    navigate('verifikasi');
+    navigate('/verifikasi');
   };
 
   return (
     <>
-      <div className='header p-4 flex items-center '>
-        <div className='w-[62.1px] h-[62.1px] bg-[#FFEC69] rounded-[9px]' />
-        <h1 className='ml-[20px] text-2xl font-extrabold'>Roaming Rabbit</h1>
-      </div>
+      <Header headerType={HEADER_TYPE.DEFAULT} headerTitle='Roaming Rabbit' />
       <div className='content-wrapper p-4'>
         <div className='heading'>
           <h1 className='font-black text-[34px] leading-10'>

@@ -2,14 +2,13 @@ import React from 'react';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
+import { Header } from 'components';
+import { HEADER_TYPE } from 'interfaces';
 
 const MListing = () => {
   return (
     <>
-      <div className='haader p-4 flex items-center'>
-        <div className='w-[62.1px] h-[62.1px] bg-[#FFEC69] rounded-[9px]'></div>
-        <h1 className='ml-[20px] text-2xl font-extrabold'>Roaming Rabbit</h1>
-      </div>
+      <Header headerType={HEADER_TYPE.DEFAULT} headerTitle='Roaming Rabbit' />
       <div className='content-wrapper p-4 bg-[#FFF7DA]'>
         <div className='form-content'>
           <div className='form mb-6'>

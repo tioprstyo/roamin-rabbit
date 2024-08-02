@@ -1,15 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Header } from 'components';
+import { HEADER_TYPE } from 'interfaces';
 
 const MHome = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <div className='header p-4 flex items-center '>
-        <div className='w-[62.1px] h-[62.1px] bg-[#FFEC69] rounded-[9px]'></div>
-        <h1 className='ml-[20px] text-2xl font-extrabold'>Roaming Rabbit</h1>
-      </div>
+      <Header headerType={HEADER_TYPE.DEFAULT} headerTitle='Roaming Rabbit' />
       <div className='content-wrapper p-4'>
         <div className='heading'>
           <span className='font-normal text-[32px] leading-10'>

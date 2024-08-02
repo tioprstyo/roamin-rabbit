@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
+import { Header } from 'components';
+import { HEADER_TYPE } from 'interfaces';
 
 const MVerification = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const MVerification = () => {
 
   const handleOtpSubmit = () => {
     // console.log(otp.join(''));
-    navigate('/home');
+    navigate('/');
   };
 
   useEffect(() => {
@@ -38,9 +39,7 @@ const MVerification = () => {
 
   return (
     <>
-      <div className='header p-4 flex items-center '>
-        <ArrowBackIcon onClick={() => navigate(-1)} />
-      </div>
+      <Header headerType={HEADER_TYPE.DETAIL} headerTitle='' />
       <div className='content-wrapper p-4 mt-10'>
         <div className='heading'>
           <h1 className='font-black text-[28px] leading-10'>Let’s Verify</h1>
