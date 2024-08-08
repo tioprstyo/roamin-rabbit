@@ -1,15 +1,21 @@
+import React, { useEffect, useState } from 'react';
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useLogin } from 'hooks';
 
 const MLogin = () => {
   const navigate = useNavigate();
+  const [phoneNumber, setPhoneNumber] = useState('');
 
-  const Login = () => {
-    navigate('/verifikasi');
-  };
+  const { data, mutate: mutateLogin } = useLogin();
+
+  useEffect(() => {
+    if (data?.status === 'success') {
+      navigate('/verifikasi');
+    }
+  }, [data, navigate]);
 
   return (
     <>
@@ -35,11 +41,14 @@ const MLogin = () => {
               type='text'
               placeholder='Full Name'
               className='px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full'
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPhoneNumber(e.target.value)
+              }
             />
           </div>
           <div className='form'>
             <button
-              onClick={Login}
+              onClick={() => mutateLogin(phoneNumber)}
               className='bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]'
               type='button'
             >

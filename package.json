@@ -15,6 +15,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/react-slick": "^0.23.13",
+    "axios": "^1.7.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -51,7 +52,6 @@
     "lint": "eslint  --fix src/**/*",
     "format": "prettier src/**/*.js --write. --config ./.prettierrc",
     "env-dev": "chmod +x switch_env.sh && ./switch_env.sh -e dev",
-    "env-stg": "chmod +x switch_env.sh && ./switch_env.sh -e stg",
     "env-prod": "chmod +x switch_env.sh && ./switch_env.sh -e prod"
   },
   "eslintConfig": {
