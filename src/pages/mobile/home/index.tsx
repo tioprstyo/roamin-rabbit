@@ -9,7 +9,7 @@ const MHome = () => {
   return (
     <>
       <Header headerType={HEADER_TYPE.DEFAULT} headerTitle='Roaming Rabbit' />
-      <div className='content-wrapper p-4'>
+      <div className='content-wrapper p-4 pb-[120px] min-h-[calc(100vh-6rem)]'>
         <div className='heading'>
           <span className='font-normal text-[32px] leading-10'>
             Get easily to

@@ -20,7 +20,7 @@ const BottomNavigation = () => {
 
   return (
     <div
-      className={`${isShowNavigation ? 'block' : 'hidden'} navigation flex justify-around items-center fixed bg-white bottom-0 left-0 right-0 py-3 border-t border-[#CECECE]`}
+      className={`${isShowNavigation ? 'block' : 'hidden'} navigation flex justify-around items-center fixed bottom-0 left-0 right-0 py-3 border-t border-[#CECECE] bg-white`}
     >
       {mainMenu.map((e: NavigationMenuProps) => (
         <NavLink
