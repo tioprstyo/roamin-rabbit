@@ -18,7 +18,7 @@ const Header = ({ headerType, headerTitle }: HeaderProps) => {
     return (
       <div className='header p-4 flex items-center '>
         <ArrowBackIcon onClick={() => navigate(-1)} />
-        <h1 className='ml-[20px] text-2xl font-extrabold'>{headerTitle}</h1>
+        <h1 className='text-2xl font-extrabold mx-auto'>{headerTitle}</h1>
       </div>
     );
   }

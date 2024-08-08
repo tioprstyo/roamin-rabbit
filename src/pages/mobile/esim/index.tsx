@@ -12,7 +12,7 @@ const MEsim = () => {
   return (
     <>
       <Header headerType={HEADER_TYPE.NORMAL} headerTitle='My eSIM' />
-      <div className='content-wrapper'>
+      <div className='content-wrapper pb-[120px] min-h-[calc(100vh-6rem)]'>
         <div className='flex flex-wrap'>
           <div className='w-full'>
             <ul

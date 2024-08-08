@@ -40,7 +40,7 @@ const MVerification = () => {
   return (
     <>
       <Header headerType={HEADER_TYPE.DETAIL} headerTitle='' />
-      <div className='content-wrapper p-4 mt-10'>
+      <div className='content-wrapper p-4 mt-10 min-h-[calc(100vh-6rem)]'>
         <div className='heading'>
           <h1 className='font-black text-[28px] leading-10'>Let’s Verify</h1>
           <p className='text-[16px] text-[#505454] font-normal mt-5'>

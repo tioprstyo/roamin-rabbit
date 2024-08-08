@@ -4,3 +4,6 @@ export { default as MVerification } from './verifikasi';
 export { default as MHome } from './home';
 export { default as MEsim } from './esim';
 export { default as MListing } from './listing';
+export { default as MFilter } from './filter';
+export { default as MDetail } from './detail';
+export { default as MNotActive } from './notActive';

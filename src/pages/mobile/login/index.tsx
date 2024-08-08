@@ -14,7 +14,7 @@ const MLogin = () => {
   return (
     <>
       <Header headerType={HEADER_TYPE.DEFAULT} headerTitle='Roaming Rabbit' />
-      <div className='content-wrapper p-4'>
+      <div className='content-wrapper p-4 min-h-[calc(100vh-6rem)]'>
         <div className='heading'>
           <h1 className='font-black text-[34px] leading-10'>
             Login
