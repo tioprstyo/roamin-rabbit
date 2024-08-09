@@ -11,16 +11,16 @@ const BottomNavigation = () => {
   const [isShowNavigation, setIsShowNavigation] = useState(false);
 
   useEffect(() => {
-    if (
+    setIsShowNavigation(
       mainMenu.find((e: NavigationMenuProps) => e.path === location.pathname)
-    ) {
-      setIsShowNavigation(true);
-    }
+        ? true
+        : false,
+    );
   }, [location.pathname]);
 
   return (
     <div
-      className={`${isShowNavigation ? 'block' : 'hidden'} navigation flex justify-around items-center fixed bottom-0 left-0 right-0 py-3 border-t border-[#CECECE] bg-white`}
+      className={`${isShowNavigation ? 'block' : 'hidden'} max-w-screen-md mx-auto navigation flex justify-around items-center fixed bottom-0 left-0 right-0 py-3 border-t border-[#CECECE] bg-white`}
     >
       {mainMenu.map((e: NavigationMenuProps) => (
         <NavLink

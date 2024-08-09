@@ -1,19 +1,17 @@
-import { AuthResponse, AuthProps } from 'interfaces';
+import { UserProps, UsersResponse } from 'interfaces';
 import { useState } from 'react';
 import { api } from 'services';
 
-export const useLogin = () => {
-  const [data, setData] = useState<AuthProps>();
+export const useGetProfile = () => {
+  const [data, setData] = useState<UserProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async (phoneNumber: string) => {
+  const mutate = async () => {
     setIsLoading(true);
     try {
-      const resp: AuthResponse = await api.post('/auth/login', {
-        phoneNumber,
-      });
+      const resp: UsersResponse = await api.get('/account');
       if (resp?.status === 'success') {
-        setData(resp.data);
+        setData(resp?.data);
         setIsLoading(false);
       }
     } catch (err) {

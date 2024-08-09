@@ -1,17 +1,15 @@
-import { AuthResponse, AuthProps } from 'interfaces';
+import { CountriesResponse, CountriesProps } from 'interfaces';
 import { useState } from 'react';
 import { api } from 'services';
 
-export const useLogin = () => {
-  const [data, setData] = useState<AuthProps>();
+export const useGetCountries = () => {
+  const [data, setData] = useState<CountriesProps[]>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async (phoneNumber: string) => {
+  const mutate = async () => {
     setIsLoading(true);
     try {
-      const resp: AuthResponse = await api.post('/auth/login', {
-        phoneNumber,
-      });
+      const resp: CountriesResponse = await api.get('/countries');
       if (resp?.status === 'success') {
         setData(resp.data);
         setIsLoading(false);

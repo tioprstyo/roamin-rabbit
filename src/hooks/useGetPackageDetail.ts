@@ -1,19 +1,19 @@
-import { AuthResponse, AuthProps } from 'interfaces';
+import { PackageDetailProps, PackageDetailResponse } from 'interfaces';
 import { useState } from 'react';
 import { api } from 'services';
 
-export const useLogin = () => {
-  const [data, setData] = useState<AuthProps>();
+export const useGetPackageDetail = (id: string) => {
+  const [data, setData] = useState<PackageDetailProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async (phoneNumber: string) => {
+  const mutate = async () => {
     setIsLoading(true);
     try {
-      const resp: AuthResponse = await api.post('/auth/login', {
-        phoneNumber,
-      });
+      const resp: PackageDetailResponse = await api.get(
+        `/packages/${id}/detail`,
+      );
       if (resp?.status === 'success') {
-        setData(resp.data);
+        setData(resp?.data);
         setIsLoading(false);
       }
     } catch (err) {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const Authorization = '';
 const config = {
   headers: {
@@ -7,8 +8,9 @@ const config = {
     ...{ Authorization },
   },
 };
+
 const get = (url: string) => {
-  axios
+  return axios
     .get(`${process.env.REACT_APP_BASE_URL}${url}`, config)
     .then((response) => {
       return response.data;
@@ -29,9 +31,21 @@ const post = (url: string, body: object) => {
     });
 };
 
+const put = (url: string, body: object) => {
+  return axios
+    .put(`${process.env.REACT_APP_BASE_URL}${url}`, body, config)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error;
+    });
+};
+
 const api = {
   get,
   post,
+  put,
 };
 
 export { api };

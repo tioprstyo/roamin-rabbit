@@ -1,19 +1,21 @@
-import { AuthResponse, AuthProps } from 'interfaces';
+import { ExpiredOrderResponse } from 'interfaces';
 import { useState } from 'react';
 import { api } from 'services';
 
-export const useLogin = () => {
-  const [data, setData] = useState<AuthProps>();
+export const useGetExpiredOrder = () => {
+  const [data, setData] = useState<ExpiredOrderResponse>({
+    data: [],
+    status: '',
+    metadata: undefined,
+  });
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async (phoneNumber: string) => {
+  const mutate = async () => {
     setIsLoading(true);
     try {
-      const resp: AuthResponse = await api.post('/auth/login', {
-        phoneNumber,
-      });
+      const resp: ExpiredOrderResponse = await api.get('/orders/expired');
       if (resp?.status === 'success') {
-        setData(resp.data);
+        setData(resp);
         setIsLoading(false);
       }
     } catch (err) {

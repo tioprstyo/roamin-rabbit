@@ -12,7 +12,7 @@ const MLogin = () => {
   const { data, mutate: mutateLogin } = useLogin();
 
   useEffect(() => {
-    if (data?.status === 'success') {
+    if (data) {
       navigate('/verifikasi');
     }
   }, [data, navigate]);
