@@ -1,6 +1,6 @@
-import { BottomNavigation } from 'components';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { BottomNavigation } from 'components';
 
 const MobileLayout = () => {
   return (

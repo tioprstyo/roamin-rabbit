@@ -79,10 +79,6 @@ export default [...fixupConfigRules(compat.extends(
 
         "import/prefer-default-export": "off",
         "react/prop-types": "off",
-
-        "max-len": ["warn", {
-            code: 80,
-        }],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "no-shadow": "off",
