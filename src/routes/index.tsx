@@ -14,7 +14,8 @@ import {
   MProfile,
   MOrderDetail,
   MCoupon,
-  MChangeNumber
+  MChangeNumber,
+  MEditProfile
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -122,6 +123,18 @@ const Router = () => {
           element: windowSize > 768 ? <MChangeNumber /> : <MChangeNumber />,
           path: 'change-number',
           key: 'change-number',
+        },
+        {
+          element: '',
+          path: 'profile',
+          key: 'profile',
+          children: [
+            {
+              element: windowSize > 768 ? <MEditProfile /> : <MEditProfile />,
+              path: 'edit',
+              key: 'edit',
+            },
+          ],
         },
       ],
     },
