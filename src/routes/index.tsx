@@ -9,7 +9,13 @@ import {
   MVerification,
   MFilter,
   MDetail,
-  MNotActive
+  MNotActive,
+  MHistory,
+  MProfile,
+  MOrderDetail,
+  MCoupon,
+  MChangeNumber,
+  MEditProfile
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -77,14 +83,58 @@ const Router = () => {
           key: 'filter',
         },
         {
-          element: windowSize > 768 ? <MDetail /> : <MDetail />,
+          element: '',
           path: 'detail',
           key: 'detail',
+          children: [
+            {
+              element: windowSize > 768 ? <MDetail /> : <MDetail />,
+              path: '',
+              key: 'detail-product',
+            },
+            {
+              element: windowSize > 768 ? <MNotActive /> : <MNotActive />,
+              path: 'not-active',
+              key: 'not-active',
+            },
+            {
+              element: windowSize > 768 ? <MOrderDetail /> : <MOrderDetail />,
+              path: 'order',
+              key: 'detail-order',
+            },
+          ],
         },
         {
-          element: windowSize > 768 ? <MNotActive /> : <MNotActive />,
-          path: 'not-active',
-          key: 'not-active',
+          element: windowSize > 768 ? <MHistory /> : <MHistory />,
+          path: 'history',
+          key: 'history',
+        },
+        {
+          element: windowSize > 768 ? <MProfile /> : <MProfile />,
+          path: 'profile',
+          key: 'profile',
+        },
+        {
+          element: windowSize > 768 ? <MCoupon /> : <MCoupon />,
+          path: 'coupon',
+          key: 'coupon',
+        },
+        {
+          element: windowSize > 768 ? <MChangeNumber /> : <MChangeNumber />,
+          path: 'change-number',
+          key: 'change-number',
+        },
+        {
+          element: '',
+          path: 'profile',
+          key: 'profile',
+          children: [
+            {
+              element: windowSize > 768 ? <MEditProfile /> : <MEditProfile />,
+              path: 'edit',
+              key: 'edit',
+            },
+          ],
         },
       ],
     },
