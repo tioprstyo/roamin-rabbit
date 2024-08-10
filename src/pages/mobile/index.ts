@@ -10,3 +10,4 @@ export { default as MNotActive } from './notActive';
 export { default as MHistory } from './history';
 export { default as MProfile } from './profile';
 export { default as MOrderDetail } from './orderDetail';
+export { default as MCoupon } from './coupon';

@@ -12,7 +12,8 @@ import {
   MNotActive,
   MHistory,
   MProfile,
-  MOrderDetail
+  MOrderDetail,
+  MCoupon
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -110,6 +111,11 @@ const Router = () => {
           element: windowSize > 768 ? <MProfile /> : <MProfile />,
           path: 'profile',
           key: 'profile',
+        },
+        {
+          element: windowSize > 768 ? <MCoupon /> : <MCoupon />,
+          path: 'coupon',
+          key: 'coupon',
         },
       ],
     },
