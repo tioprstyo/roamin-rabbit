@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const Authorization = '';
 const config = {
@@ -12,10 +12,10 @@ const config = {
 const get = (url: string) => {
   return axios
     .get(`${process.env.REACT_APP_BASE_URL}${url}`, config)
-    .then((response) => {
+    .then((response: AxiosResponse) => {
       return response.data;
     })
-    .catch((error) => {
+    .catch((error: AxiosError) => {
       return error;
     });
 };
@@ -23,10 +23,10 @@ const get = (url: string) => {
 const post = (url: string, body: object) => {
   return axios
     .post(`${process.env.REACT_APP_BASE_URL}${url}`, body, config)
-    .then((response) => {
+    .then((response: AxiosResponse) => {
       return response.data;
     })
-    .catch((error) => {
+    .catch((error: AxiosError) => {
       return error;
     });
 };
@@ -34,10 +34,10 @@ const post = (url: string, body: object) => {
 const put = (url: string, body: object) => {
   return axios
     .put(`${process.env.REACT_APP_BASE_URL}${url}`, body, config)
-    .then((response) => {
+    .then((response: AxiosResponse) => {
       return response.data;
     })
-    .catch((error) => {
+    .catch((error: AxiosError) => {
       return error;
     });
 };

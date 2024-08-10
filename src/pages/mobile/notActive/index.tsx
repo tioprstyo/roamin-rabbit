@@ -28,7 +28,7 @@ const MNotActive = () => {
                 <div className="paket-info flex flex-col justify-center">
                     <h6 className='text-base font-extrabold'>20 GB | 30 days</h6>
                     <span className='text-xs font-normal block mt-4'>ICCID</span>
-                    <b className='text-sm font-extrabold'>8965012404030963967</b>
+                    <b className='text-sm font-extrabold break-words'>8965012404030963967</b>
                 </div>
             </div>
             <div className='infornationn p-4'>

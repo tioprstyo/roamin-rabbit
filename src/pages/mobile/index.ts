@@ -7,3 +7,5 @@ export { default as MListing } from './listing';
 export { default as MFilter } from './filter';
 export { default as MDetail } from './detail';
 export { default as MNotActive } from './notActive';
+export { default as MHistory } from './history';
+export { default as MProfile } from './profile';

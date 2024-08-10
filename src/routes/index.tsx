@@ -9,7 +9,9 @@ import {
   MVerification,
   MFilter,
   MDetail,
-  MNotActive
+  MNotActive,
+  MHistory,
+  MProfile
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -77,14 +79,31 @@ const Router = () => {
           key: 'filter',
         },
         {
-          element: windowSize > 768 ? <MDetail /> : <MDetail />,
+          element: '',
           path: 'detail',
           key: 'detail',
+          children: [
+            {
+              element: windowSize > 768 ? <MDetail /> : <MDetail />,
+              path: '',
+              key: 'detail-product',
+            },
+            {
+              element: windowSize > 768 ? <MNotActive /> : <MNotActive />,
+              path: 'not-active',
+              key: 'not-active',
+            },
+          ],
         },
         {
-          element: windowSize > 768 ? <MNotActive /> : <MNotActive />,
-          path: 'not-active',
-          key: 'not-active',
+          element: windowSize > 768 ? <MHistory /> : <MHistory />,
+          path: 'history',
+          key: 'history',
+        },
+        {
+          element: windowSize > 768 ? <MProfile /> : <MProfile />,
+          path: 'profile',
+          key: 'profile',
         },
       ],
     },
