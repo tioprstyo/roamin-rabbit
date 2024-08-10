@@ -7,7 +7,6 @@ import PublicIcon from '@mui/icons-material/Public';
 import TuneIcon from '@mui/icons-material/Tune';
 import Slider from "react-slick";
 import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
 import { useRecoilValue } from 'recoil';

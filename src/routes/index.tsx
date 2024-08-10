@@ -13,7 +13,8 @@ import {
   MHistory,
   MProfile,
   MOrderDetail,
-  MCoupon
+  MCoupon,
+  MChangeNumber
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -116,6 +117,11 @@ const Router = () => {
           element: windowSize > 768 ? <MCoupon /> : <MCoupon />,
           path: 'coupon',
           key: 'coupon',
+        },
+        {
+          element: windowSize > 768 ? <MChangeNumber /> : <MChangeNumber />,
+          path: 'change-number',
+          key: 'change-number',
         },
       ],
     },

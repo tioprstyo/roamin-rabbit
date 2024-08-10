@@ -4,11 +4,11 @@ import { HEADER_TYPE } from 'interfaces';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from 'hooks';
+import PhoneInput from 'react-phone-input-2'
 
 const MLogin = () => {
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState('');
-
   const { data, mutate: mutateLogin } = useLogin();
 
   useEffect(() => {
@@ -37,13 +37,26 @@ const MLogin = () => {
             <label className='text-[14px] font-normal mb-3' htmlFor=''>
               Phone Number
             </label>
-            <input
-              type='text'
-              placeholder='Full Name'
-              className='px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full'
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPhoneNumber(e.target.value)
-              }
+            <PhoneInput
+                onChange={(phoneNumber:string, e: React.ChangeEvent<HTMLInputElement> )=> setPhoneNumber(e.target.value)}
+                country={'id'}
+                inputClass="px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full"
+                inputStyle={{
+                    width: '100%',
+                    height: 'auto',
+                    borderRadius: '9px',
+                    paddingLeft: '60px'
+                }}
+                buttonStyle={{
+                    borderRadius: '9px 0 0 9px',
+                    backgroundColor: 'white',
+                    width: '51px'
+                }}
+                inputProps={{
+                    name: 'phone',
+                    required: true,
+                    autoFocus: true
+                }}
             />
           </div>
           <div className='form'>
