@@ -1,11 +1,9 @@
 import React from 'react'
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
 import { useNavigate } from 'react-router-dom';
+import FlagImage from 'assets/img/flag.png';
 
 const MNotActive = () => {
   const navigate = useNavigate();
@@ -33,8 +31,8 @@ const MNotActive = () => {
             </div>
             <div className='infornationn p-4'>
                 <h2 className='text-xl font-extrabold mb-3'>Coverage (1 Country)</h2>
-                <div className='cardCoverage border border-[#E2DFDF] bg-white rounded-[9px] p-3 mb-3'>
-                    <PaymentsOutlinedIcon />
+                <div className='cardCoverage flex border border-[#E2DFDF] bg-white rounded-[9px] p-3 mb-3'>
+                    <img src={FlagImage} alt="" />
                     <p className='text-base font-medium ml-3 inline'>Indonesia</p>
                 </div>
                 <h2 className='text-xl font-extrabold mb-3'>Additional Information</h2>

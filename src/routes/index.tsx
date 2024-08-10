@@ -11,7 +11,8 @@ import {
   MDetail,
   MNotActive,
   MHistory,
-  MProfile
+  MProfile,
+  MOrderDetail
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -92,6 +93,11 @@ const Router = () => {
               element: windowSize > 768 ? <MNotActive /> : <MNotActive />,
               path: 'not-active',
               key: 'not-active',
+            },
+            {
+              element: windowSize > 768 ? <MOrderDetail /> : <MOrderDetail />,
+              path: 'order',
+              key: 'detail-order',
             },
           ],
         },
