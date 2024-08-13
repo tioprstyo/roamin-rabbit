@@ -130,6 +130,11 @@ const Router = () => {
           key: 'profile',
           children: [
             {
+              element: windowSize > 768 ? <MProfile /> : <MProfile />,
+              path: '',
+              key: 'account',
+            },
+            {
               element: windowSize > 768 ? <MEditProfile /> : <MEditProfile />,
               path: 'edit',
               key: 'edit',

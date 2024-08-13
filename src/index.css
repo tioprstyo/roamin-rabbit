@@ -64,3 +64,10 @@ code {
   display: block;
   margin: auto;
 }
+
+.icon-wrapper{
+  bottom: -40px;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+}
