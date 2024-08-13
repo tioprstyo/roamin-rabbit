@@ -6,7 +6,7 @@ export const useGetPackageDetail = (id: string) => {
   const [data, setData] = useState<PackageDetailProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async () => {
+  const fetching = async () => {
     setIsLoading(true);
     try {
       const resp: PackageDetailResponse = await api.get(
@@ -23,7 +23,7 @@ export const useGetPackageDetail = (id: string) => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

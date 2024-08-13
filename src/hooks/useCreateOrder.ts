@@ -10,7 +10,7 @@ export const useCreateOrder = () => {
   const [data, setData] = useState<CreateOrderProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async ({
+  const fetching = async ({
     packageId,
     paymentMethod,
     paymentMetadata,
@@ -35,7 +35,7 @@ export const useCreateOrder = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

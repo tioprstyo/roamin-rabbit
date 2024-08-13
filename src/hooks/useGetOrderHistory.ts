@@ -6,7 +6,7 @@ export const useGetOrderHistory = () => {
   const [data, setData] = useState<HistoryOrderProps[]>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async () => {
+  const fetching = async () => {
     setIsLoading(true);
     try {
       const resp: HistoryOrderResponse = await api.get('/orders');
@@ -21,7 +21,7 @@ export const useGetOrderHistory = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

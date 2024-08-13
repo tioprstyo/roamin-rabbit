@@ -9,7 +9,7 @@ import PhoneInput from 'react-phone-input-2'
 const MLogin = () => {
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState('');
-  const { data, mutate: mutateLogin } = useLogin();
+  const { data, fetching: fetchingLogin } = useLogin();
 
   useEffect(() => {
     if (data) {
@@ -61,7 +61,7 @@ const MLogin = () => {
           </div>
           <div className='form'>
             <button
-              onClick={() => mutateLogin(phoneNumber)}
+              onClick={() => fetchingLogin(phoneNumber)}
               className='bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]'
               type='button'
             >
