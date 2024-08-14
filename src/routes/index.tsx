@@ -15,7 +15,8 @@ import {
   MOrderDetail,
   MCoupon,
   MChangeNumber,
-  MEditProfile
+  MEditProfile,
+  MSupport
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -140,6 +141,11 @@ const Router = () => {
               key: 'edit',
             },
           ],
+        },
+        {
+          element: windowSize > 768 ? <MSupport /> : <MSupport />,
+          path: 'support',
+          key: 'support',
         },
       ],
     },

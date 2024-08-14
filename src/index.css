@@ -71,3 +71,11 @@ code {
   right: 50%;
   transform: translate(-50%, -50%);
 }
+
+.slick-slide {
+  border: 5px solid transparent;
+}
+
+.slick-slide img{
+  border: none;
+}
