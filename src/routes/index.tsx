@@ -9,14 +9,15 @@ import {
   MVerification,
   MFilter,
   MDetail,
-  MNotActive,
+  MStatus,
   MHistory,
   MProfile,
   MOrderDetail,
   MCoupon,
   MChangeNumber,
   MEditProfile,
-  MSupport
+  MSupport,
+  MDetailProduct
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -91,12 +92,17 @@ const Router = () => {
             {
               element: windowSize > 768 ? <MDetail /> : <MDetail />,
               path: '',
-              key: 'detail-product',
+              key: 'detail-page',
             },
             {
-              element: windowSize > 768 ? <MNotActive /> : <MNotActive />,
-              path: 'not-active',
-              key: 'not-active',
+              element: windowSize > 768 ? <MDetailProduct /> : <MDetailProduct />,
+              path: 'package',
+              key: 'detail-package',
+            },
+            {
+              element: windowSize > 768 ? <MStatus /> : <MStatus />,
+              path: 'status',
+              key: 'status',
             },
             {
               element: windowSize > 768 ? <MOrderDetail /> : <MOrderDetail />,
