@@ -162,6 +162,7 @@ const Router = () => {
           path: 'compatible',
           key: 'compatible',
         },
+<<<<<<< HEAD
         {
           element: windowSize > 768 ? <MActivate /> : <MActivate />,
           path: 'activate',
@@ -172,6 +173,8 @@ const Router = () => {
           path: 'tutorial',
           key: 'tutorial',
         },
+=======
+>>>>>>> 070c2d5 (DEV-1:Add Compatible  Page)
       ],
     },
   ];
