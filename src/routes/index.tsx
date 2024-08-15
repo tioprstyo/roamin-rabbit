@@ -17,7 +17,8 @@ import {
   MChangeNumber,
   MEditProfile,
   MSupport,
-  MDetailProduct
+  MDetailProduct,
+  MCompatible
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -152,6 +153,11 @@ const Router = () => {
           element: windowSize > 768 ? <MSupport /> : <MSupport />,
           path: 'support',
           key: 'support',
+        },
+        {
+          element: windowSize > 768 ? <MCompatible /> : <MCompatible />,
+          path: 'compatible',
+          key: 'compatible',
         },
       ],
     },
