@@ -6,7 +6,7 @@ export const useVerifyOTP = () => {
   const [data, setData] = useState<OtpProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async ({ phoneNumber, otp }: OtpRequest) => {
+  const fetching = async ({ phoneNumber, otp }: OtpRequest) => {
     setIsLoading(true);
     try {
       const resp: OtpResponse = await api.post('/auth/verify-otp', {
@@ -24,7 +24,7 @@ export const useVerifyOTP = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

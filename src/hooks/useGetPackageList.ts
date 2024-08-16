@@ -10,7 +10,7 @@ export const useGetPackageList = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async () => {
+  const fetching = async () => {
     setIsLoading(true);
     try {
       const resp: PackagesResponse = await api.get('/packages');
@@ -25,7 +25,7 @@ export const useGetPackageList = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

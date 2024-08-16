@@ -10,7 +10,7 @@ export const useGetUpcomingOrders = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async () => {
+  const fetching = async () => {
     setIsLoading(true);
     try {
       const resp: UpcommingOrderResponse = await api.get('/orders/upcoming');
@@ -25,7 +25,7 @@ export const useGetUpcomingOrders = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

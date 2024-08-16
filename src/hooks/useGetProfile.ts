@@ -6,7 +6,7 @@ export const useGetProfile = () => {
   const [data, setData] = useState<UserProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async () => {
+  const fetching = async () => {
     setIsLoading(true);
     try {
       const resp: UsersResponse = await api.get('/account');
@@ -21,7 +21,7 @@ export const useGetProfile = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

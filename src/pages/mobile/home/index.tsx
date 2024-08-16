@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
+import ReactFlagsSelect from "react-flags-select";
 
 const MHome = () => {
   const navigate = useNavigate();
+  const [select, setSelect] = useState<string>('ID');
+  const onSelect = (code: string) => setSelect(code);
 
   return (
     <>
@@ -23,10 +26,11 @@ const MHome = () => {
             <label className='text-[14px] font-normal mb-3' htmlFor=''>
               Choose your trip
             </label>
-            <input
-              type='text'
-              placeholder='Full Name'
-              className='px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full'
+            <ReactFlagsSelect
+                selected={select}
+                onSelect={onSelect}
+                countries={["ID","fi", "GB", "IE", "IT", "NL", "SE"]}
+                searchable
             />
           </div>
           <div className='form'>

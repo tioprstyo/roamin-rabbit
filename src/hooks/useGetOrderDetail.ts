@@ -6,7 +6,7 @@ export const useGetOrderDetail = () => {
   const [data, setData] = useState<OrderDetailProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async (id: string) => {
+  const fetching = async (id: string) => {
     setIsLoading(true);
     try {
       const resp: OrderDetailResponse = await api.get(`/orders/${id}/detail`);
@@ -21,7 +21,7 @@ export const useGetOrderDetail = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

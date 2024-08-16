@@ -5,11 +5,10 @@ import { HEADER_TYPE } from 'interfaces';
 import { useNavigate } from 'react-router-dom';
 import FlagImage from 'assets/img/flag.png';
 
-const MNotActive = () => {
+const MStatus = () => {
   const navigate = useNavigate();
 
   return (
-    
     <>
         <Header headerType={HEADER_TYPE.DETAIL} headerTitle='Details' />
         <div className='content-wrapper bg-[#FFF7DA] min-h-[calc(100vh-4rem)]'>
@@ -82,4 +81,4 @@ const MNotActive = () => {
   )
 }
 
-export default MNotActive
+export default MStatus;

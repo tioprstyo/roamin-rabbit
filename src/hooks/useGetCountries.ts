@@ -6,7 +6,7 @@ export const useGetCountries = () => {
   const [data, setData] = useState<CountriesProps[]>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async () => {
+  const fetching = async () => {
     setIsLoading(true);
     try {
       const resp: CountriesResponse = await api.get('/countries');
@@ -21,7 +21,7 @@ export const useGetCountries = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

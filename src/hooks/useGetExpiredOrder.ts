@@ -10,7 +10,7 @@ export const useGetExpiredOrder = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async () => {
+  const fetching = async () => {
     setIsLoading(true);
     try {
       const resp: ExpiredOrderResponse = await api.get('/orders/expired');
@@ -25,7 +25,7 @@ export const useGetExpiredOrder = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

@@ -6,7 +6,7 @@ export const useEditProfile = () => {
   const [data, setData] = useState<AuthProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async ({ name, email }: UserRequest) => {
+  const fetching = async ({ name, email }: UserRequest) => {
     setIsLoading(true);
     try {
       const resp: AuthResponse = await api.put('/account/edit', {
@@ -24,7 +24,7 @@ export const useEditProfile = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

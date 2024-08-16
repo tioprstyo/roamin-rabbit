@@ -6,7 +6,7 @@ export const useGetActivateOrder = () => {
   const [data, setData] = useState<ActivateOrderProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async (id: string) => {
+  const fetching = async (id: string) => {
     setIsLoading(true);
     try {
       const resp: ActivateOrderResponse = await api.get(
@@ -23,7 +23,7 @@ export const useGetActivateOrder = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

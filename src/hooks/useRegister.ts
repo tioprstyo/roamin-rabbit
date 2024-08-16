@@ -6,7 +6,7 @@ export const useRegister = () => {
   const [data, setData] = useState<AuthProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async ({ fullName, phoneNumber }: UserRegisterRequest) => {
+  const fetching = async ({ fullName, phoneNumber }: UserRegisterRequest) => {
     setIsLoading(true);
     try {
       const resp: AuthResponse = await api.post('/auth/register', {
@@ -24,7 +24,7 @@ export const useRegister = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

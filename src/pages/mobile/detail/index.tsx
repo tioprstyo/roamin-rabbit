@@ -1,218 +1,85 @@
 import React, { useState } from 'react'
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import LanguageIcon from '@mui/icons-material/Language';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useNavigate } from 'react-router-dom';
-import Slider from "react-slick";
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
-import { useRecoilValue } from 'recoil';
-import { slidetSettingState } from 'atom/sliderSetting';
+import FlagImage from 'assets/img/flag.png';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import TextSnippetOutlinedIcon from '@mui/icons-material/TextSnippetOutlined';
+import {ProgressCircle} from 'components';
+import EventIcon from '@mui/icons-material/Event';
+import InsertChartOutlinedTwoToneIcon from '@mui/icons-material/InsertChartOutlinedTwoTone';
 
 const MDetail = () => {
-  const navigate = useNavigate();
-  const [show, setShow] = useState<boolean>(false);
-  var settings = useRecoilValue(slidetSettingState);
 
   return (
     <>
-        <Header headerType={HEADER_TYPE.DETAIL} headerTitle='Package Details' />
-        <div className='content-wrapper bg-[#FFF7DA] min-h-[calc(100vh-4rem)] pb-28'>
-            <div className="listCard bg-white">
-                <div className='cardHeader p-4 flex items-center'>
-                    <div className="w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]"></div>
-                    <h1 className='ml-[20px] text-xl font-extrabold'>Bebas Konexii</h1>
-                </div>
-                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                    <span className='flex'>
-                        <SignalCellularAltIcon className='mr-3' />
-                        Data
-                    </span>
-                    <h3 className='text-[16px] font-black'>1 GB</h3>
-                </div>
-                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                    <span className='flex'>
-                        <CalendarMonthIcon className='mr-3' />
-                        Validity
-                    </span>
-                    <h3 className='text-[16px] font-black'>7 days</h3>
-                </div>
-                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                    <span className='flex'>
-                        <LanguageIcon className='mr-3' />
-                        Network
-                    </span>
-                    <h3 className='text-[16px] font-black'>Indosat</h3>
-                </div>
-                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                    <span className='flex'>
-                        <PaymentsOutlinedIcon className='mr-3' />
-                        Price
-                    </span>
-                    <h3 className='text-[16px] font-black'>US $ 12.00</h3>
-                </div>
-            </div>
-            <div className="detail-content p-4">
-                <div className="listCard border border-[#E2DFDF] bg-white rounded-[9px]">
-                    <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-3 py-3 items-center'>
-                        <h6 className='text-[16px] font-medium'>Coverage Country - Indonesia</h6>
-                        <SignalCellularAltIcon />
+        <Header headerType={HEADER_TYPE.DETAIL} headerTitle='Detail' />
+        <div className='content-wrapper bg-[#FFF7DA] min-h-[calc(100vh-4rem)]'>
+            <div className="header-info grid grid-rows-1 bg-white">
+                <div className="info grid grid-cols-2 gap-x-2 gap-y-5 border border-b-[#E2DFDF] p-4">
+                    <div className='paket-name'>
+                        <h1 className='text-xl font-extrabold'>Sobat Halo</h1>
                     </div>
-                    <div onClick={() => setShow(!show)} className='cardContent flex justify-between border border-t-[#E2DFDF] px-3 py-3 items-center'>
-                        <h6 className='text-[16px] font-medium'>Additional Information</h6>
-                        {show ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    <div className="paket-status">
+                        <span className='px-4 py-2 bg-[#FFEC69] rounded-[9px] text-xs font-extrabold'>Not Active</span>
                     </div>
-                    <div className={`contentHide ${show ? 'block': 'hidden'}`}>
-                        <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] px-3 py-3'>
-                            <p className='text-[12px] font-medium text-[#989898]'>PLAN TYPE</p>
-                            <h6 className='text-[16px] font-medium'>Data, Call (100 Minutes), Text (20 SMS)</h6>
-                        </div>
-                        <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] px-3 py-3'>
-                            <p className='text-[12px] font-medium text-[#989898]'>SPEED</p>
-                            <h6 className='text-[16px] font-medium'>4G/LTE/5G</h6>
-                            <span className='text-[14px] font-light'>This data plan is expected to have 5G speed. However, network coverage and speed may vary by location and time of day.</span>
-                        </div>
-                        <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] px-3 py-3'>
-                            <p className='text-[12px] font-medium text-[#989898]'>INSTALATION</p>
-                            <h6 className='text-[16px] font-medium'>Scan QR or enter code manually</h6>
-                        </div>
-                        <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] px-3 py-3'>
-                            <p className='text-[12px] font-medium text-[#989898]'>ACTIVATION POLICY</p>
-                            <h6 className='text-[16px] font-medium'>The validity period starts when the eSIM connects to any supported network/s.</h6>
-                        </div>
-                        <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] px-3 py-3'>
-                            <p className='text-[12px] font-medium text-[#989898]'>IP ROUTING</p>
-                            <h6 className='text-[16px] font-medium'>Yes</h6>
-                        </div>
-                        <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] px-3 py-3'>
-                            <p className='text-[12px] font-medium text-[#989898]'>THETERING</p>
-                            <h6 className='text-[16px] font-medium'>Enjoy 20mb per day to share with 3 people.</h6>
-                        </div>
-                        <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] px-3 py-3'>
-                            <p className='text-[12px] font-medium text-[#989898]'>eKYC (IDENTITY VERIFICATION)</p>
-                            <h6 className='text-[16px] font-medium'>Not Required</h6>
-                        </div>
-                        <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] px-3 py-3'>
-                            <p className='text-[12px] font-medium text-[#989898]'>Top Up Options</p>
-                            <h6 className='text-[16px] font-medium'>Yes</h6>
-                        </div>
+                    <div className='paket-square'>
+                        <div className="w-[157px] h-[97px] bg-[#E7E7E7] rounded-[9px]"></div>
+                    </div>
+                    <div className="paket-info flex flex-col justify-center">
+                        <h6 className='text-base font-extrabold'>20 GB | 30 days</h6>
+                        <span className='text-xs font-normal block mt-4'>ICCID</span>
+                        <b className='text-sm font-extrabold break-words'>8965012404030963967</b>
                     </div>
                 </div>
-                <div className="listing mt-6">
-                    <h6 className='text-[18px] font-extrabold'>Available Other Package (5)</h6>
-                    <Slider {...settings}>
-                        <div>
-                            <div className="listCard border border-[#E2DFDF] bg-white rounded-[9px] mt-5">
-                                <div className='cardHeader p-4 flex items-center'>
-                                    <div className="w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]"></div>
-                                    <h1 className='ml-[20px] text-xl font-extrabold'>Sobat Halo</h1>
-                                </div>
-                                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                                    <span className='flex'>
-                                        <SignalCellularAltIcon className='mr-3' />
-                                        Data
-                                    </span>
-                                    <h3 className='text-[16px] font-black'>1 GB</h3>
-                                </div>
-                                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                                    <span className='flex'>
-                                        <CalendarMonthIcon className='mr-3' />
-                                        Validity
-                                    </span>
-                                    <h3 className='text-[16px] font-black'>7 days</h3>
-                                </div>
-                                <div className="cardFooter grid grid-cols-2 items-center justify-center border border-t-[#E2DFDF] p-4">
-                                    <div className='cardPrice text-center'>
-                                        <h6 className='text-xl font-black'>US $ 50.00</h6>
-                                    </div>
-                                    <div className='cardButton text-center'>
-                                        <button className="text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]" type="button">
-                                            Choose
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="listCard border border-[#E2DFDF] bg-white rounded-[9px] mt-5">
-                                <div className='cardHeader p-4 flex items-center'>
-                                    <div className="w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]"></div>
-                                    <h1 className='ml-[20px] text-xl font-extrabold'>Helo Sel</h1>
-                                </div>
-                                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                                    <span className='flex'>
-                                        <SignalCellularAltIcon className='mr-3' />
-                                        Data
-                                    </span>
-                                    <h3 className='text-[16px] font-black'>1 GB</h3>
-                                </div>
-                                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                                    <span className='flex'>
-                                        <CalendarMonthIcon className='mr-3' />
-                                        Validity
-                                    </span>
-                                    <h3 className='text-[16px] font-black'>7 days</h3>
-                                </div>
-                                <div className="cardFooter grid grid-cols-2 items-center justify-center border border-t-[#E2DFDF] p-4">
-                                    <div className='cardPrice text-center'>
-                                        <h6 className='text-xl font-black'>US $ 50.00</h6>
-                                    </div>
-                                    <div className='cardButton text-center'>
-                                        <button className="text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]" type="button">
-                                            Choose
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="listCard border border-[#E2DFDF] bg-white rounded-[9px] mt-5">
-                                <div className='cardHeader p-4 flex items-center'>
-                                    <div className="w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]"></div>
-                                    <h1 className='ml-[20px] text-xl font-extrabold'>Bebas Konexii</h1>
-                                </div>
-                                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                                    <span className='flex'>
-                                        <SignalCellularAltIcon className='mr-3' />
-                                        Data
-                                    </span>
-                                    <h3 className='text-[16px] font-black'>1 GB</h3>
-                                </div>
-                                <div className='cardContent flex justify-between border border-t-[#E2DFDF] px-4 py-6 items-center'>
-                                    <span className='flex'>
-                                        <CalendarMonthIcon className='mr-3' />
-                                        Validity
-                                    </span>
-                                    <h3 className='text-[16px] font-black'>7 days</h3>
-                                </div>
-                                <div className="cardFooter grid grid-cols-2 items-center justify-center border border-t-[#E2DFDF] p-4">
-                                    <div className='cardPrice text-center'>
-                                        <h6 className='text-xl font-black'>US $ 50.00</h6>
-                                    </div>
-                                    <div className='cardButton text-center'>
-                                        <button className="text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]" type="button">
-                                            Choose
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Slider>
+                <div className="plan-details flex justify-between border border-b-[#E2DFDF] p-3">
+                    <span className='flex items-center text-sm font-normal'><TextSnippetOutlinedIcon className='mr-2'/> Plan Details</span>
+                    <ChevronRightIcon />
                 </div>
             </div>
-        </div>
-        <div className="fromBuy grid grid-cols-2 items-center justify-center border border-t-[#E2DFDF] p-4 fixed bottom-0 left-0 right-0 bg-white">
-            <div className='buyPrice text-center'>
-                <h6 className='text-xl font-black'>US $ 50.00</h6>
-            </div>
-            <div className='buyButton text-center'>
-                <button className="bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] w-9/12 text-[14px]" type="button">
-                    Buy Now
-                </button>
+            <div className='infornationn p-4'>
+                <div className="active-package rounded-lg bg-white border border-[#E2DFDF] mb-4">
+                  <div className="card p-3 flex items-center border-b border-b-[#E2DFDF]">
+                      <span className='flex items-center text-sm font-normal'><InsertChartOutlinedTwoToneIcon className='mr-2'/> Usage Data</span>
+                  </div>
+                  <div className="card p-3 flex flex-row gap-x-2 items-center border-b border-b-[#E2DFDF]">
+                      <div className='square-section basis-2/5'>
+                        <ProgressCircle value={80} />
+                      </div>
+                      <div className='package-name basis-3/5 flex flex-col gap-y-1 justify-between'>
+                          <div className="keterangan-section grid grid-cols-2 gap-1">
+                              <div className="keterangan">
+                                  <span className='block text-[10px] font-light'>USED DATA</span>
+                                  <b className='text-sm font-extrabold'>19 MB</b>
+                              </div>
+                              <div className="keterangan">
+                                  <span className='block text-[10px] font-light'>CALLS</span>
+                                  <b className='text-sm font-extrabold'>60/100 Minutes</b>
+                              </div>
+                              <div className="keterangan">
+                                  <span className='block text-[10px] font-light'>TOTAL  DATA</span>
+                                  <b className='text-sm font-extrabold'>20 GB</b>
+                              </div>
+                              <div className="keterangan">
+                                  <span className='block text-[10px] font-light'>TEXT</span>
+                                  <b className='text-sm font-extrabold'>15/20 SMS</b>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div className='card p-3 flex justify-between items-center'>
+                    <span className='flex items-center text-sm font-normal'><EventIcon className='mr-2' /> Expired On</span>
+                    <b className='text-sm font-black'>15 June 2024 | 11:28 (GMT)</b>
+                  </div>
+                </div>
+                <div className="text-plan text-center mb-4 p-4">
+                    <h2 className='text-[22px] font-semibold mb-4'>Want to reactivate this <br /> data plan?</h2>
+                    <p className='text-sm font-light'>Top up by selecting and purchase a data plan</p>
+                </div>
+                <div className='form-topup'>
+                    <button  className="bg-[#FFEC69] text-[#000000] font-extrabold text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]" type="button">
+                        Top Up
+                    </button>
+                </div>
             </div>
         </div>
     </>

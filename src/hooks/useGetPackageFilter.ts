@@ -6,7 +6,7 @@ export const useGetPackageFilter = () => {
   const [data, setData] = useState<PackageFilterProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async () => {
+  const fetching = async () => {
     setIsLoading(true);
     try {
       const resp: PackagesFilterResponse = await api.get('/packages/filter');
@@ -21,7 +21,7 @@ export const useGetPackageFilter = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };

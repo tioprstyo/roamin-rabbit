@@ -12,7 +12,7 @@ const MHistory = () => {
             <Header headerType={HEADER_TYPE.DETAIL} headerTitle='Order History' />
             <div className='content-wrapper bg-[#FFF7DA] min-h-[calc(100vh-4rem)]'>
                 <div className="card flex flex-row gap-x-2 items-center bg-white p-4 border border-[#E2DFDF]">
-                    <div className='paket-square basis-1/4'>
+                    <div className='paket-square basis-1/5'>
                         <div className="w-[83px] h-[51px] bg-[#E7E7E7] rounded-[9px]"></div>
                     </div>
                     <div className='paket-name basis-3/4 flex flex-row gap-x-2 justify-between'>

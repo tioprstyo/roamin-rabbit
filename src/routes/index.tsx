@@ -9,13 +9,19 @@ import {
   MVerification,
   MFilter,
   MDetail,
-  MNotActive,
+  MStatus,
   MHistory,
   MProfile,
   MOrderDetail,
   MCoupon,
   MChangeNumber,
-  MEditProfile
+  MEditProfile,
+  MSupport,
+  MDetailProduct,
+  MCompatible,
+  MConfirm,
+  MActivate,
+  MTutorial
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -90,12 +96,17 @@ const Router = () => {
             {
               element: windowSize > 768 ? <MDetail /> : <MDetail />,
               path: '',
-              key: 'detail-product',
+              key: 'detail-page',
             },
             {
-              element: windowSize > 768 ? <MNotActive /> : <MNotActive />,
-              path: 'not-active',
-              key: 'not-active',
+              element: windowSize > 768 ? <MDetailProduct /> : <MDetailProduct />,
+              path: 'package',
+              key: 'detail-package',
+            },
+            {
+              element: windowSize > 768 ? <MStatus /> : <MStatus />,
+              path: 'status',
+              key: 'status',
             },
             {
               element: windowSize > 768 ? <MOrderDetail /> : <MOrderDetail />,
@@ -130,11 +141,36 @@ const Router = () => {
           key: 'profile',
           children: [
             {
+              element: windowSize > 768 ? <MProfile /> : <MProfile />,
+              path: '',
+              key: 'account',
+            },
+            {
               element: windowSize > 768 ? <MEditProfile /> : <MEditProfile />,
               path: 'edit',
               key: 'edit',
             },
           ],
+        },
+        {
+          element: windowSize > 768 ? <MSupport /> : <MSupport />,
+          path: 'support',
+          key: 'support',
+        },
+        {
+          element: windowSize > 768 ? <MCompatible /> : <MCompatible />,
+          path: 'compatible',
+          key: 'compatible',
+        },
+        {
+          element: windowSize > 768 ? <MActivate /> : <MActivate />,
+          path: 'activate',
+          key: 'activate',
+        },
+        {
+          element: windowSize > 768 ? <MTutorial /> : <MTutorial />,
+          path: 'tutorial',
+          key: 'tutorial',
         },
       ],
     },

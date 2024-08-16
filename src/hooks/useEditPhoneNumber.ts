@@ -6,7 +6,7 @@ export const useEditPhoneNumber = () => {
   const [data, setData] = useState<AuthProps>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const mutate = async (phoneNumber: string) => {
+  const fetching = async (phoneNumber: string) => {
     setIsLoading(true);
     try {
       const resp: AuthResponse = await api.put('/account/change-phone', {
@@ -23,7 +23,7 @@ export const useEditPhoneNumber = () => {
 
   return {
     data,
-    mutate,
+    fetching,
     isLoading,
   };
 };
