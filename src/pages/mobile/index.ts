@@ -16,3 +16,4 @@ export { default as MEditProfile } from './editProfile';
 export { default as MSupport } from './support';
 export { default as MDetailProduct } from './detailProduct';
 export { default as MCompatible} from './compatible';
+export { default as MConfirm} from './confirm';

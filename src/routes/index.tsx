@@ -18,7 +18,8 @@ import {
   MEditProfile,
   MSupport,
   MDetailProduct,
-  MCompatible
+  MCompatible,
+  MConfirm
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -158,6 +159,11 @@ const Router = () => {
           element: windowSize > 768 ? <MCompatible /> : <MCompatible />,
           path: 'compatible',
           key: 'compatible',
+        },
+        {
+          element: windowSize > 768 ? <MConfirm /> : <MConfirm />,
+          path: 'confirmasi',
+          key: 'confirmasi',
         },
       ],
     },
