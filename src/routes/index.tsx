@@ -20,7 +20,8 @@ import {
   MDetailProduct,
   MCompatible,
   MConfirm,
-  MActivate
+  MActivate,
+  MTutorial
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -165,6 +166,11 @@ const Router = () => {
           element: windowSize > 768 ? <MActivate /> : <MActivate />,
           path: 'activate',
           key: 'activate',
+        },
+        {
+          element: windowSize > 768 ? <MTutorial /> : <MTutorial />,
+          path: 'tutorial',
+          key: 'tutorial',
         },
       ],
     },
