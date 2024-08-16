@@ -17,3 +17,4 @@ export { default as MSupport } from './support';
 export { default as MDetailProduct } from './detailProduct';
 export { default as MCompatible} from './compatible';
 export { default as MConfirm} from './confirm';
+export { default as MActivate} from './activate';

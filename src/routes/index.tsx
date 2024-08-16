@@ -19,7 +19,8 @@ import {
   MSupport,
   MDetailProduct,
   MCompatible,
-  MConfirm
+  MConfirm,
+  MActivate
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -161,9 +162,9 @@ const Router = () => {
           key: 'compatible',
         },
         {
-          element: windowSize > 768 ? <MConfirm /> : <MConfirm />,
-          path: 'confirmasi',
-          key: 'confirmasi',
+          element: windowSize > 768 ? <MActivate /> : <MActivate />,
+          path: 'activate',
+          key: 'activate',
         },
       ],
     },

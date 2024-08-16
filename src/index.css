@@ -79,3 +79,7 @@ code {
 .slick-slide img{
   border: none;
 }
+
+.break-anywhere{
+  overflow-wrap: anywhere;
+}
