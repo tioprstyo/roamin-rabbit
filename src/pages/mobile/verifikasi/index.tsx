@@ -3,12 +3,19 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
+import { useRecoilState } from 'recoil';
+import { inputNumberState } from 'atom/inputNumber';
+import { useVerifyOTP } from 'hooks';
+import { CookiesProvider, useCookies } from 'react-cookie'
 
 const MVerification = () => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const inputRef = useRef<(HTMLDivElement | null)[]>([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const inputNumber = useRecoilState(inputNumberState);
+  const {data, fetching: fetchingOTP} = useVerifyOTP();
+  const [token, setToken] = useCookies(['token'])
 
   const handleOtpChange = (value: string, index: number) => {
     const newOtp = [...otp];
@@ -25,8 +32,11 @@ const MVerification = () => {
   };
 
   const handleOtpSubmit = () => {
-    // console.log(otp.join(''));
-    navigate('/');
+    let inputOtp = otp.join('');
+    fetchingOTP({
+        phoneNumber: inputNumber[0],
+        otp: inputOtp 
+    })
   };
 
   useEffect(() => {
@@ -35,7 +45,14 @@ const MVerification = () => {
     } else {
       setIsButtonDisabled(true);
     }
-  }, [otp]);
+
+    if(data){
+      setToken('token', data.token);
+      navigate('/')
+    }
+
+    console.log(data)
+  }, [otp, data]);
 
   return (
     <>
@@ -44,9 +61,9 @@ const MVerification = () => {
         <div className='heading'>
           <h1 className='font-black text-[28px] leading-10'>Let’s Verify</h1>
           <p className='text-[16px] text-[#505454] font-normal mt-5'>
-            OTP code has send to your WhatsApp
+            OTP code has send to your WhatsApp 
             <br />
-            <span className='font-semibold'>[number phone]</span>
+            <span className='font-semibold'>[{inputNumber[0]}]</span>
           </p>
         </div>
         <div className='form-content mt-5'>
