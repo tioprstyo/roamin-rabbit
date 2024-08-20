@@ -9,8 +9,8 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [inputNumber, setInputNumber] = useRecoilState(inputNumberState);
 
-  const fetching = async (numberPhone: string) => {
-    let phoneNumber = '+'+numberPhone;
+  const fetching = async (phoneNumber: string) => {
+    phoneNumber = '+'+phoneNumber;
     setInputNumber(phoneNumber);
     setIsLoading(true);
     try {
