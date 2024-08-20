@@ -172,6 +172,11 @@ const Router = () => {
           path: 'tutorial',
           key: 'tutorial',
         },
+        {
+          element: windowSize > 768 ? <MConfirm /> : <MConfirm />,
+          path: 'confirmasi',
+          key: 'confirmasi',
+        },
       ],
     },
   ];

@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
 import ReactFlagsSelect from "react-flags-select";
+import { useGetCountries } from 'hooks';
 
 const MHome = () => {
   const navigate = useNavigate();
   const [select, setSelect] = useState<string>('ID');
+  const [kode, setKode] = useState<Array<string>>([]);
+  const {data, fetching: fetchingCountry} = useGetCountries();
+
   const onSelect = (code: string) => setSelect(code);
+
+  useEffect(() => {
+    if(!data){
+      fetchingCountry();
+    } else {
+      data.map((code) => setKode(kode => [...kode, code.isoCode]))
+    }
+  }, [data]);
 
   return (
     <>
@@ -29,7 +41,7 @@ const MHome = () => {
             <ReactFlagsSelect
                 selected={select}
                 onSelect={onSelect}
-                countries={["ID","fi", "GB", "IE", "IT", "NL", "SE"]}
+                countries={kode}
                 searchable
             />
           </div>

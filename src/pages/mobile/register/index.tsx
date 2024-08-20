@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
+import { useRegister } from 'hooks';
 
 const MRegister = () => {
+  const navigate = useNavigate();
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [fullName, setFullName] = useState('');
+  const {data, fetching: fetchingRegister} = useRegister()
+
+  const register = () => {
+    fetchingRegister({fullName, phoneNumber})
+  }
+
+  useEffect(() => {
+    if (data) {
+      navigate('/verifikasi');
+    }
+  }, [data, navigate]);
+
   return (
     <>
       <Header headerType={HEADER_TYPE.DEFAULT} headerTitle='Roaming Rabbit' />
@@ -26,29 +43,19 @@ const MRegister = () => {
               Full Name
             </label>
             <input
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
+              name='fullName'
               type='text'
               placeholder='Full Name'
               className='px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full'
             />
-          </div>
-          <div className='form mb-4'>
-            <label className='text-[14px] font-normal mb-3' htmlFor=''>
-              Email
-            </label>
-            <input
-              type='email'
-              placeholder='Email'
-              className='px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full'
-            />
-            <span className='text-[#C6C6C6] text-[10px] font-normal'>
-              Email must contains “@” and “.”, example: email@mail.com
-            </span>
           </div>
           <div className='form mb-10'>
             <label className='text-[14px] font-normal mb-3' htmlFor=''>
               Phone Number
             </label>
             <PhoneInput
+                onChange={(e: string )=> setPhoneNumber(e)}
                 country={'id'}
                 inputClass="px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full"
                 inputStyle={{
@@ -63,7 +70,7 @@ const MRegister = () => {
                     width: '51px'
                 }}
                 inputProps={{
-                    name: 'phone',
+                    name: 'fullName',
                     required: true,
                     autoFocus: true
                 }}
@@ -71,6 +78,7 @@ const MRegister = () => {
           </div>
           <div className='form mb-7'>
             <button
+            onClick={register}
               className='bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 mt-3 w-full text-[14px]'
               type='button'
             >

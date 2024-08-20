@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import Cookies from 'js-cookie';
 
-const Authorization = '';
+const Authorization = Cookies.get('token');
 const config = {
   headers: {
     'Content-Type': 'application/json',

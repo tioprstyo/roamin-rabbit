@@ -3,11 +3,7 @@ import { useState } from 'react';
 import { api } from 'services';
 
 export const useGetUpcomingOrders = () => {
-  const [data, setData] = useState<UpcommingOrderResponse>({
-    data: [],
-    status: '',
-    metadata: undefined,
-  });
+  const [data, setData] = useState<UpcommingOrderResponse>();
   const [isLoading, setIsLoading] = useState(false);
 
   const fetching = async () => {

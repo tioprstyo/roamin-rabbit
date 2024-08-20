@@ -38,7 +38,7 @@ const MLogin = () => {
               Phone Number
             </label>
             <PhoneInput
-                onChange={(phoneNumber:string, e: React.ChangeEvent<HTMLInputElement> )=> setPhoneNumber(e.target.value)}
+                onChange={(e: string )=> setPhoneNumber(e)}
                 country={'id'}
                 inputClass="px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full"
                 inputStyle={{
