@@ -6,7 +6,7 @@ import { HEADER_TYPE } from 'interfaces';
 import { useRecoilState } from 'recoil';
 import { inputNumberState } from 'atom/inputNumber';
 import { useVerifyOTP } from 'hooks';
-import { CookiesProvider, useCookies } from 'react-cookie'
+import Cookies from 'js-cookie';
 
 const MVerification = () => {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ const MVerification = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const inputNumber = useRecoilState(inputNumberState);
   const {data, fetching: fetchingOTP} = useVerifyOTP();
-  const [token, setToken] = useCookies(['token'])
 
   const handleOtpChange = (value: string, index: number) => {
     const newOtp = [...otp];
@@ -47,7 +46,7 @@ const MVerification = () => {
     }
 
     if(data){
-      setToken('token', data.token);
+      Cookies.set('token', data.token)
       navigate('/')
     }
 
