@@ -14,7 +14,6 @@ const MHistory = () => {
     if(!data){
         fetching();
     }
-    console.log(data)
   },[data]);
 
   return (

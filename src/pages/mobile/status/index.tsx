@@ -15,8 +15,6 @@ const MStatus = () => {
     if(!data){
         fetching(id);
     }
-
-    console.log(data)
   }, [data]);
 
   return (

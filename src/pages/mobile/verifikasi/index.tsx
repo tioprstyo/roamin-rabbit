@@ -49,8 +49,6 @@ const MVerification = () => {
       Cookies.set('token', data.token)
       navigate('/')
     }
-
-    console.log(data)
   }, [otp, data]);
 
   return (

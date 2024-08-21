@@ -4,7 +4,7 @@ CircularProgressProps,
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-const ProgressCircle = (props: CircularProgressProps & { value: number },) => {
+const ProgressCircle = (props: CircularProgressProps & { value: number, total?: number },) => {
     return (
         <Box sx={{ position: 'relative', display: 'inline-flex' }}>
             <CircularProgress size={130} thickness={5} sx={{ 
@@ -32,7 +32,7 @@ const ProgressCircle = (props: CircularProgressProps & { value: number },) => {
                 component="div"
                 textAlign='center'
                 color="text.secondary"
-                ><b className='text-sm'>{`${props.value} MB`}</b> <br /> <span className='text-[10px]'>REMAINING DATA</span> </Typography>
+                ><b className='text-sm'>{`${props.total} MB`}</b> <br /> <span className='text-[10px]'>REMAINING DATA</span> </Typography>
             </Box>
         </Box>
     );

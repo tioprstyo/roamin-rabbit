@@ -25,8 +25,6 @@ const MEsim = () => {
       fetchingExpired();
     }
 
-    // console.log(dataExpired)
-
   }, [dataUpcoming, dataExpired])
 
   return (
