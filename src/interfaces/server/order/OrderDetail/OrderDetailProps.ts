@@ -16,4 +16,5 @@ export interface OrderDetailProps {
   isActivated: boolean;
   isExpired: boolean;
   countryIso: string;
+  orderStatus: string;
 }

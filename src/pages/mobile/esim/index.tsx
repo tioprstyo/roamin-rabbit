@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import NoSimImage from 'assets/img/no-sim.png';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HEADER_TYPE } from 'interfaces';
 import { Header } from 'components';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -116,9 +116,9 @@ const MEsim = () => {
                                       <button className="text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]" type="button">
                                           Active
                                       </button>
-                                      <button className="text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]" type="button">
+                                      <Link to={`/detail/sim/${data.id}`} className="text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]" type="button">
                                           View Detail
-                                      </button>
+                                      </Link>
                                   </div>
                                 </div>
                               </div>
@@ -190,9 +190,9 @@ const MEsim = () => {
                                     <button className="text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]" type="button">
                                         Active
                                     </button>
-                                    <button className="text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]" type="button">
+                                    <Link to={`/detail/sim/${data.id}`} className="text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]" type="button">
                                         View Detail
-                                    </button>
+                                    </Link>
                                 </div>
                               </div>
                             </div>
