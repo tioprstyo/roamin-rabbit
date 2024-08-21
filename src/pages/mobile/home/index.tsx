@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from 'components';
-import { HEADER_TYPE } from 'interfaces';
+import { CountriesProps, CountriesSelect, HEADER_TYPE } from 'interfaces';
 import ReactFlagsSelect from "react-flags-select";
 import { useGetCountries } from 'hooks';
 
 const MHome = () => {
   const navigate = useNavigate();
-  const [select, setSelect] = useState<string>('ID');
+  const [select, setSelect] = useState<CountriesSelect>({
+    countryId: '',
+    isoCode: 'ID'
+  });
   const [kode, setKode] = useState<Array<string>>([]);
   const {data, fetching: fetchingCountry} = useGetCountries();
 
-  const onSelect = (code: string) => setSelect(code);
+  const onSelect = (code: string) => {
+      const selectedData =  data?.find((e: CountriesProps) => e.isoCode == code);
+      setSelect({
+        ...select,
+        countryId: selectedData?.id || '',
+        isoCode: selectedData?.isoCode || 'ID'
+      })
+  };
 
   useEffect(() => {
     if(!data){
@@ -39,7 +49,7 @@ const MHome = () => {
               Choose your trip
             </label>
             <ReactFlagsSelect
-                selected={select}
+                selected={select.isoCode}
                 onSelect={onSelect}
                 countries={kode}
                 searchable
