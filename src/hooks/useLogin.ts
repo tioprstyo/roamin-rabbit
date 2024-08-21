@@ -18,7 +18,6 @@ export const useLogin = () => {
         phoneNumber,
       });
       if (resp?.status === 'success') {
-        console.log(resp)
         setData(resp.data);
         setIsLoading(false);
       }

@@ -1,7 +1,11 @@
 export interface HistoryOrderProps {
+  caption: string;
+  createdAt: string;
   id: string;
-  pic: string;
   name: string;
-  iccid: string;
-  country: string;
+  orderStatus: string;
+  orderStatusString: string;
+  pic: string;
+  price: string;
+  validity: string;
 }

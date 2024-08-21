@@ -2,10 +2,11 @@ export interface ActivePlanProps {
   id: string;
   pic: string;
   name: string;
-  usedDate: string;
+  usedData: number;
+  usedCall: number;
+  usedSms: number;
   expiredAt: string;
-  quotaCall: string;
-  quotaData: string;
-  quotaText: string;
-  remainingData: string;
+  quotaCall: number;
+  quotaData: number;
+  quotaSms: number;
 }

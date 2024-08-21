@@ -105,8 +105,8 @@ const Router = () => {
             },
             {
               element: windowSize > 768 ? <MStatus /> : <MStatus />,
-              path: 'status',
-              key: 'status',
+              path: 'sim/:id',
+              key: 'sim',
             },
             {
               element: windowSize > 768 ? <MOrderDetail /> : <MOrderDetail />,
