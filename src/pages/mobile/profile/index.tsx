@@ -21,7 +21,7 @@ const MProfile = () => {
   const {data, fetching} = useGetProfile();
 
   const tab = (value: number) => {show == value ? setShow(0) : setShow(value)}
-  const usedTotal = (data: any) => {return data?.quotaData * data?.usedData} 
+  const usedTotal = (data: any) => {return 100 - (data?.quotaData && data?.usedData ? (data?.quotaData / data?.usedData) * 100 : 0)} 
   const total = useMemo(() => usedTotal(data?.activePlan), [data?.activePlan])
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const MProfile = () => {
                   </div>
                   <div className="card p-3 flex flex-row gap-x-2 items-center border-b border-b-[#E2DFDF]">
                       <div className='square-section basis-2/5'>
-                        <ProgressCircle value={80} total={data.activePlan.quotaData} />
+                        <ProgressCircle value={total} total={data.activePlan.quotaData} />
                       </div>
                       <div className='package-name basis-3/5 flex flex-col gap-y-1 justify-between'>
                           <div className="keterangan-section grid grid-cols-2 gap-1">
