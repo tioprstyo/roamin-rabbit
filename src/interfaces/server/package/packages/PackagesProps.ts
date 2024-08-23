@@ -6,4 +6,5 @@ export interface PackagesProps {
   network: string;
   country: string;
   price: string;
+  speed: string;
 }
