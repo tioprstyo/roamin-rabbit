@@ -9,9 +9,9 @@ const MHome = () => {
   const navigate = useNavigate();
   const [select, setSelect] = useState<CountriesSelect>({
     countryId: '',
-    isoCode: 'ID'
+    isoCode: ''
   });
-  const [kode, setKode] = useState<Array<string>>([]);
+  const [kode, setKode] = useState<string[]>([]);
   const {data, fetching: fetchingCountry} = useGetCountries();
 
   const onSelect = (code: string) => {
@@ -19,7 +19,7 @@ const MHome = () => {
       setSelect({
         ...select,
         countryId: selectedData?.id || '',
-        isoCode: selectedData?.isoCode || 'ID'
+        isoCode: selectedData?.isoCode || ''
       })
   };
 
@@ -27,7 +27,12 @@ const MHome = () => {
     if(!data){
       fetchingCountry();
     } else {
-      data.map((code) => setKode(kode => [...kode, code.isoCode]))
+      data.map((code) => setKode(kode => [...kode, code.isoCode]));
+      setSelect({
+        ...select,
+        countryId: data[0].id,
+        isoCode: data[0].isoCode
+      })
     }
   }, [data]);
 
@@ -57,7 +62,7 @@ const MHome = () => {
           </div>
           <div className='form'>
             <button
-              onClick={() => navigate('/listing')}
+              onClick={() => navigate(`/listing?countryId=${select.countryId}&isoCode=${select.isoCode}`)}
               className='bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]'
               type='button'
             >
