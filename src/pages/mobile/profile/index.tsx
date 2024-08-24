@@ -228,61 +228,61 @@ const MProfile = () => {
           <h3 className='text-base font-extrabold mb-4 text-black dark:text-white'>
             More Info
           </h3>
-          <div
-            onClick={() => tab(1)}
-            className='cardContent flex justify-between border border-t-roamin-neutral-600 dark:border-roamin-dark-400 rounded-t-[9px] px-3 py-3 items-center bg-white dark:bg-roamin-dark-700 text-black dark:text-white'
-          >
-            <span className='text-base font-medium'>Partner with Us</span>
-            {show == 1 ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </div>
-          <div
-            className={`contentHide1 ${show == 1 ? 'block' : 'hidden'} bg-white dark:bg-roamin-dark-700 text-black dark:text-white`}
-          >
-            <div className='cardContent flex flex-col items-start border border-t-roamin-neutral-600 dark:border-roamin-dark-400 px-3 py-3'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                PLAN TYPE
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                Data, Call (100 Minutes), Text (20 SMS)
-              </h6>
+          <div className="more-info border border-roamin-neutral-600 dark:border-roamin-dark-400 rounded-[9px] items-center bg-white dark:bg-roamin-dark-700 text-black dark:text-white divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400">
+            <div
+              onClick={() => tab(1)}
+              className='cardContent flex justify-between px-3 py-3'
+            >
+              <span className='text-base font-medium'>Partner with Us</span>
+              {show == 1 ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </div>
-          </div>
-          <div
-            onClick={() => tab(2)}
-            className='cardContent flex justify-between border border-t-roamin-neutral-600 dark:border-roamin-dark-400 px-3 py-3 items-center bg-white dark:bg-roamin-dark-700 text-black dark:text-white'
-          >
-            <span className='text-base font-medium'>About Us</span>
-            {show == 2 ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </div>
-          <div
-            className={`contentHide2 ${show == 2 ? 'block' : 'hidden'} bg-white`}
-          >
-            <div className='cardContent flex flex-col items-start border border-t-roamin-neutral-600 dark:border-roamin-dark-400 px-3 py-3 dark:bg-roamin-dark-700 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                PLAN TYPE
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                Data, Call (100 Minutes), Text (20 SMS)
-              </h6>
+            <div
+              className={`contentHide1 ${show == 1 ? 'block' : 'hidden'} bg-white dark:bg-roamin-dark-700 text-black dark:text-white`}
+            >
+              <div className='cardContent flex flex-col items-start px-3 py-3'>
+                <p className='text-[12px] font-medium text-[#989898]'>
+                  PLAN TYPE
+                </p>
+                <h6 className='text-[16px] font-medium'>
+                  Data, Call (100 Minutes), Text (20 SMS)
+                </h6>
+              </div>
             </div>
-          </div>
-          <div
-            onClick={() => tab(3)}
-            className='cardContent flex justify-between border border-t-roamin-neutral-600 dark:border-roamin-dark-400 rounded-b-[9px] px-3 py-3 items-center bg-white dark:bg-roamin-dark-700 text-black dark:text-white'
-          >
-            <span className='text-base font-medium'>Help Center</span>
-            {show == 3 ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </div>
-          <div
-            className={`contentHide3 ${show == 3 ? 'block' : 'hidden'} bg-white`}
-          >
-            <div className='cardContent flex flex-col items-start border border-t-roamin-neutral-600 dark:border-roamin-dark-400 px-3 py-3 dark:bg-roamin-dark-700 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                PLAN TYPE
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                Data, Call (100 Minutes), Text (20 SMS)
-              </h6>
+            <div
+              onClick={() => tab(2)}
+              className='cardContent flex justify-between px-3 py-3'>
+              <span className='text-base font-medium'>About Us</span>
+              {show == 2 ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </div>
+            <div
+              className={`contentHide2 ${show == 2 ? 'block' : 'hidden'} bg-white dark:bg-roamin-dark-700 text-black dark:text-white`}
+            >
+              <div className='cardContent flex flex-col items-start px-3 py-3'>
+                <p className='text-[12px] font-medium text-[#989898]'>
+                  PLAN TYPE
+                </p>
+                <h6 className='text-[16px] font-medium'>
+                  Data, Call (100 Minutes), Text (20 SMS)
+                </h6>
+              </div>
+            </div>
+            <div
+              onClick={() => tab(3)}
+              className='cardContent flex justify-between px-3 py-3'>
+              <span className='text-base font-medium'>Help Center</span>
+              {show == 3 ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </div>
+            <div
+              className={`contentHide3 ${show == 3 ? 'block' : 'hidden'} bg-white dark:bg-roamin-dark-700 text-black dark:text-white`}
+            >
+              <div className='cardContent flex flex-col items-start px-3 py-3'>
+                <p className='text-[12px] font-medium text-[#989898]'>
+                  PLAN TYPE
+                </p>
+                <h6 className='text-[16px] font-medium'>
+                  Data, Call (100 Minutes), Text (20 SMS)
+                </h6>
+              </div>
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ export const useLogin = () => {
   const [inputNumber, setInputNumber] = useRecoilState(inputNumberState);
 
   const fetching = async (phoneNumber: string) => {
-    phoneNumber = `${phoneNumber}`;
+    phoneNumber = `+${phoneNumber}`;
     setInputNumber(phoneNumber);
     setIsLoading(true);
     try {
@@ -18,6 +18,7 @@ export const useLogin = () => {
         phoneNumber,
       });
       if (resp?.status === 'success') {
+        console.log(resp)
         setData(resp.data);
         setIsLoading(false);
       }

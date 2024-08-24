@@ -32,7 +32,7 @@ const ProgressCircle = (props: CircularProgressProps & { value: number, total?: 
                 component="div"
                 textAlign='center'
                 color="text.secondary"
-                ><b className='text-sm'>{`${props.total} MB`}</b> <br /> <span className='text-[10px]'>REMAINING DATA</span> </Typography>
+                ><b className='text-sm text-black dark:text-white'>{`${props.total} MB`}</b> <br /> <span className='text-[10px] text-black dark:text-white'>REMAINING DATA</span> </Typography>
             </Box>
         </Box>
     );

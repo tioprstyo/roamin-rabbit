@@ -99,9 +99,8 @@ const Router = () => {
               key: 'detail-page',
             },
             {
-              element:
-                windowSize > 768 ? <MDetailProduct /> : <MDetailProduct />,
-              path: 'package',
+              element: windowSize > 768 ? <MDetailProduct /> : <MDetailProduct />,
+              path: 'package/:packageId',
               key: 'detail-package',
             },
             {
