@@ -3,7 +3,7 @@ import { RequestBodyProps } from 'interfaces';
 import Cookies from 'js-cookie';
 
 const Authorization = Cookies.get('token');
-const config:RequestBodyProps = {
+const config: RequestBodyProps = {
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -11,9 +11,9 @@ const config:RequestBodyProps = {
   },
 };
 
-const get = (url: string, body?:object) => {
-  if(body){
-    config.params= body
+const get = (url: string, body?: object) => {
+  if (body) {
+    config.params = body;
   }
   return axios
     .get(`${process.env.REACT_APP_BASE_URL}${url}`, config)

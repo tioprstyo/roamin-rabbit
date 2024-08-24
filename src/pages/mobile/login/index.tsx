@@ -4,7 +4,7 @@ import { HEADER_TYPE } from 'interfaces';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from 'hooks';
-import PhoneInput from 'react-phone-input-2'
+import PhoneInput from 'react-phone-input-2';
 
 const MLogin = () => {
   const navigate = useNavigate();
@@ -22,41 +22,47 @@ const MLogin = () => {
       <Header headerType={HEADER_TYPE.DEFAULT} headerTitle='Roaming Rabbit' />
       <div className='content-wrapper p-4 min-h-[calc(100vh-6rem)]'>
         <div className='heading'>
-          <h1 className='font-black text-[34px] leading-10'>
+          <h1 className='font-black text-[34px] leading-10 text-black dark:text-white'>
             Login
             <br />
             <span className='font-normal'>
-              to activate
+              to complete
               <br />
-              or check the usage
+              your purchase
             </span>
           </h1>
+          <p className='text-black dark:text-white mt-8 mb-8'>
+            You’ll need to sign in to activate your data plan
+          </p>
         </div>
-        <div className='form-content mt-11'>
-          <div className='form mb-6'>
-            <label className='text-[14px] font-normal mb-3' htmlFor=''>
+        <div className='form-content'>
+          <div className='form mb-6 flex flex-col gap-1'>
+            <label
+              className='text-[14px] font-normal text-black dark:text-white'
+              htmlFor=''
+            >
               Phone Number
             </label>
             <PhoneInput
-                onChange={(e: string )=> setPhoneNumber(e)}
-                country={'id'}
-                inputClass="px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full"
-                inputStyle={{
-                    width: '100%',
-                    height: 'auto',
-                    borderRadius: '9px',
-                    paddingLeft: '60px'
-                }}
-                buttonStyle={{
-                    borderRadius: '9px 0 0 9px',
-                    backgroundColor: 'white',
-                    width: '51px'
-                }}
-                inputProps={{
-                    name: 'phone',
-                    required: true,
-                    autoFocus: true
-                }}
+              onChange={(e: string) => setPhoneNumber(e)}
+              country={'id'}
+              inputClass='px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] outline-none focus:outline-none focus:ring w-full'
+              inputStyle={{
+                width: '100%',
+                height: 'auto',
+                borderRadius: '9px',
+                paddingLeft: '60px',
+              }}
+              buttonStyle={{
+                borderRadius: '9px 0 0 9px',
+                backgroundColor: 'white',
+                width: '51px',
+              }}
+              inputProps={{
+                name: 'phone',
+                required: true,
+                autoFocus: true,
+              }}
             />
           </div>
           <div className='form'>
@@ -70,9 +76,12 @@ const MLogin = () => {
           </div>
         </div>
         <div className='registrer mt-16 text-center'>
-          <span className='text-sm font-medium'>
+          <span className='text-sm font-medium text-black dark:text-white'>
             Don’t have an account?{' '}
-            <Link to='register' className='text-[#538EB6]'>
+            <Link
+              to='register'
+              className='text-[#538EB6] dark:text-roamin-yellow-500'
+            >
               Register
             </Link>
           </span>
