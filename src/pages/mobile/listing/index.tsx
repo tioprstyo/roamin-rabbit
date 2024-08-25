@@ -11,12 +11,13 @@ import { Header } from 'components';
 import { HEADER_TYPE, ListParamsProps } from 'interfaces';
 import { useRecoilValue } from 'recoil';
 import { slidetSettingState } from 'atom/sliderSetting';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useGetPackageList } from 'hooks';
 import CircularProgress from '@mui/material/CircularProgress';
 import { PackagesProps } from 'interfaces';
 
 const MListing = () => {
+  const navigate = useNavigate();
   const settings = useRecoilValue(slidetSettingState);
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isLoading, fetching } = useGetPackageList();
@@ -26,7 +27,6 @@ const MListing = () => {
   searchParams.forEach((value, key) => {
     params[key] = value;
   });
-  console.log(params);
 
   useEffect(() => {
     if (!data) {
@@ -143,6 +143,7 @@ const MListing = () => {
                             </div>
                             <div className='cardButton flex justify-center px-4 py-6'>
                               <button
+                              onClick={() => navigate(`/detail/package/${li.id}`)}
                                 className='bg-roamin-yellow-500 color-black font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] w-9/12 text-[14px]'
                                 type='button'
                               >

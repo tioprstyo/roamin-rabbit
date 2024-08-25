@@ -27,7 +27,7 @@ const MHome = () => {
     if (!data) {
       fetchingCountry();
     } else {
-      data.map((code) => setKode(() => [...kode, code.isoCode]));
+      setKode(data.map((code) => { return (code.isoCode)}));
       setSelect({
         ...select,
         countryId: data[0].id,

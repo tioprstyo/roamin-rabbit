@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { HEADER_TYPE } from 'interfaces';
 import { Header } from 'components';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
@@ -10,11 +10,62 @@ import QrImage from 'assets/img/qr.png';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { useGetActivateOrder } from 'hooks';
+import copy from "copy-to-clipboard";
+import { QRCode } from 'react-qrcode-logo';
 
 const MActivate = () => {
+    const {id} = useParams() as { id: string };
     const navigate = useNavigate();
     const [openTab, setOpenTab] = useState<number>(1);
     const [packages, setIspackages] = useState<boolean>(true);
+    const {data, fetching} = useGetActivateOrder();
+    const addressRef = useRef<any>();
+    const codeRef = useRef<any>();
+    const qrStyle: React.CSSProperties = {
+        margin: 'auto',
+        height: '250px',
+        width: '250px'
+    }
+
+    const copyAddress = () => {
+        let copyText = addressRef.current?.textContent;
+        let isCopy = copy(copyText);
+    
+        if (isCopy) {
+          alert("Copied to Clipboard");
+        }
+    };
+
+    const copyCode = () => {
+        let copyText = codeRef.current?.textContent;
+        let isCopy = copy(copyText);
+    
+        if (isCopy) {
+          alert("Copied to Clipboard");
+        }
+    };
+
+    const downloadCode = () => {
+        const canvas: any = document.getElementById("qrCode");
+        if(canvas) {
+          const pngUrl = canvas
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+          let downloadLink = document.createElement("a");
+          downloadLink.href = pngUrl
+          downloadLink.download = `your_name.png`;
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+        }
+      }
+
+    useEffect(() => {
+        if(!data){
+            fetching(id);
+        }
+    }, [data]);
 
   return (
     <>
@@ -31,7 +82,7 @@ const MActivate = () => {
                         className={
                         'text-xs font-bold uppercase px-5 py-3 block leading-normal ' +
                         (openTab === 1
-                            ? 'text-[#1D1B20] border-b-2 border-[#FFDE95]'
+                            ? 'text-[#1D1B20] dark:text-roamin-yellow-500 border-b-2 border-[#FFDE95]'
                             : 'text-[#B3B3B3] border-b-2')
                         }
                         onClick={(e) => {
@@ -50,7 +101,7 @@ const MActivate = () => {
                         className={
                         'text-xs font-bold uppercase px-5 py-3 block leading-normal ' +
                         (openTab === 2
-                            ? 'text-[#1D1B20] border-b-2 border-[#FFDE95]'
+                            ? 'text-[#1D1B20] dark:text-roamin-yellow-500 border-b-2 border-[#FFDE95]'
                             : 'text-[#B3B3B3] border-b-2')
                         }
                         onClick={(e) => {
@@ -84,23 +135,21 @@ const MActivate = () => {
                                     </div>
                                 </div>
                                 <div className="installation-section mt-4">
-                                    <h2 className='text-medium font-extrabold mb-2'>eSIM Installation</h2>
-                                    <div className="listCard border border-[#E2DFDF] bg-white rounded-[9px]">
-                                        <div className='cardContent flex justify-between border border-t-[#E2DFDF] p-4 items-center'>
-                                            <span className='text-sm font-medium'><TextSnippetOutlinedIcon/> View Instruction</span>
-                                            <ChevronRightOutlinedIcon/>
-                                        </div>
+                                    <h2 className='text-medium font-extrabold mb-2 dark:text-white'>eSIM Installation</h2>
+                                    <div className="listCard flex justify-between p-4 items-center border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 rounded-[9px] dark:text-white">
+                                        <span className='text-sm font-medium'><TextSnippetOutlinedIcon/> View Instruction</span>
+                                        <ChevronRightOutlinedIcon/>
                                     </div>
                                 </div>
                                 <div className="qr-section mt-4 p-4">
-                                    <div className="qr text-center mb-4">
+                                    <div className="qr text-center mb-4 dark:text-white">
                                         <h6 className='text-base font-black mb-4'>SCAN THIS QR</h6>
                                         <p className='text-sm font-normal mb-4'>Download QR code below or display on the another device to install eSIM.</p>
-                                        <img className='mx-auto' src={QrImage} alt={QrImage} />
+                                        <QRCode id='qrCode' style={qrStyle} value={data?.qrCode} />
                                     </div>
                                     <div className='download grid grid-cols-4 gap-3 items-end p-2'>
                                         <div className="form col-span-3">
-                                            <button className="bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-3 py-3 rounded-[9px] w-full text-[14px] border border-[#FFEC69]" type="button">
+                                            <button onClick={() => downloadCode()} className="bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-3 py-3 rounded-[9px] w-full text-[14px] border border-[#FFEC69]" type="button">
                                                 Download
                                             </button>
                                         </div>
@@ -128,36 +177,34 @@ const MActivate = () => {
                                     </div>
                                 </div>
                                 <div className="installation-section mt-4">
-                                    <h2 className='text-medium font-extrabold mb-2'>eSIM Installation</h2>
-                                    <div className="listCard border border-[#E2DFDF] bg-white rounded-[9px]">
-                                        <div className='cardContent flex justify-between border border-t-[#E2DFDF] p-4 items-center'>
-                                            <span className='text-sm font-medium'><TextSnippetOutlinedIcon/> View Instruction</span>
-                                            <ChevronRightOutlinedIcon/>
-                                        </div>
+                                    <h2 className='text-medium font-extrabold mb-2 dark:text-white'>eSIM Installation</h2>
+                                    <div className="listCard flex justify-between p-4 items-center border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 rounded-[9px] dark:text-white">
+                                        <span className='text-sm font-medium'><TextSnippetOutlinedIcon/> View Instruction</span>
+                                        <ChevronRightOutlinedIcon/>
                                     </div>
                                 </div>
-                                <div className="code-section bg-white border border-[#E2DFDF] rounded-[9px] mt-4">
-                                    <div className='card border border-b-[#E2DFDF] '>
+                                <div className="code-section bg-white dark:bg-roamin-dark-700 border border-roamin-neutral-600 dark:border-roamin-dark-400 rounded-[9px] mt-4 dark:text-white divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400">
+                                    <div className='card'>
                                         <div className='cardContent flex justify-between items-center px-3 py-3'>
                                             <div className='caption mr-3'>
                                                 <p className='text-xs font-light text-[#989898]'>SM-DP+ ADDRESS</p>
-                                                <p className='text-[13px] font-medium'>LPA:1$sin.prod.ondemandconnectivity.com</p>
+                                                <p ref={addressRef} className='text-[13px] font-medium'>{data?.smdpAddress}</p>
                                             </div>
-                                            <ContentCopyOutlinedIcon/>
+                                            <ContentCopyOutlinedIcon onClick={copyAddress} />
                                         </div>
                                     </div>
-                                    <div className='card border border-b-[#E2DFDF]'>
+                                    <div className='card'>
                                         <div className='cardContent flex justify-between items-center px-3 py-3'>
                                             <div className='caption mr-3'>
                                                 <p className='text-xs font-light text-[#989898]'>ACTIVATION CODE</p>
-                                                <p className='text-[12px] font-medium break-all'>
-                                                    $1B9EF723C424AAA965A4A3F90989E781523A64E16990653983F51AB53F579888
+                                                <p ref={codeRef} className='text-[12px] font-medium break-all'>
+                                                    {data?.activationCode}
                                                 </p>
                                             </div>
-                                            <ContentCopyOutlinedIcon/>
+                                            <ContentCopyOutlinedIcon onClick={copyCode}/>
                                         </div>
                                     </div>
-                                    <div className='card border border-b-[#E2DFDF]'>
+                                    <div className='card'>
                                         <div className='cardContent flex justify-between items-center px-3 py-3'>
                                             <InfoOutlinedIcon/>
                                             <p className='text-[12px] font-medium ml-3'>

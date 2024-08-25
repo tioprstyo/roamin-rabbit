@@ -117,18 +117,19 @@ const MEsim = () => {
                                 </div>
                                 <div className='cardFooter grid grid-cols-2 gap-2 items-center p-4 py-6 text-black dark:text-white'>
                                   <button
+                                    onClick={() => navigate(`/activate/${data.id}`)}
                                     className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
                                     type='button'
                                   >
                                     Active
                                   </button>
-                                  <Link
-                                    to={`/detail/sim/${data.id}`}
+                                  <button
+                                    onClick={() => navigate(`/detail/sim/${data.id}`)}
                                     className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
                                     type='button'
                                   >
                                     View Detail
-                                  </Link>
+                                  </button>
                                 </div>
                               </div>
                             </div>

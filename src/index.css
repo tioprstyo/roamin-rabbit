@@ -21,7 +21,7 @@ code {
   vertical-align: middle;
   margin: auto;
   padding: 0;
-  background: rgba(255, 255, 255, 0.3);
+  background: inherit;
   border-radius: 40px;
   width: 70px;
   text-align: center;

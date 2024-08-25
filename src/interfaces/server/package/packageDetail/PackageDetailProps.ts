@@ -3,5 +3,5 @@ import { PackageDetailData } from './PackageDetailData';
 
 export interface PackageDetailProps {
   package: PackageDetailData;
-  otherPackages: OtherPackageData;
+  otherPackages: OtherPackageData[];
 }

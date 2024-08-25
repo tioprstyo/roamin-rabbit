@@ -99,9 +99,8 @@ const Router = () => {
               key: 'detail-page',
             },
             {
-              element:
-                windowSize > 768 ? <MDetailProduct /> : <MDetailProduct />,
-              path: 'package',
+              element: windowSize > 768 ? <MDetailProduct /> : <MDetailProduct />,
+              path: 'package/:packageId',
               key: 'detail-package',
             },
             {
@@ -165,7 +164,7 @@ const Router = () => {
         },
         {
           element: windowSize > 768 ? <MActivate /> : <MActivate />,
-          path: 'activate',
+          path: 'activate/:orderId',
           key: 'activate',
         },
         {
