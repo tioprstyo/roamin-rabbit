@@ -164,7 +164,7 @@ const Router = () => {
         },
         {
           element: windowSize > 768 ? <MActivate /> : <MActivate />,
-          path: 'activate',
+          path: 'activate/:orderId',
           key: 'activate',
         },
         {

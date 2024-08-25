@@ -25,7 +25,7 @@ const get = (url: string, body?: object) => {
     });
 };
 
-const post = (url: string, body: object) => {
+const post = (url: string, body?: object) => {
   return axios
     .post(`${process.env.REACT_APP_BASE_URL}${url}`, body, config)
     .then((response: AxiosResponse) => {
