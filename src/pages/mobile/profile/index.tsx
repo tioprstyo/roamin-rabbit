@@ -10,7 +10,7 @@ import Switch from '@mui/material/Switch';
 import { ProgressCircle } from 'components';
 import EventIcon from '@mui/icons-material/Event';
 import { styled } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDarkMode, useGetProfile } from 'hooks';
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -59,6 +59,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const MProfile = () => {
+  const navigate = useNavigate();
   const { data, fetching } = useGetProfile();
   const { data: isDarkMode, fetching: setIsDarkMode } = useDarkMode();
   const [show, setShow] = useState<number>(0);
@@ -89,7 +90,7 @@ const MProfile = () => {
       <div className='content-wrapper p-4 pb-[120px] bg-[#FFF7DA] dark:bg-roamin-dark-600 min-h-[calc(100vh-6rem)]'>
         <div className='profile-section mb-4'>
           {data?.profile ? (
-            <div className='card flex flex-row gap-x-4 items-center rounded-lg bg-white p-4 border border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700'>
+            <div onClick={() => navigate('/profile/edit')} className='card flex flex-row gap-x-4 items-center rounded-lg bg-white p-4 border border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700'>
               <div className='user-profile basis-1/5'>
                 <img
                   className='w-full rounded-full border'
