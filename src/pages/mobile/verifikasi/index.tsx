@@ -17,12 +17,14 @@ const MVerification = () => {
   const {data, fetching: fetchingOTP} = useVerifyOTP();
 
   const handleOtpChange = (value: string, index: number) => {
+    const re = /^[0-9\b]+$/;
     const newOtp = [...otp];
     newOtp[index] = value;
-    setOtp(newOtp);
-
-    if (value.length === 1 && index < newOtp.length - 1) {
-      inputRef.current[index + 1]?.focus();
+    if (value === '' || re.test(value)) {
+        setOtp(newOtp);
+        if (value.length === 1 && index < newOtp.length - 1) {
+          inputRef.current[index + 1]?.focus();
+        }
     }
 
     if (value.length === 0 && index > 0) {
@@ -56,8 +58,8 @@ const MVerification = () => {
       <Header headerType={HEADER_TYPE.DETAIL} headerTitle='' />
       <div className='content-wrapper p-4 mt-10 min-h-[calc(100vh-6rem)]'>
         <div className='heading'>
-          <h1 className='font-black text-[28px] leading-10'>Let’s Verify</h1>
-          <p className='text-[16px] text-[#505454] font-normal mt-5'>
+          <h1 className='font-black text-[28px] dark:text-roamin-yellow-500 leading-10'>Let’s Verify</h1>
+          <p className='text-[16px] text-[#505454] dark:text-white font-normal mt-5'>
             OTP code has send to your WhatsApp 
             <br />
             <span className='font-semibold'>[{inputNumber[0]}]</span>
@@ -69,6 +71,7 @@ const MVerification = () => {
               {otp.map((digit, index) => (
                 <input
                   key={index}
+                  inputMode='numeric'
                   value={digit}
                   maxLength={1}
                   type='text'
@@ -79,7 +82,7 @@ const MVerification = () => {
               ))}
             </div>
             <div className='timer mt-3'>
-              <p className='text-[16px] text-[#363636] font-normal'>
+              <p className='text-[16px] text-[#363636] dark:text-white font-normal'>
                 Wait for <b className='text-[#40B7B0]'>02:59</b> to resend the
                 OTP
               </p>

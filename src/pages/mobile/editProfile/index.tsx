@@ -5,8 +5,10 @@ import FlagImage from 'assets/img/flag.png';
 import ManImage from 'assets/img/man.png';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import { useGetProfile } from 'hooks';
+import { useNavigate } from 'react-router-dom';
 
 const MEditProfile = () => {
+  const navigate = useNavigate();
   const {data, fetching} = useGetProfile();
   const [profile, setProfile] = useState<UserRequest>({
         name: '',
@@ -67,7 +69,7 @@ const MEditProfile = () => {
                         </div>
                     </div>
                     <div className="form">
-                        <button className="bg-white color-[#000000] font-medium text-sm px-3 py-3 rounded-[9px] w-full text-[14px] border border-[#BEBEBE]" type="button">
+                        <button onClick={() => navigate('/change-number')} className="bg-white color-[#000000] font-medium text-sm px-3 py-3 rounded-[9px] w-full text-[14px] border border-[#BEBEBE]" type="button">
                             Change
                         </button>
                     </div>
