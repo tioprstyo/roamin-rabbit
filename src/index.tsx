@@ -5,9 +5,9 @@ import { RecoilRoot } from 'recoil';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import Router from 'routes';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import 'react-phone-input-2/lib/style.css'
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'react-phone-input-2/lib/style.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

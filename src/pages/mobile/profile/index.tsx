@@ -90,7 +90,10 @@ const MProfile = () => {
       <div className='content-wrapper p-4 pb-[120px] bg-[#FFF7DA] dark:bg-roamin-dark-600 min-h-[calc(100vh-6rem)]'>
         <div className='profile-section mb-4'>
           {data?.profile ? (
-            <div onClick={() => navigate('/profile/edit')} className='card flex flex-row gap-x-4 items-center rounded-lg bg-white p-4 border border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700'>
+            <div
+              onClick={() => navigate('/profile/edit')}
+              className='card flex flex-row gap-x-4 items-center rounded-lg bg-white p-4 border border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700'
+            >
               <div className='user-profile basis-1/5'>
                 <img
                   className='w-full rounded-full border'
@@ -118,7 +121,10 @@ const MProfile = () => {
               <p className='text-lg font-light mb-4 text-black dark:text-white'>
                 Login to access easy connections on every trip!
               </p>
-              <button className='bg-roamin-yellow-500 color-[#000000] font-extrabold text-sm px-4 py-4 rounded-[9px] w-2/4 text-[18px]'>
+              <button
+                className='bg-roamin-yellow-500 color-[#000000] font-extrabold text-sm px-4 py-4 rounded-[9px] w-2/4 text-[18px]'
+                onClick={() => navigate('/login')}
+              >
                 Login
               </button>
             </div>
@@ -229,7 +235,7 @@ const MProfile = () => {
           <h3 className='text-base font-extrabold mb-4 text-black dark:text-white'>
             More Info
           </h3>
-          <div className="more-info border border-roamin-neutral-600 dark:border-roamin-dark-400 rounded-[9px] items-center bg-white dark:bg-roamin-dark-700 text-black dark:text-white divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400">
+          <div className='more-info border border-roamin-neutral-600 dark:border-roamin-dark-400 rounded-[9px] items-center bg-white dark:bg-roamin-dark-700 text-black dark:text-white divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400'>
             <div
               onClick={() => tab(1)}
               className='cardContent flex justify-between px-3 py-3'
@@ -251,7 +257,8 @@ const MProfile = () => {
             </div>
             <div
               onClick={() => tab(2)}
-              className='cardContent flex justify-between px-3 py-3'>
+              className='cardContent flex justify-between px-3 py-3'
+            >
               <span className='text-base font-medium'>About Us</span>
               {show == 2 ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </div>
@@ -269,7 +276,8 @@ const MProfile = () => {
             </div>
             <div
               onClick={() => tab(3)}
-              className='cardContent flex justify-between px-3 py-3'>
+              className='cardContent flex justify-between px-3 py-3'
+            >
               <span className='text-base font-medium'>Help Center</span>
               {show == 3 ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </div>

@@ -1,8 +1,10 @@
-import { MetaDatalistProps } from 'interfaces';
 import { PackagesProps } from './PackagesProps';
 
+interface PackagesResponseProps {
+  [key: string]: PackagesProps[];
+}
+
 export interface PackagesResponse {
-  data: PackagesProps[];
+  data: PackagesResponseProps;
   status: string;
-  metadata: MetaDatalistProps | undefined;
 }
