@@ -4,6 +4,7 @@ import { Header } from 'components';
 import { CountriesProps, CountriesSelect, HEADER_TYPE } from 'interfaces';
 import ReactFlagsSelect from 'react-flags-select';
 import { useGetCountries } from 'hooks';
+import { parseQueryParams } from 'services';
 
 const MHome = () => {
   const navigate = useNavigate();
@@ -27,7 +28,11 @@ const MHome = () => {
     if (!data) {
       fetchingCountry();
     } else {
-      setKode(data.map((code) => { return (code.isoCode)}));
+      setKode(
+        data.map((code) => {
+          return code.isoCode;
+        }),
+      );
       setSelect({
         ...select,
         countryId: data[0].id,
@@ -69,9 +74,7 @@ const MHome = () => {
           <div className='form'>
             <button
               onClick={() =>
-                navigate(
-                  `/listing?countryId=${select.countryId}&isoCode=${select.isoCode}`,
-                )
+                navigate(`/listing${parseQueryParams({ ...select })}`)
               }
               className='bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]'
               type='button'

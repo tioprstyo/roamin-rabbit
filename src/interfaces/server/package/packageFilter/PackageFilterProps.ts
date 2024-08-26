@@ -8,6 +8,6 @@ export interface PackageFilterProps {
   quotaData: FilterProps[];
   network: FilterProps[];
   speed: FilterProps[];
-  otherService: FilterProps[];
+  planType: FilterProps[];
   quotaTheteringNominal: FilterProps[];
 }

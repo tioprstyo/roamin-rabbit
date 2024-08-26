@@ -1,3 +1,3 @@
 export interface ListParamsProps {
-    [key: string] : string
+  [key: string]: string;
 }

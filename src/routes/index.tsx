@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, Children } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import {
   MEsim,
@@ -7,7 +7,6 @@ import {
   MLogin,
   MRegister,
   MVerification,
-  MFilter,
   MDetail,
   MStatus,
   MHistory,
@@ -84,11 +83,6 @@ const Router = () => {
           ],
         },
         {
-          element: windowSize > 768 ? <MFilter /> : <MFilter />,
-          path: 'filter',
-          key: 'filter',
-        },
-        {
           element: '',
           path: 'detail',
           key: 'detail',
@@ -99,7 +93,8 @@ const Router = () => {
               key: 'detail-page',
             },
             {
-              element: windowSize > 768 ? <MDetailProduct /> : <MDetailProduct />,
+              element:
+                windowSize > 768 ? <MDetailProduct /> : <MDetailProduct />,
               path: 'package/:packageId',
               key: 'detail-package',
             },

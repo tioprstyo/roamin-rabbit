@@ -19,11 +19,11 @@ const MDetailProduct = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState<boolean>(false);
   const settings = useRecoilValue(slidetSettingState);
-  const {data, fetching} = useGetPackageDetail();
+  const { data, fetching } = useGetPackageDetail();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if(!data){
+    if (!data) {
       fetching(packageId);
     }
   }, [data, navigate]);
@@ -35,14 +35,18 @@ const MDetailProduct = () => {
         <div className='listCard bg-white dark:bg-roamin-dark-700 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 text-black dark:text-white'>
           <div className='cardHeader p-4 flex items-center'>
             <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'></div>
-            <h1 className='ml-[20px] text-xl font-extrabold'>{data?.package.name}</h1>
+            <h1 className='ml-[20px] text-xl font-extrabold'>
+              {data?.package.name}
+            </h1>
           </div>
           <div className='cardContent flex justify-between px-4 py-6 items-center'>
             <span className='flex'>
               <SignalCellularAltIcon className='mr-3' />
               Data
             </span>
-            <h3 className='text-[16px] font-black'>{data?.package.quotaData}</h3>
+            <h3 className='text-[16px] font-black'>
+              {data?.package.quotaData}
+            </h3>
           </div>
           <div className='cardContent flex justify-between px-4 py-6 items-center'>
             <span className='flex'>
@@ -94,7 +98,9 @@ const MDetailProduct = () => {
               </div>
               <div className='cardContent flex flex-col items-start px-3 py-3'>
                 <p className='text-[12px] font-medium text-[#989898]'>SPEED</p>
-                <h6 className='text-[16px] font-medium'>{data?.package.speed}</h6>
+                <h6 className='text-[16px] font-medium'>
+                  {data?.package.speed}
+                </h6>
                 <span className='text-[14px] font-light'>
                   This data plan is expected to have 5G speed. However, network
                   coverage and speed may vary by location and time of day.
@@ -121,7 +127,9 @@ const MDetailProduct = () => {
                 <p className='text-[12px] font-medium text-[#989898]'>
                   IP ROUTING
                 </p>
-                <h6 className='text-[16px] font-medium'>{data?.package.ipRouting ? 'Yes' : 'No'}</h6>
+                <h6 className='text-[16px] font-medium'>
+                  {data?.package.ipRouting ? 'Yes' : 'No'}
+                </h6>
               </div>
               <div className='cardContent flex flex-col items-start px-3 py-3'>
                 <p className='text-[12px] font-medium text-[#989898]'>
@@ -135,13 +143,17 @@ const MDetailProduct = () => {
                 <p className='text-[12px] font-medium text-[#989898]'>
                   eKYC (IDENTITY VERIFICATION)
                 </p>
-                <h6 className='text-[16px] font-medium'>{data?.package.ekyc ? 'Required' : 'Not Required'}</h6>
+                <h6 className='text-[16px] font-medium'>
+                  {data?.package.ekyc ? 'Required' : 'Not Required'}
+                </h6>
               </div>
               <div className='cardContent flex flex-col items-start px-3 py-3'>
                 <p className='text-[12px] font-medium text-[#989898]'>
                   Top Up Options
                 </p>
-                <h6 className='text-[16px] font-medium'>{data?.package.topupOption ? 'Yes' : 'No'}</h6>
+                <h6 className='text-[16px] font-medium'>
+                  {data?.package.topupOption ? 'Yes' : 'No'}
+                </h6>
               </div>
             </div>
           </div>
@@ -150,54 +162,61 @@ const MDetailProduct = () => {
               Available Other Package (5)
             </h6>
             <Slider {...settings}>
-              { data?.otherPackages.map((other: OtherPackageData, i: number) => (
-                  <div key={i}>
-                    <div className='listCard border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 rounded-[9px] mt-5 dark:text-white'>
-                      <div className='cardHeader p-4 flex items-center'>
-                        <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'></div>
-                        <h1 className='ml-[20px] text-xl font-extrabold'>
-                          Sobat Halo
-                        </h1>
+              {data?.otherPackages.map((other: OtherPackageData, i: number) => (
+                <div key={i}>
+                  <div className='listCard border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 rounded-[9px] mt-5 dark:text-white'>
+                    <div className='cardHeader p-4 flex items-center'>
+                      <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'></div>
+                      <h1 className='ml-[20px] text-xl font-extrabold'>
+                        Sobat Halo
+                      </h1>
+                    </div>
+                    <div className='cardContent flex justify-between px-4 py-6 items-center'>
+                      <span className='flex'>
+                        <SignalCellularAltIcon className='mr-3' />
+                        Data
+                      </span>
+                      <h3 className='text-[16px] font-black'>
+                        {other.quotaData}
+                      </h3>
+                    </div>
+                    <div className='cardContent flex justify-between px-4 py-6 items-center'>
+                      <span className='flex'>
+                        <CalendarMonthIcon className='mr-3' />
+                        Validity
+                      </span>
+                      <h3 className='text-[16px] font-black'>
+                        {other.validity}
+                      </h3>
+                    </div>
+                    <div className='cardFooter grid grid-cols-2 items-center justify-center p-4'>
+                      <div className='cardPrice text-center'>
+                        <h6 className='text-xl font-black'>{other.price}</h6>
                       </div>
-                      <div className='cardContent flex justify-between px-4 py-6 items-center'>
-                        <span className='flex'>
-                          <SignalCellularAltIcon className='mr-3' />
-                          Data
-                        </span>
-                        <h3 className='text-[16px] font-black'>{other.quotaData}</h3>
-                      </div>
-                      <div className='cardContent flex justify-between px-4 py-6 items-center'>
-                        <span className='flex'>
-                          <CalendarMonthIcon className='mr-3' />
-                          Validity
-                        </span>
-                        <h3 className='text-[16px] font-black'>{other.validity}</h3>
-                      </div>
-                      <div className='cardFooter grid grid-cols-2 items-center justify-center p-4'>
-                        <div className='cardPrice text-center'>
-                          <h6 className='text-xl font-black'>{other.price}</h6>
-                        </div>
-                        <div className='cardButton text-center'>
-                          <button
-                            onClick={() => navigate(`/detail/package/${other.id}`)}
-                            className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
-                            type='button'
-                          >
-                            Choose
-                          </button>
-                        </div>
+                      <div className='cardButton text-center'>
+                        <button
+                          onClick={() =>
+                            navigate(`/detail/package/${other.id}`)
+                          }
+                          className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
+                          type='button'
+                        >
+                          Choose
+                        </button>
                       </div>
                     </div>
                   </div>
-                ))
-              }
+                </div>
+              ))}
             </Slider>
           </div>
         </div>
       </div>
       <div className='fromBuy grid grid-cols-2 items-center justify-center border-t-roamin-neutral-600 dark:border-t-roamin-dark-400 p-4 fixed bottom-0 left-0 right-0 bg-white dark:bg-roamin-dark-800'>
         <div className='buyPrice text-center'>
-          <h6 className='text-xl font-black dark:text-white'>{data?.package.price}</h6>
+          <h6 className='text-xl font-black dark:text-white'>
+            {data?.package.price}
+          </h6>
         </div>
         <div className='buyButton text-center'>
           <button
