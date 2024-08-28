@@ -17,7 +17,7 @@ const MChangeNumber = () => {
     }
 
     if(data){
-        navigate('/verifikasi');
+        navigate('/verifikasi', { state: { previousPath: location.pathname } });
     }
 
     setPhoneNumber(dataProfile?.profile.phoneNumber || '');

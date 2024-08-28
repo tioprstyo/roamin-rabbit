@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
 import { useRecoilState } from 'recoil';
@@ -15,6 +15,7 @@ const MVerification = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const inputNumber = useRecoilState(inputNumberState);
   const {data, fetching: fetchingOTP} = useVerifyOTP();
+  const prevRoute = useLocation();
 
   const handleOtpChange = (value: string, index: number) => {
     const re = /^[0-9\b]+$/;
@@ -41,6 +42,7 @@ const MVerification = () => {
   };
 
   useEffect(() => {
+    console.log(prevRoute.state.previousPath);
     if (otp.every((digit) => digit !== '')) {
       setIsButtonDisabled(false);
     } else {
@@ -48,8 +50,12 @@ const MVerification = () => {
     }
 
     if(data){
-      Cookies.set('token', data.token)
-      navigate('/')
+      if(prevRoute.state.previousPath == '/change-number'){
+        navigate('/profile')
+      } else {
+        Cookies.set('token', data.token)
+        navigate('/')
+      }
     }
   }, [otp, data]);
 

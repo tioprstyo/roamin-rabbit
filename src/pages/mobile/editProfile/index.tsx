@@ -50,6 +50,7 @@ const MEditProfile = () => {
                         Full Name
                     </label>
                     <input
+                    disabled
                     onChange={(e) => eventHandler(e)}
                     value={profile.name}
                     name='name'
@@ -65,7 +66,7 @@ const MEditProfile = () => {
                             <span className="z-10 leading-snug font-normal absolute text-center text-blueGray-300 bg-transparent text-base flex items-center justify-center w-10 px-2 py-3 border-r border-[#BEBEBE]">
                                 <img src={FlagImage} alt="" />
                             </span>
-                            <input value={data?.profile.phoneNumber || ''} type="text" placeholder="Placeholder" className="pl-12 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] w-full" readOnly/>
+                            <input value={data?.profile.phoneNumber || ''} type="text" placeholder="Placeholder" className="pl-12 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] w-full" disabled/>
                         </div>
                     </div>
                     <div className="form">
@@ -79,6 +80,7 @@ const MEditProfile = () => {
                         Email
                     </label>
                     <input
+                    disabled
                     onChange={(e) => eventHandler(e)}
                     value={profile.email}
                     name='email'
