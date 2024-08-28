@@ -60,7 +60,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 const MProfile = () => {
   const navigate = useNavigate();
-  const { data, fetching } = useGetProfile();
+  const { data, isLoading ,fetching } = useGetProfile();
   const { data: isDarkMode, fetching: setIsDarkMode } = useDarkMode();
   const [show, setShow] = useState<number>(0);
   const label = { inputProps: { 'aria-label': 'Color switch demo' } };
@@ -89,134 +89,179 @@ const MProfile = () => {
       <Header headerType={HEADER_TYPE.NORMAL} headerTitle='Account' />
       <div className='content-wrapper p-4 pb-[120px] bg-[#FFF7DA] dark:bg-roamin-dark-600 min-h-[calc(100vh-6rem)]'>
         <div className='profile-section mb-4'>
-          {data?.profile ? (
-            <div
-              onClick={() => navigate('/profile/edit')}
-              className='card flex flex-row gap-x-4 items-center rounded-lg bg-white p-4 border border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700'
-            >
-              <div className='user-profile basis-1/5'>
-                <img
-                  className='w-full rounded-full border'
-                  src={data.profile.profilePicture}
-                  alt={data.profile.profilePicture}
-                />
+          {isLoading ? (
+            <>
+              <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
+                <div className="animate-pulse flex space-x-4">
+                  <div className="rounded-full bg-slate-200 h-10 w-10"></div>
+                    <div className="flex-1 space-y-6 py-1">
+                      <div className="h-2 bg-slate-200 rounded"></div>
+                      <div className="space-y-3">
+                        <div className="h-2 bg-slate-200 rounded"></div>
+                      </div>
+                  </div>
+                </div>
               </div>
-              <div className='user-name basis-3/4 flex flex-col gap-y-1 justify-between text-black dark:text-white'>
-                <b className='text-xl font-extrabold'>{data.profile.name}</b>
-                <p className='text-base font-[350]'>
-                  {data.profile.phoneNumber}
-                </p>
-              </div>
-              <div className='user-info basis-auto text-black dark:text-white'>
-                <ChevronRightIcon />
-              </div>
-            </div>
-          ) : (
-            <div className='profile-not-login rounded-lg bg-white p-4 w-full text-center dark:border-roamin-dark-400 dark:bg-roamin-dark-700'>
-              <img
-                className='mx-auto mb-4'
-                src={ProfileImage}
-                alt={ProfileImage}
-              />
-              <p className='text-lg font-light mb-4 text-black dark:text-white'>
-                Login to access easy connections on every trip!
-              </p>
-              <button
-                className='bg-roamin-yellow-500 color-[#000000] font-extrabold text-sm px-4 py-4 rounded-[9px] w-2/4 text-[18px]'
-                onClick={() => navigate('/login')}
-              >
-                Login
-              </button>
-            </div>
+            </>
+          ):(
+            <>
+              {data?.profile ? (
+                <div
+                  onClick={() => navigate('/profile/edit')}
+                  className='card flex flex-row gap-x-4 items-center rounded-lg bg-white p-4 border border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700'
+                >
+                  <div className='user-profile basis-1/5'>
+                    <img
+                      className='w-full rounded-full border'
+                      src={data.profile.profilePicture}
+                      alt={data.profile.profilePicture}
+                    />
+                  </div>
+                  <div className='user-name basis-3/4 flex flex-col gap-y-1 justify-between text-black dark:text-white'>
+                    <b className='text-xl font-extrabold'>{data.profile.name}</b>
+                    <p className='text-base font-[350]'>
+                      {data.profile.phoneNumber}
+                    </p>
+                  </div>
+                  <div className='user-info basis-auto text-black dark:text-white'>
+                    <ChevronRightIcon />
+                  </div>
+                </div>
+              ) : (
+                <div className='profile-not-login rounded-lg bg-white p-4 w-full text-center dark:border-roamin-dark-400 dark:bg-roamin-dark-700'>
+                  <img
+                    className='mx-auto mb-4'
+                    src={ProfileImage}
+                    alt={ProfileImage}
+                  />
+                  <p className='text-lg font-light mb-4 text-black dark:text-white'>
+                    Login to access easy connections on every trip!
+                  </p>
+                  <button
+                    className='bg-roamin-yellow-500 color-[#000000] font-extrabold text-sm px-4 py-4 rounded-[9px] w-2/4 text-[18px]'
+                    onClick={() => navigate('/login')}
+                  >
+                    Login
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
         <div className='package-section mb-4'>
           <h3 className='text-base font-extrabold mb-4 text-black dark:text-white'>
             Current Active Plan
           </h3>
-          {data?.activePlan ? (
-            <div className='active-package rounded-lg bg-white border border-roamin-neutral-600 dark:border-roamin-dark-400 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 dark:bg-roamin-dark-700'>
-              <div className='card p-3 flex flex-row gap-x-4 items-center'>
-                <div className='square-section basis-1/5'>
-                  <div className='w-[83px] h-[51px] bg-roamin-neutral-500 rounded-[9px]' />
-                </div>
-                <div className='package-name basis-3/4 flex flex-col gap-y-1 justify-between text-black dark:text-white'>
-                  <b className='text-lg font-extrabold'>
-                    {data.activePlan.name}
-                  </b>
-                </div>
-                <div className='package-info basis-auto text-black dark:text-white'>
-                  <ChevronRightIcon />
-                </div>
-              </div>
-              <div className='card p-3 flex flex-row gap-x-2 items-center'>
-                <div className='square-section basis-2/5'>
-                  <ProgressCircle
-                    value={total}
-                    total={data.activePlan.quotaData}
-                  />
-                </div>
-                <div className='package-name basis-3/5 flex flex-col gap-y-1 justify-between'>
-                  <div className='keterangan-section grid grid-cols-2 gap-1'>
-                    <div className='keterangan text-black dark:text-white'>
-                      <span className='block text-[10px] font-light'>
-                        USED DATA
-                      </span>
-                      <b className='text-sm font-extrabold'>
-                        {data.activePlan.usedData} MB
-                      </b>
+          {isLoading ? (
+            <>
+              <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
+                <div className="animate-pulse flex space-x-4">
+                  <div className="flex-1 space-y-6 py-1">
+                    <div className="h-5 bg-slate-200 rounded"></div>
+                    <div className="space-y-3">
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="h-10 bg-slate-200 rounded col-span-1"></div>
+                        <div className="h-10 bg-slate-200 rounded col-span-1"></div>
+                        <div className="h-10 bg-slate-200 rounded col-span-1"></div>
+                      </div>
                     </div>
-                    <div className='keterangan text-black dark:text-white'>
-                      <span className='block text-[10px] font-light'>
-                        CALLS
-                      </span>
-                      <b className='text-sm font-extrabold'>
-                        {data.activePlan.usedCall}/{data.activePlan.quotaCall}{' '}
-                        Minutes
-                      </b>
-                    </div>
-                    <div className='keterangan text-black dark:text-white'>
-                      <span className='block text-[10px] font-light'>
-                        TOTAL DATA
-                      </span>
-                      <b className='text-sm font-extrabold'>
-                        {data.activePlan.quotaData} GB
-                      </b>
-                    </div>
-                    <div className='keterangan text-black dark:text-white'>
-                      <span className='block text-[10px] font-light'>TEXT</span>
-                      <b className='text-sm font-extrabold'>
-                        {data.activePlan.usedSms}/{data.activePlan.quotaSms} SMS
-                      </b>
+                    <div className="space-y-3">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="h-5 bg-slate-200 rounded col-span-1"></div>
+                        <div className="h-5 bg-slate-200 rounded col-span-1"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className='card p-3 flex justify-between items-center text-black dark:text-white'>
-                <span className='text-sm font-normal'>
-                  <EventIcon /> Expired On
-                </span>
-                <b className='text-sm font-black'>
-                  {data.activePlan.expiredAt}
-                </b>
-              </div>
-            </div>
+            </>
           ) : (
-            <div className='not-package rounded-lg bg-white border border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700 text-black dark:text-white'>
-              <div className='caption text-center py-10'>
-                <img
-                  className='mx-auto mb-5'
-                  src={NoSimImage}
-                  alt={NoSimImage}
-                />
-                <p className='text-sm font-normal text-black dark:text-white'>
-                  You don't have an active data plan
-                </p>
-              </div>
-              <button className='bg-roamin-yellow-500 color-black font-extrabold text-sm px-4 py-4 rounded-b-[9px] w-full text-[18px] text-black'>
-                Buy Now
-              </button>
-            </div>
+            <>
+              {data?.activePlan ? (
+                <div className='active-package rounded-lg bg-white border border-roamin-neutral-600 dark:border-roamin-dark-400 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 dark:bg-roamin-dark-700'>
+                  <div className='card p-3 flex flex-row gap-x-4 items-center'>
+                    <div className='square-section basis-1/5'>
+                      <div className='w-[83px] h-[51px] bg-roamin-neutral-500 rounded-[9px]' />
+                    </div>
+                    <div className='package-name basis-3/4 flex flex-col gap-y-1 justify-between text-black dark:text-white'>
+                      <b className='text-lg font-extrabold'>
+                        {data.activePlan.name}
+                      </b>
+                    </div>
+                    <div className='package-info basis-auto text-black dark:text-white'>
+                      <ChevronRightIcon />
+                    </div>
+                  </div>
+                  <div className='card p-3 flex flex-row gap-x-2 items-center'>
+                    <div className='square-section basis-2/5'>
+                      <ProgressCircle
+                        value={total}
+                        total={data.activePlan.quotaData}
+                      />
+                    </div>
+                    <div className='package-name basis-3/5 flex flex-col gap-y-1 justify-between'>
+                      <div className='keterangan-section grid grid-cols-2 gap-1'>
+                        <div className='keterangan text-black dark:text-white'>
+                          <span className='block text-[10px] font-light'>
+                            USED DATA
+                          </span>
+                          <b className='text-sm font-extrabold'>
+                            {data.activePlan.usedData} MB
+                          </b>
+                        </div>
+                        <div className='keterangan text-black dark:text-white'>
+                          <span className='block text-[10px] font-light'>
+                            CALLS
+                          </span>
+                          <b className='text-sm font-extrabold'>
+                            {data.activePlan.usedCall}/{data.activePlan.quotaCall}{' '}
+                            Minutes
+                          </b>
+                        </div>
+                        <div className='keterangan text-black dark:text-white'>
+                          <span className='block text-[10px] font-light'>
+                            TOTAL DATA
+                          </span>
+                          <b className='text-sm font-extrabold'>
+                            {data.activePlan.quotaData} GB
+                          </b>
+                        </div>
+                        <div className='keterangan text-black dark:text-white'>
+                          <span className='block text-[10px] font-light'>TEXT</span>
+                          <b className='text-sm font-extrabold'>
+                            {data.activePlan.usedSms}/{data.activePlan.quotaSms} SMS
+                          </b>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='card p-3 flex justify-between items-center text-black dark:text-white'>
+                    <span className='text-sm font-normal'>
+                      <EventIcon /> Expired On
+                    </span>
+                    <b className='text-sm font-black'>
+                      {data.activePlan.expiredAt}
+                    </b>
+                  </div>
+                </div>
+              ) : (
+                <div className='not-package rounded-lg bg-white border border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700 text-black dark:text-white'>
+                  <div className='caption text-center py-10'>
+                    <img
+                      className='mx-auto mb-5'
+                      src={NoSimImage}
+                      alt={NoSimImage}
+                    />
+                    <p className='text-sm font-normal text-black dark:text-white'>
+                      You don't have an active data plan
+                    </p>
+                  </div>
+                  <button className='bg-roamin-yellow-500 color-black font-extrabold text-sm px-4 py-4 rounded-b-[9px] w-full text-[18px] text-black'>
+                    Buy Now
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
         <div className='order-section mb-4'>
