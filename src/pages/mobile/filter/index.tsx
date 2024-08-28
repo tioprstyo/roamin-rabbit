@@ -55,7 +55,7 @@ const MFilter = ({
         handleBackButton={() => handleBackButton()}
       />
       <div className='content-wrapper p-4 min-h-[calc(100vh-6rem)] relative bg-white dark:bg-roamin-dark-600'>
-        <div className='pb-[120px]'>
+        <div className='pb-[80px]'>
           <div className='heading py-7 border-b border-[#CECECE] dark:border-roamin-dark-400'>
             <h6 className='text-xl font-semibold text-black dark:text-white'>
               Choose Your Package Plan

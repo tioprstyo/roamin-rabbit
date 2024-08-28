@@ -8,9 +8,13 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PublicIcon from '@mui/icons-material/Public';
 import SimCardDownloadOutlinedIcon from '@mui/icons-material/SimCardDownloadOutlined';
 import { useGetExpiredOrder, useGetUpcomingOrders } from 'hooks';
+import { useRecoilValue } from 'recoil';
+import { slidetSettingState } from 'atom/sliderSetting';
+import Slider from 'react-slick';
 
 const MEsim = () => {
   const navigate = useNavigate();
+  const settings = useRecoilValue(slidetSettingState);
   const [openTab, setOpenTab] = useState<number>(1);
   const { data: dataUpcoming, fetching: fetchingUpComing } =
     useGetUpcomingOrders();
@@ -87,65 +91,135 @@ const MEsim = () => {
                   >
                     {dataUpcoming?.data ? (
                       <>
-                        {dataUpcoming?.data.map((data, i) => (
-                          <div className='active' key={i}>
-                            <div className='list-active'>
-                              <div className='listCard border border-roamin-neutral-600 dark:border-roamin-neutral-800 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
-                                <div className='cardHeader p-4 py-6 flex items-center text-black dark:text-white'>
-                                  <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
-                                  <h1 className='ml-[20px] text-xl font-extrabold'>
-                                    {data.name}
-                                  </h1>
+                        {dataUpcoming.data.length > 1 ? (
+                          <>
+                            <Slider {...settings}>
+                              {dataUpcoming?.data.map((data, i) => (
+                                <div key={i}>
+                                  <div className='active'>
+                                    <div className='list-active'>
+                                      <div className='listCard border border-roamin-neutral-600 dark:border-roamin-neutral-800 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
+                                        <div className='cardHeader p-4 py-6 flex items-center text-black dark:text-white'>
+                                          <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
+                                          <h1 className='ml-[20px] text-xl font-extrabold'>
+                                            {data.name}
+                                          </h1>
+                                        </div>
+                                        <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
+                                          <span className='flex'>
+                                            <PublicIcon className='mr-3' />
+                                            Coverage
+                                          </span>
+                                          <h3 className='text-[16px] font-black'>
+                                            {data.country}
+                                          </h3>
+                                        </div>
+                                        <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
+                                          <span className='flex'>
+                                            <SimCardDownloadOutlinedIcon className='mr-3' />
+                                            ICCID
+                                          </span>
+                                          <h3 className='text-[16px] font-black'>
+                                            {data.iccid}
+                                          </h3>
+                                        </div>
+                                        <div className='cardFooter grid grid-cols-2 gap-2 items-center p-4 py-6 text-black dark:text-white'>
+                                          <button
+                                            onClick={() => navigate(`/activate/${data.id}`)}
+                                            className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
+                                            type='button'
+                                          >
+                                            Active
+                                          </button>
+                                          <button
+                                            onClick={() => navigate(`/detail/sim/${data.id}`)}
+                                            className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
+                                            type='button'
+                                          >
+                                            View Detail
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className='caption-active py-7'>
+                                      <h3 className='text-xl font-semibold text-black dark:text-white'>
+                                        Are you looking to buy <br /> a new eSIM?
+                                      </h3>
+                                      <a
+                                        className='text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
+                                        href=''
+                                      >
+                                        Visit our store and choose one!
+                                      </a>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
-                                  <span className='flex'>
-                                    <PublicIcon className='mr-3' />
-                                    Coverage
-                                  </span>
-                                  <h3 className='text-[16px] font-black'>
-                                    {data.country}
+                              ))}
+                            </Slider>
+                          </>
+                        ) : (
+                          <>
+                            {dataUpcoming?.data.map((data, i) => (
+                              <div className='active' key={i}>
+                                <div className='list-active'>
+                                  <div className='listCard border border-roamin-neutral-600 dark:border-roamin-neutral-800 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
+                                    <div className='cardHeader p-4 py-6 flex items-center text-black dark:text-white'>
+                                      <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
+                                      <h1 className='ml-[20px] text-xl font-extrabold'>
+                                        {data.name}
+                                      </h1>
+                                    </div>
+                                    <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
+                                      <span className='flex'>
+                                        <PublicIcon className='mr-3' />
+                                        Coverage
+                                      </span>
+                                      <h3 className='text-[16px] font-black'>
+                                        {data.country}
+                                      </h3>
+                                    </div>
+                                    <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
+                                      <span className='flex'>
+                                        <SimCardDownloadOutlinedIcon className='mr-3' />
+                                        ICCID
+                                      </span>
+                                      <h3 className='text-[16px] font-black'>
+                                        {data.iccid}
+                                      </h3>
+                                    </div>
+                                    <div className='cardFooter grid grid-cols-2 gap-2 items-center p-4 py-6 text-black dark:text-white'>
+                                      <button
+                                        onClick={() => navigate(`/activate/${data.id}`)}
+                                        className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
+                                        type='button'
+                                      >
+                                        Active
+                                      </button>
+                                      <button
+                                        onClick={() => navigate(`/detail/sim/${data.id}`)}
+                                        className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
+                                        type='button'
+                                      >
+                                        View Detail
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className='caption-active py-7'>
+                                  <h3 className='text-xl font-semibold text-black dark:text-white'>
+                                    Are you looking to buy <br /> a new eSIM?
                                   </h3>
-                                </div>
-                                <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
-                                  <span className='flex'>
-                                    <SimCardDownloadOutlinedIcon className='mr-3' />
-                                    ICCID
-                                  </span>
-                                  <h3 className='text-[16px] font-black'>
-                                    {data.iccid}
-                                  </h3>
-                                </div>
-                                <div className='cardFooter grid grid-cols-2 gap-2 items-center p-4 py-6 text-black dark:text-white'>
-                                  <button
-                                    onClick={() => navigate(`/activate/${data.id}`)}
-                                    className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
-                                    type='button'
+                                  <a
+                                    className='text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
+                                    href=''
                                   >
-                                    Active
-                                  </button>
-                                  <button
-                                    onClick={() => navigate(`/detail/sim/${data.id}`)}
-                                    className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
-                                    type='button'
-                                  >
-                                    View Detail
-                                  </button>
+                                    Visit our store and choose one!
+                                  </a>
                                 </div>
                               </div>
-                            </div>
-                            <div className='caption-active py-7'>
-                              <h3 className='text-xl font-semibold text-black dark:text-white'>
-                                Are you looking to buy <br /> a new eSIM?
-                              </h3>
-                              <a
-                                className='text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
-                                href=''
-                              >
-                                Visit our store and choose one!
-                              </a>
-                            </div>
-                          </div>
-                        ))}
+                            ))}
+                          </>
+                        )}
                       </>
                     ) : (
                       <div className='text-black dark:text-white'>
