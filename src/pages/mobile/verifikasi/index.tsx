@@ -5,27 +5,31 @@ import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
 import { useRecoilState } from 'recoil';
 import { inputNumberState } from 'atom/inputNumber';
-import { useVerifyOTP } from 'hooks';
+import { useCountdown, useVerifyOTP } from 'hooks';
 import Cookies from 'js-cookie';
+import moment from 'moment';
 
 const MVerification = () => {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const inputRef = useRef<(HTMLDivElement | null)[]>([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const inputNumber = useRecoilState(inputNumberState);
-  const {data, fetching: fetchingOTP} = useVerifyOTP();
+  const { data, fetching: fetchingOTP } = useVerifyOTP();
   const prevRoute = useLocation();
+  const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
+  const { minutes, seconds } = useCountdown(
+    moment(new Date(), 'H:m').add(3, 'minutes').format('YYYY-MM-DD H:m'),
+  );
 
   const handleOtpChange = (value: string, index: number) => {
     const re = /^[0-9\b]+$/;
     const newOtp = [...otp];
     newOtp[index] = value;
     if (value === '' || re.test(value)) {
-        setOtp(newOtp);
-        if (value.length === 1 && index < newOtp.length - 1) {
-          inputRef.current[index + 1]?.focus();
-        }
+      setOtp(newOtp);
+      if (value.length === 1 && index < newOtp.length - 1) {
+        inputRef.current[index + 1]?.focus();
+      }
     }
 
     if (value.length === 0 && index > 0) {
@@ -34,27 +38,26 @@ const MVerification = () => {
   };
 
   const handleOtpSubmit = () => {
-    let inputOtp = otp.join('');
+    const inputOtp = otp.join('');
     fetchingOTP({
-        phoneNumber: inputNumber[0],
-        otp: inputOtp 
-    })
+      phoneNumber: inputNumber[0],
+      otp: inputOtp,
+    });
   };
 
   useEffect(() => {
-    console.log(prevRoute.state.previousPath);
     if (otp.every((digit) => digit !== '')) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
 
-    if(data){
-      if(prevRoute.state.previousPath == '/change-number'){
-        navigate('/profile')
+    if (data) {
+      if (prevRoute.state?.previousPath == '/change-number') {
+        navigate('/profile');
       } else {
-        Cookies.set('token', data.token)
-        navigate('/')
+        Cookies.set('token', data.token);
+        navigate('/');
       }
     }
   }, [otp, data]);
@@ -64,9 +67,11 @@ const MVerification = () => {
       <Header headerType={HEADER_TYPE.DETAIL} headerTitle='' />
       <div className='content-wrapper p-4 mt-10 min-h-[calc(100vh-6rem)]'>
         <div className='heading'>
-          <h1 className='font-black text-[28px] dark:text-roamin-yellow-500 leading-10'>Let’s Verify</h1>
+          <h1 className='font-black text-[28px] dark:text-roamin-yellow-500 leading-10'>
+            Let’s Verify
+          </h1>
           <p className='text-[16px] text-[#505454] dark:text-white font-normal mt-5'>
-            OTP code has send to your WhatsApp 
+            OTP code has send to your WhatsApp
             <br />
             <span className='font-semibold'>[{inputNumber[0]}]</span>
           </p>
@@ -89,8 +94,12 @@ const MVerification = () => {
             </div>
             <div className='timer mt-3'>
               <p className='text-[16px] text-[#363636] dark:text-white font-normal'>
-                Wait for <b className='text-[#40B7B0]'>02:59</b> to resend the
-                OTP
+                Wait for{' '}
+                <b className='text-[#40B7B0]'>
+                  {minutes < 10 ? `0${minutes}` : minutes}:
+                  {seconds < 10 ? `0${seconds}` : seconds}
+                </b>{' '}
+                to resend the OTP
               </p>
             </div>
           </div>

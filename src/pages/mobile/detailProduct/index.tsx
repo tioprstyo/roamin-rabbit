@@ -198,7 +198,7 @@ const MDetailProduct = () => {
                           onClick={() =>
                             navigate(`/detail/package/${other.id}`)
                           }
-                          className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
+                          className='textblack dark:text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-black dark:border-[#FFEC69] rounded-[9px] w-full text-[14px]'
                           type='button'
                         >
                           Choose

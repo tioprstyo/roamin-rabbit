@@ -9,7 +9,10 @@ done
 
 case $environment in
     "prod")
-        BASE_URL="https://roamin-rabbit.com"
+        BASE_URL="http://api.roaminrabbit.com"
+        ;;
+    "staging")
+        BASE_URL="http://api-dev.roaminrabbit.com"
         ;;
     "dev")
         BASE_URL="https://stoplight.io/mocks/roamin-rabbit/roaming-rabbit-api/19100496"

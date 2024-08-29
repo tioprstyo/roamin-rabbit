@@ -3,13 +3,18 @@ import { HEADER_TYPE, HeaderProps } from 'interfaces';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 
-const Header = ({ headerType, headerTitle, handleBackButton }: HeaderProps) => {
+const Header = ({
+  headerType,
+  headerTitle,
+  handleBackButton,
+  classname,
+}: HeaderProps) => {
   const navigate = useNavigate();
 
   if (headerType === HEADER_TYPE.DEFAULT) {
     return (
       <div
-        className='header p-4 flex items-center cursor-pointer'
+        className={`header p-4 flex items-center cursor-pointer ${classname}`}
         onClick={() => navigate('/')}
       >
         <div className='w-[62.1px] h-[62.1px] bg-[#FFEC69] rounded-[9px]'></div>
@@ -21,7 +26,9 @@ const Header = ({ headerType, headerTitle, handleBackButton }: HeaderProps) => {
   }
   if (headerType === HEADER_TYPE.DETAIL) {
     return (
-      <div className='header p-4 flex items-center bg-white dark:bg-roamin-dark-800'>
+      <div
+        className={`header p-4 flex items-center bg-white dark:bg-roamin-dark-800 ${classname}`}
+      >
         <ArrowBackIcon
           className='text-black dark:text-white'
           onClick={() => (handleBackButton ? handleBackButton() : navigate(-1))}
@@ -35,7 +42,9 @@ const Header = ({ headerType, headerTitle, handleBackButton }: HeaderProps) => {
 
   return (
     <div className='header p-4 flex items-center justify-center'>
-      <h1 className='ml-[20px] text-2xl font-extrabold text-black dark:text-roamin-yellow-500'>
+      <h1
+        className={`ml-[20px] text-2xl font-extrabold text-black dark:text-roamin-yellow-500 ${classname}`}
+      >
         {headerTitle}
       </h1>
     </div>

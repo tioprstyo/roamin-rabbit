@@ -2,21 +2,23 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { RequestBodyProps } from 'interfaces';
 import Cookies from 'js-cookie';
 
-const Authorization = Cookies.get('token');
 const config: RequestBodyProps = {
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    Authorization,
   },
 };
 
-const get = (url: string, body?: object) => {
-  if (body) {
-    config.params = body;
-  }
-  return axios
-    .get(`${process.env.REACT_APP_BASE_URL}${url}`, config)
+const get = async (url: string, body?: object) => {
+  return await axios
+    .get(`${process.env.REACT_APP_BASE_URL}${url}`, {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: Cookies.get('token'),
+      },
+      params: body,
+    })
     .then((response: AxiosResponse) => {
       return response.data;
     })
@@ -25,9 +27,15 @@ const get = (url: string, body?: object) => {
     });
 };
 
-const post = (url: string, body?: object) => {
-  return axios
-    .post(`${process.env.REACT_APP_BASE_URL}${url}`, body, config)
+const post = async (url: string, body?: object) => {
+  return await axios
+    .post(`${process.env.REACT_APP_BASE_URL}${url}`, body, {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: Cookies.get('token'),
+      },
+    })
     .then((response: AxiosResponse) => {
       return response.data;
     })
@@ -36,9 +44,15 @@ const post = (url: string, body?: object) => {
     });
 };
 
-const put = (url: string, body: object) => {
-  return axios
-    .put(`${process.env.REACT_APP_BASE_URL}${url}`, body, config)
+const put = async (url: string, body: object) => {
+  return await axios
+    .put(`${process.env.REACT_APP_BASE_URL}${url}`, body, {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: Cookies.get('token'),
+      },
+    })
     .then((response: AxiosResponse) => {
       return response.data;
     })

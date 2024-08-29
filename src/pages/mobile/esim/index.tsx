@@ -21,11 +21,9 @@ const MEsim = () => {
   const { data: dataExpired, fetching: fetchingExpired } = useGetExpiredOrder();
 
   useEffect(() => {
-    if (!dataUpcoming || !dataExpired) {
-      fetchingUpComing();
-      fetchingExpired();
-    }
-  }, [dataUpcoming, dataExpired]);
+    fetchingUpComing();
+    fetchingExpired();
+  }, []);
 
   return (
     <>
@@ -38,7 +36,7 @@ const MEsim = () => {
               role='tablist'
             >
               <li
-                className={`-mb-px last:mr-0 flex-auto text-center ${openTab === 1 ? 'border-b-2 border-b-roamin-yellow-500' : ''}`}
+                className={`-mb-px last:mr-0 flex-auto text-center ${openTab === 1 ? 'border-b-2 border-b-black dark:border-b-roamin-yellow-500' : ''}`}
               >
                 <a
                   className={
@@ -59,7 +57,7 @@ const MEsim = () => {
                 </a>
               </li>
               <li
-                className={`-mb-px last:mr-0 flex-auto text-center ${openTab === 2 ? 'border-b-2 border-b-roamin-yellow-500' : ''}`}
+                className={`-mb-px last:mr-0 flex-auto text-center ${openTab === 2 ? 'border-b-2 border-b-black dark:border-b-roamin-yellow-500' : ''}`}
               >
                 <a
                   className={
@@ -97,8 +95,8 @@ const MEsim = () => {
                               {dataUpcoming?.data.map((data, i) => (
                                 <div key={i}>
                                   <div className='active'>
-                                    <div className='list-active'>
-                                      <div className='listCard border border-roamin-neutral-600 dark:border-roamin-neutral-800 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
+                                    <div className='list-active shadow'>
+                                      <div className='listCard  border border-roamin-neutral-600 dark:border-roamin-neutral-800 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
                                         <div className='cardHeader p-4 py-6 flex items-center text-black dark:text-white'>
                                           <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
                                           <h1 className='ml-[20px] text-xl font-extrabold'>
@@ -125,14 +123,18 @@ const MEsim = () => {
                                         </div>
                                         <div className='cardFooter grid grid-cols-2 gap-2 items-center p-4 py-6 text-black dark:text-white'>
                                           <button
-                                            onClick={() => navigate(`/activate/${data.id}`)}
+                                            onClick={() =>
+                                              navigate(`/activate/${data.id}`)
+                                            }
                                             className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
                                             type='button'
                                           >
                                             Active
                                           </button>
                                           <button
-                                            onClick={() => navigate(`/detail/sim/${data.id}`)}
+                                            onClick={() =>
+                                              navigate(`/detail/sim/${data.id}`)
+                                            }
                                             className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
                                             type='button'
                                           >
@@ -143,7 +145,8 @@ const MEsim = () => {
                                     </div>
                                     <div className='caption-active py-7'>
                                       <h3 className='text-xl font-semibold text-black dark:text-white'>
-                                        Are you looking to buy <br /> a new eSIM?
+                                        Are you looking to buy <br /> a new
+                                        eSIM?
                                       </h3>
                                       <a
                                         className='text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
@@ -161,8 +164,8 @@ const MEsim = () => {
                           <>
                             {dataUpcoming?.data.map((data, i) => (
                               <div className='active' key={i}>
-                                <div className='list-active'>
-                                  <div className='listCard border border-roamin-neutral-600 dark:border-roamin-neutral-800 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
+                                <div className='list-active shadow'>
+                                  <div className='listCard border border-roamin-neutral-600 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
                                     <div className='cardHeader p-4 py-6 flex items-center text-black dark:text-white'>
                                       <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
                                       <h1 className='ml-[20px] text-xl font-extrabold'>
@@ -189,14 +192,18 @@ const MEsim = () => {
                                     </div>
                                     <div className='cardFooter grid grid-cols-2 gap-2 items-center p-4 py-6 text-black dark:text-white'>
                                       <button
-                                        onClick={() => navigate(`/activate/${data.id}`)}
-                                        className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
+                                        onClick={() =>
+                                          navigate(`/activate/${data.id}`)
+                                        }
+                                        className='text-black dark:text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-black dark:border-[#FFEC69] rounded-[9px] w-full text-[14px]'
                                         type='button'
                                       >
                                         Active
                                       </button>
                                       <button
-                                        onClick={() => navigate(`/detail/sim/${data.id}`)}
+                                        onClick={() =>
+                                          navigate(`/detail/sim/${data.id}`)
+                                        }
                                         className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
                                         type='button'
                                       >
@@ -210,7 +217,7 @@ const MEsim = () => {
                                     Are you looking to buy <br /> a new eSIM?
                                   </h3>
                                   <a
-                                    className='text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
+                                    className='text-[#5F97BC] dark:text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
                                     href=''
                                   >
                                     Visit our store and choose one!
@@ -253,7 +260,7 @@ const MEsim = () => {
                       <>
                         {dataExpired.data.map((data, i) => (
                           <div className='active' key={i}>
-                            <div className='list-active'>
+                            <div className='list-active shadow'>
                               <div className='listCard border border-roamin-neutral-600 dark:border-roamin-neutral-800 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
                                 <div className='cardHeader p-4 py-6 flex items-center text-black dark:text-white'>
                                   <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]' />
@@ -290,7 +297,7 @@ const MEsim = () => {
                                 </div>
                                 <div className='cardFooter grid grid-cols-2 gap-2 items-center border border-t-[#E2DFDF] p-4 py-6'>
                                   <button
-                                    className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
+                                    className='text-black dark:text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-black dark:border-[#FFEC69] rounded-[9px] w-full text-[14px]'
                                     type='button'
                                   >
                                     Active
@@ -310,7 +317,7 @@ const MEsim = () => {
                                 Need new plan for <br /> other destinations?
                               </h3>
                               <a
-                                className='text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
+                                className='text-[#5F97BC] dark:text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
                                 href=''
                               >
                                 Visit our store and choose your next

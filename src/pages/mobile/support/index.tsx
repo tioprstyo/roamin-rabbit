@@ -75,11 +75,8 @@ const MSupport = () => {
           >
             <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] dark:border-roamin-dark-400 px-3 py-3 text-black dark:text-white dark:bg-roamin-dark-700'>
               <p className='text-[12px] font-medium text-[#989898]'>
-                PLAN TYPE
+                Lorem Ipsum
               </p>
-              <h6 className='text-[16px] font-medium'>
-                Data, Call (100 Minutes), Text (20 SMS)
-              </h6>
             </div>
           </div>
           <div
@@ -96,11 +93,8 @@ const MSupport = () => {
           >
             <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] dark:border-roamin-dark-400 px-3 py-3 text-black dark:text-white dark:bg-roamin-dark-700'>
               <p className='text-[12px] font-medium text-[#989898]'>
-                PLAN TYPE
+                Lorem Ipsum
               </p>
-              <h6 className='text-[16px] font-medium'>
-                Data, Call (100 Minutes), Text (20 SMS)
-              </h6>
             </div>
           </div>
           <div
@@ -117,11 +111,8 @@ const MSupport = () => {
           >
             <div className='cardContent flex flex-col items-start border border-t-[#E2DFDF] dark:border-roamin-dark-400 px-3 py-3 text-black dark:text-white dark:bg-roamin-dark-700'>
               <p className='text-[12px] font-medium text-[#989898]'>
-                PLAN TYPE
+                Lorem Ipsum
               </p>
-              <h6 className='text-[16px] font-medium'>
-                Data, Call (100 Minutes), Text (20 SMS)
-              </h6>
             </div>
           </div>
         </div>

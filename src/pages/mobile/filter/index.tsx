@@ -53,6 +53,7 @@ const MFilter = ({
         headerType={HEADER_TYPE.DETAIL}
         headerTitle='Filter'
         handleBackButton={() => handleBackButton()}
+        classname='shadow mb-1'
       />
       <div className='content-wrapper p-4 min-h-[calc(100vh-6rem)] relative bg-white dark:bg-roamin-dark-600'>
         <div className='pb-[80px]'>

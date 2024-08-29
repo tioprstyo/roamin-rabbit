@@ -179,7 +179,7 @@ const MListing = () => {
                       {packageData[lists].map(
                         (li: PackagesProps, j: number) => (
                           <div key={j}>
-                            <div className='listCard border border-roamin-neutral-600 dark:border-roamin-dark-400 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 bg-white dark:bg-roamin-dark-700 rounded-[9px] mt-5'>
+                            <div className='shadow listCard border border-roamin-neutral-600 dark:border-roamin-dark-400 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 bg-white dark:bg-roamin-dark-700 rounded-[9px] mt-5'>
                               <div className='cardHeader p-4 flex items-center text-black dark:text-white'>
                                 <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
                                 <h1 className='ml-[20px] text-xl font-extrabold'>
