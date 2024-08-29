@@ -89,7 +89,7 @@ const MHome = () => {
           </span>
           <br />
           <a
-            className='text-sm text-[#5F97BC] dark:text-roamin-yellow-500 underline decoration-solid decoration-roamin-yellow-500'
+            className='text-sm text-[#5F97BC] dark:text-roamin-yellow-500 underline decoration-solid decoration-[#5F97BC] dark:decoration-roamin-yellow-500'
             href=''
           >
             See list of devices that support esim

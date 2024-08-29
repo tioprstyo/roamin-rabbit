@@ -60,7 +60,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 const MProfile = () => {
   const navigate = useNavigate();
-  const { data, isLoading ,fetching } = useGetProfile();
+  const { data, isLoading, fetching } = useGetProfile();
   const { data: isDarkMode, fetching: setIsDarkMode } = useDarkMode();
   const [show, setShow] = useState<number>(0);
   const label = { inputProps: { 'aria-label': 'Color switch demo' } };
@@ -79,10 +79,8 @@ const MProfile = () => {
   const total = useMemo(() => usedTotal(data?.activePlan), [data?.activePlan]);
 
   useEffect(() => {
-    if (!data) {
-      fetching();
-    }
-  }, [data]);
+    fetching();
+  }, []);
 
   return (
     <>
@@ -91,19 +89,19 @@ const MProfile = () => {
         <div className='profile-section mb-4'>
           {isLoading ? (
             <>
-              <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
-                <div className="animate-pulse flex space-x-4">
-                  <div className="rounded-full bg-slate-200 h-10 w-10"></div>
-                    <div className="flex-1 space-y-6 py-1">
-                      <div className="h-2 bg-slate-200 rounded"></div>
-                      <div className="space-y-3">
-                        <div className="h-2 bg-slate-200 rounded"></div>
-                      </div>
+              <div className='border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto'>
+                <div className='animate-pulse flex space-x-4'>
+                  <div className='rounded-full bg-slate-200 h-10 w-10'></div>
+                  <div className='flex-1 space-y-6 py-1'>
+                    <div className='h-2 bg-slate-200 rounded'></div>
+                    <div className='space-y-3'>
+                      <div className='h-2 bg-slate-200 rounded'></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </>
-          ):(
+          ) : (
             <>
               {data?.profile ? (
                 <div
@@ -118,7 +116,9 @@ const MProfile = () => {
                     />
                   </div>
                   <div className='user-name basis-3/4 flex flex-col gap-y-1 justify-between text-black dark:text-white'>
-                    <b className='text-xl font-extrabold'>{data.profile.name}</b>
+                    <b className='text-xl font-extrabold'>
+                      {data.profile.name}
+                    </b>
                     <p className='text-base font-[350]'>
                       {data.profile.phoneNumber}
                     </p>
@@ -154,21 +154,21 @@ const MProfile = () => {
           </h3>
           {isLoading ? (
             <>
-              <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
-                <div className="animate-pulse flex space-x-4">
-                  <div className="flex-1 space-y-6 py-1">
-                    <div className="h-5 bg-slate-200 rounded"></div>
-                    <div className="space-y-3">
-                      <div className="grid grid-cols-3 gap-4">
-                        <div className="h-10 bg-slate-200 rounded col-span-1"></div>
-                        <div className="h-10 bg-slate-200 rounded col-span-1"></div>
-                        <div className="h-10 bg-slate-200 rounded col-span-1"></div>
+              <div className='border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto'>
+                <div className='animate-pulse flex space-x-4'>
+                  <div className='flex-1 space-y-6 py-1'>
+                    <div className='h-5 bg-slate-200 rounded'></div>
+                    <div className='space-y-3'>
+                      <div className='grid grid-cols-3 gap-4'>
+                        <div className='h-10 bg-slate-200 rounded col-span-1'></div>
+                        <div className='h-10 bg-slate-200 rounded col-span-1'></div>
+                        <div className='h-10 bg-slate-200 rounded col-span-1'></div>
                       </div>
                     </div>
-                    <div className="space-y-3">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="h-5 bg-slate-200 rounded col-span-1"></div>
-                        <div className="h-5 bg-slate-200 rounded col-span-1"></div>
+                    <div className='space-y-3'>
+                      <div className='grid grid-cols-2 gap-4'>
+                        <div className='h-5 bg-slate-200 rounded col-span-1'></div>
+                        <div className='h-5 bg-slate-200 rounded col-span-1'></div>
                       </div>
                     </div>
                   </div>
@@ -214,8 +214,8 @@ const MProfile = () => {
                             CALLS
                           </span>
                           <b className='text-sm font-extrabold'>
-                            {data.activePlan.usedCall}/{data.activePlan.quotaCall}{' '}
-                            Minutes
+                            {data.activePlan.usedCall}/
+                            {data.activePlan.quotaCall} Minutes
                           </b>
                         </div>
                         <div className='keterangan text-black dark:text-white'>
@@ -227,9 +227,12 @@ const MProfile = () => {
                           </b>
                         </div>
                         <div className='keterangan text-black dark:text-white'>
-                          <span className='block text-[10px] font-light'>TEXT</span>
+                          <span className='block text-[10px] font-light'>
+                            TEXT
+                          </span>
                           <b className='text-sm font-extrabold'>
-                            {data.activePlan.usedSms}/{data.activePlan.quotaSms} SMS
+                            {data.activePlan.usedSms}/{data.activePlan.quotaSms}{' '}
+                            SMS
                           </b>
                         </div>
                       </div>
@@ -293,11 +296,8 @@ const MProfile = () => {
             >
               <div className='cardContent flex flex-col items-start px-3 py-3'>
                 <p className='text-[12px] font-medium text-[#989898]'>
-                  PLAN TYPE
+                  Lorem Ipsum
                 </p>
-                <h6 className='text-[16px] font-medium'>
-                  Data, Call (100 Minutes), Text (20 SMS)
-                </h6>
               </div>
             </div>
             <div
@@ -312,11 +312,8 @@ const MProfile = () => {
             >
               <div className='cardContent flex flex-col items-start px-3 py-3'>
                 <p className='text-[12px] font-medium text-[#989898]'>
-                  PLAN TYPE
+                  Lorem Ipsum
                 </p>
-                <h6 className='text-[16px] font-medium'>
-                  Data, Call (100 Minutes), Text (20 SMS)
-                </h6>
               </div>
             </div>
             <div
@@ -331,11 +328,8 @@ const MProfile = () => {
             >
               <div className='cardContent flex flex-col items-start px-3 py-3'>
                 <p className='text-[12px] font-medium text-[#989898]'>
-                  PLAN TYPE
+                  Lorem Ipsum
                 </p>
-                <h6 className='text-[16px] font-medium'>
-                  Data, Call (100 Minutes), Text (20 SMS)
-                </h6>
               </div>
             </div>
           </div>

@@ -13,6 +13,8 @@ export const useGetProfile = () => {
       if (resp?.status === 'success') {
         setData(resp?.data);
         setIsLoading(false);
+      } else {
+        setIsLoading(false);
       }
     } catch (err) {
       setIsLoading(false);

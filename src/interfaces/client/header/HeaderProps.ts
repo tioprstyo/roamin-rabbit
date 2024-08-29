@@ -1,6 +1,7 @@
 export interface HeaderProps {
   headerType: string;
   headerTitle: string;
+  classname?: string;
   handleBackButton?: () => void;
 }
 

@@ -57,8 +57,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint  --fix src/**/*",
     "format": "prettier src/**/*.js --write. --config ./.prettierrc",
-    "env-dev": "chmod +x switch_env.sh && ./switch_env.sh -e dev",
-    "env-prod": "chmod +x switch_env.sh && ./switch_env.sh -e prod"
+    "dev": "chmod +x switch_env.sh && ./switch_env.sh -e dev",
+    "staging": "chmod +x switch_env.sh && ./switch_env.sh -e staging",
+    "prod": "chmod +x switch_env.sh && ./switch_env.sh -e prod"
   },
   "eslintConfig": {
     "extends": []
