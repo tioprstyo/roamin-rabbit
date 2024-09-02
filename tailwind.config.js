@@ -6,6 +6,12 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      width: {
+        'inherit': 'inherit',
+      },
+      maxWidth: {
+        'inherit': 'inherit',
+      },
       colors: {
         'roamin-yellow': {
           500: '#FFEC69'

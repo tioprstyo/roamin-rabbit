@@ -1,19 +1,18 @@
 #RoaminRabbit
 e-shop for e-SIM
 
-====================================================
-
-CHANGING ENVIRONMENT COMMAND
-
-./switch_env.sh -e {env}
-
 env : 
 - prod
-- stg
-- playground
+- staging
 - dev
-- demo
 
-- Change script permission by running : chmod +x switch_env.sh
+===================================================
+
+RUN PROJECT COMMAND
+
+- yarn install
+- yarn {env}
+- yarn build (for deploying)
+- yarn start
 
 ====================================================

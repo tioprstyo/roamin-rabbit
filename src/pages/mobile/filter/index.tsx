@@ -55,7 +55,7 @@ const MFilter = ({
         handleBackButton={() => handleBackButton()}
         classname='shadow mb-1'
       />
-      <div className='content-wrapper p-4 min-h-[calc(100vh-6rem)] relative bg-white dark:bg-roamin-dark-600'>
+      <div className='max-w-inherit content-wrapper p-4 min-h-[calc(100vh-6rem)] relative bg-white dark:bg-roamin-dark-600'>
         <div className='pb-[80px]'>
           <div className='heading py-7 border-b border-[#CECECE] dark:border-roamin-dark-400'>
             <h6 className='text-xl font-semibold text-black dark:text-white'>
@@ -146,7 +146,7 @@ const MFilter = ({
             </div>
           </div>
         </div>
-        <div className='buy-section max-w-screen-md mx-auto p-4 border-t border-[#CECECE] dark:border-roamin-dark-400 fixed left-0 right-0 bottom-0 bg-white bg-white dark:bg-roamin-dark-600 text-black'>
+        <div className='max-w-inherit mx-auto buy-section p-4 border-t border-[#CECECE] dark:border-roamin-dark-400 fixed left-0 right-0 bottom-0 bg-white bg-white dark:bg-roamin-dark-600 text-black'>
           <button
             onClick={filterApply}
             className='bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]'
