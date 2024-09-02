@@ -29,7 +29,7 @@ const MDetailProduct = () => {
   }, [data, navigate]);
 
   return (
-    <>
+    <div className='relative max-w-inherit'>
       <Header headerType={HEADER_TYPE.DETAIL} headerTitle='Package Details' />
       <div className='content-wrapper bg-[#FFF7DA] dark:bg-roamin-dark-600 min-h-[calc(100vh-4rem)] pb-28'>
         <div className='listCard bg-white dark:bg-roamin-dark-700 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 text-black dark:text-white'>
@@ -212,7 +212,7 @@ const MDetailProduct = () => {
           </div>
         </div>
       </div>
-      <div className='fromBuy grid grid-cols-2 items-center justify-center border-t-roamin-neutral-600 dark:border-t-roamin-dark-400 p-4 fixed bottom-0 left-0 right-0 bg-white dark:bg-roamin-dark-800'>
+      <div className='max-w-inherit mx-auto fromBuy grid grid-cols-2 items-center justify-center border-t-roamin-neutral-600 dark:border-t-roamin-dark-400 p-4 fixed bottom-0 left-0 right-0 bg-white dark:bg-roamin-dark-800'>
         <div className='buyPrice text-center'>
           <h6 className='text-xl font-black dark:text-white'>
             {data?.package.price}
@@ -227,7 +227,7 @@ const MDetailProduct = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

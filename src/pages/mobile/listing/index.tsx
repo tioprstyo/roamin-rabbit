@@ -259,6 +259,14 @@ const MListing = () => {
           onClose={() => setIsShowFilter(false)}
           TransitionComponent={Transition}
           className='max-w-screen-md mx-auto'
+          sx={{
+            '& .MuiDialog-container': {
+              maxWidth: 'inherit',
+            },
+            '& .MuiPaper-root': {
+              maxWidth: 'inherit',
+            },
+          }}
         >
           <MFilter
             handleBackButton={handleBackButton}
