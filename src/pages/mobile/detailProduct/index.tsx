@@ -220,6 +220,7 @@ const MDetailProduct = () => {
         </div>
         <div className='buyButton text-center'>
           <button
+          onClick={()=> navigate(`/confirmasi?packageId=${packageId}`)}
             className='bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] w-9/12 text-[14px]'
             type='button'
           >

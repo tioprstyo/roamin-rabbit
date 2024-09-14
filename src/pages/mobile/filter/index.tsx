@@ -146,7 +146,7 @@ const MFilter = ({
             </div>
           </div>
         </div>
-        <div className='max-w-inherit mx-auto buy-section p-4 border-t border-[#CECECE] dark:border-roamin-dark-400 fixed left-0 right-0 bottom-0 bg-white bg-white dark:bg-roamin-dark-600 text-black'>
+        <div className='max-w-inherit mx-auto buy-section p-4 border-t border-[#CECECE] dark:border-roamin-dark-400 fixed left-0 right-0 bottom-0 bg-white dark:bg-roamin-dark-600 text-black'>
           <button
             onClick={filterApply}
             className='bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]'
