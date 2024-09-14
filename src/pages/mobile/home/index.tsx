@@ -5,6 +5,7 @@ import { CountriesProps, CountriesSelect, HEADER_TYPE } from 'interfaces';
 import ReactFlagsSelect from 'react-flags-select';
 import { useGetCountries } from 'hooks';
 import { parseQueryParams } from 'services';
+import { Link } from "react-router-dom";
 
 const MHome = () => {
   const navigate = useNavigate();
@@ -88,12 +89,12 @@ const MHome = () => {
             Does my device support it?
           </span>
           <br />
-          <a
+          <Link
             className='text-sm text-[#5F97BC] dark:text-roamin-yellow-500 underline decoration-solid decoration-[#5F97BC] dark:decoration-roamin-yellow-500'
-            href=''
+            to='compatible'
           >
             See list of devices that support esim
-          </a>
+          </Link>
         </div>
       </div>
     </>
