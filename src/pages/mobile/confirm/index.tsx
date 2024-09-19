@@ -13,8 +13,10 @@ import { ListParamsProps } from 'interfaces';
 import { parseQueryParams } from 'services';
 import { useOrder } from 'hooks';
 import Dialog from '@mui/material/Dialog';
+import Cookies from 'js-cookie';
 
 const MConfirm = () => {
+  const token = Cookies.get('token')
   const navigate = useNavigate();
   const {data, fetching} = useOrder();
   const [modal, setModal] = useState(false)
@@ -68,8 +70,12 @@ const MConfirm = () => {
       }
     }
 
-    fetching(payment);
-    setModal(true);
+    if(token){
+      fetching(payment);
+      setModal(true);
+    } else {
+      navigate('/login')
+    }
   }
 
   return (
