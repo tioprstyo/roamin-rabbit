@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { Header } from 'components';
+import { AdditionalInformation, Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import FlagImage from 'assets/img/flag.png';
 import { useGetOrderDetail } from 'hooks';
 
 const MStatus = () => {
   const { id } = useParams() as { id: string };
+  const navigate = useNavigate();
   const { data, fetching } = useGetOrderDetail();
 
   useEffect(() => {
@@ -61,75 +62,21 @@ const MStatus = () => {
             Additional Information
           </h2>
           <div className='card border border-roamin-neutral-600 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:border-roamin-neutral-800 bg-white dark:bg-roamin-dark-700 rounded-[9px] mb-3'>
-            <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                PLAN TYPE
-              </p>
-              <h6 className='text-[16px] font-medium'>{data?.planType}</h6>
-            </div>
-            <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>SPEED</p>
-              <h6 className='text-[16px] font-medium'>{data?.speed}</h6>
-              <span className='text-[14px] font-light'>
-                This data plan is expected to have 5G speed. However, network
-                coverage and speed may vary by location and time of day.
-              </span>
-            </div>
-            <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                INSTALATION
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                Scan QR or enter code manually
-              </h6>
-            </div>
-            <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                ACTIVATION POLICY
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                The validity period starts when the eSIM connects to any
-                supported network/s.
-              </h6>
-            </div>
-            <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                IP ROUTING
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                {data?.ipRouting ? 'Yes' : 'No'}
-              </h6>
-            </div>
-            <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                TETHERING
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                {data?.quotaTethering}
-              </h6>
-            </div>
-            <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                eKYC (IDENTITY VERIFICATION)
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                {data?.ekyc ? 'Required' : 'Not Required'}
-              </h6>
-            </div>
-            <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                Top Up Options
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                {data?.topupOption ? 'Yes' : 'No'}
-              </h6>
-            </div>
+            <AdditionalInformation
+              planType={data?.planType || ''}
+              speed={data?.speed || ''}
+              quotaTethering={data?.quotaTethering || ''}
+              ipRouting={data?.ipRouting || false}
+              ekyc={data?.ekyc || false}
+              topupOption={data?.topupOption || false}
+            />
           </div>
           {!data?.isActivated && (
             <div className='form-activate'>
               <button
                 className='bg-[#FFEC69] text-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]'
                 type='button'
+                onClick={() => navigate(`/activate/${id}`)}
               >
                 Activate Now
               </button>

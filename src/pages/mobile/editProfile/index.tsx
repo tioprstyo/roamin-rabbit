@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Header } from 'components';
-import { HEADER_TYPE, ProfileProps, UserRequest } from 'interfaces';
+import { HEADER_TYPE } from 'interfaces';
 import FlagImage from 'assets/img/flag.png';
 import DefaultUserPicture from 'assets/img/default_user.png';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
-import { useGetProfile } from 'hooks';
 import { useNavigate } from 'react-router-dom';
+import { profileState } from 'atom';
+import { useRecoilValue } from 'recoil';
 
 const MEditProfile = () => {
   const navigate = useNavigate();
-  const { data, fetching } = useGetProfile();
-
-  useEffect(() => {
-    fetching();
-  }, []);
+  const { profile } = useRecoilValue(profileState);
 
   return (
     <>
@@ -27,8 +24,8 @@ const MEditProfile = () => {
             >
               <img
                 className='w-full rounded-full'
-                src={data?.profile.profilePicture || DefaultUserPicture}
-                alt={data?.profile.profilePicture || DefaultUserPicture}
+                src={profile?.profilePicture || DefaultUserPicture}
+                alt={profile?.profilePicture || DefaultUserPicture}
               />
               <input className='hidden' type='file' name='' id='file' />
               <div className='icon-wrapper absolute bg-[#717171] h-[43px] w-[43px] flex justify-center items-center rounded-full'>
@@ -45,7 +42,7 @@ const MEditProfile = () => {
             </label>
             <input
               disabled
-              value={data?.profile?.name}
+              value={profile?.name}
               name='name'
               type='text'
               placeholder='Full Name'
@@ -65,7 +62,7 @@ const MEditProfile = () => {
                   <img src={FlagImage} alt='' />
                 </span>
                 <input
-                  value={data?.profile.phoneNumber}
+                  value={profile?.phoneNumber}
                   type='text'
                   placeholder='Placeholder'
                   className='pl-12 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] w-full'
@@ -92,7 +89,7 @@ const MEditProfile = () => {
             </label>
             <input
               disabled
-              value={data?.profile.email}
+              value={profile?.email}
               name='email'
               type='text'
               placeholder='Email'

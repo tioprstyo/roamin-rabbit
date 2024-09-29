@@ -3,6 +3,9 @@ import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import OrderIdIcon from 'assets/img/order_id.png';
+import OrderDateIcon from 'assets/img/order_date.png';
+import OrderStatusIcon from 'assets/img/order_status.png';
 import LanguageIcon from '@mui/icons-material/Language';
 import PublicIcon from '@mui/icons-material/Public';
 import VisaImage from 'assets/img/visa.png';
@@ -28,26 +31,55 @@ const MOrderDetail = () => {
           </h2>
           <div className='card bg-white divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 dark:text-white dark:bg-roamin-dark-700 rounded-[9px] mb-3'>
             <div className='cardContent flex flex-col items-start px-3 py-3'>
-              <p className='text-[12px] font-medium text-[#989898]'>ORDER ID</p>
-              <h6 className='text-[16px] font-medium'>
-                {orderDetails?.orderId}
-              </h6>
+              <div className='flex gap-5'>
+                <img
+                  src={OrderIdIcon}
+                  alt='order-id-icon'
+                  className='w-9 h-9'
+                />
+                <div>
+                  <p className='text-[12px] font-medium text-[#989898]'>
+                    ORDER ID
+                  </p>
+                  <h6 className='text-[16px] font-medium'>
+                    {orderDetails?.orderId}
+                  </h6>
+                </div>
+              </div>
             </div>
             <div className='cardContent flex flex-col items-start px-3 py-3'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                ORDER DATE
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                {moment().format('dddd, DD MMM YYYY')}
-              </h6>
+              <div className='flex gap-5'>
+                <img
+                  src={OrderDateIcon}
+                  alt='order-date-icon'
+                  className='w-9 h-9'
+                />
+                <div>
+                  <p className='text-[12px] font-medium text-[#989898]'>
+                    ORDER DATE
+                  </p>
+                  <h6 className='text-[16px] font-medium'>
+                    {moment().format('dddd, DD MMM YYYY')}
+                  </h6>
+                </div>
+              </div>
             </div>
             <div className='cardContent flex flex-col items-start px-3 py-3'>
-              <p className='text-[12px] font-medium text-[#989898]'>
-                ORDER STATUS
-              </p>
-              <h6 className='text-[16px] font-medium'>
-                {_.startCase(_.toLower(orderDetails?.orderStatusString))}
-              </h6>
+              <div className='flex gap-5'>
+                <img
+                  src={OrderStatusIcon}
+                  alt='order-status-icon'
+                  className='w-9 h-9'
+                />
+                <div>
+                  <p className='text-[12px] font-medium text-[#989898]'>
+                    ORDER STATUS
+                  </p>
+                  <h6 className='text-[16px] font-medium'>
+                    {_.startCase(_.toLower(orderDetails?.orderStatusString))}
+                  </h6>
+                </div>
+              </div>
             </div>
           </div>
         </div>

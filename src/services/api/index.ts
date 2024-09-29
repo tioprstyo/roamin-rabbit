@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { RequestBodyProps } from 'interfaces';
+import { ErrorResponse, RequestBodyProps } from 'interfaces';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 const config: RequestBodyProps = {
   headers: {
@@ -15,7 +16,9 @@ const get = async (url: string, body?: object) => {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${Cookies.get('token')}`,
+        Authorization: Cookies.get('token')
+          ? `Bearer ${Cookies.get('token')}`
+          : '',
       },
       params: body,
     })
@@ -23,6 +26,8 @@ const get = async (url: string, body?: object) => {
       return response.data;
     })
     .catch((error: AxiosError) => {
+      const errorResp = error.response?.data as ErrorResponse;
+      toast.error(errorResp.message);
       return error;
     });
 };
@@ -33,13 +38,17 @@ const post = async (url: string, body?: object) => {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${Cookies.get('token')}`,
+        Authorization: Cookies.get('token')
+          ? `Bearer ${Cookies.get('token')}`
+          : '',
       },
     })
     .then((response: AxiosResponse) => {
       return response.data;
     })
     .catch((error: AxiosError) => {
+      const errorResp = error.response?.data as ErrorResponse;
+      toast.error(errorResp.message);
       return error;
     });
 };
@@ -50,13 +59,17 @@ const put = async (url: string, body: object) => {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${Cookies.get('token')}`,
+        Authorization: Cookies.get('token')
+          ? `Bearer ${Cookies.get('token')}`
+          : '',
       },
     })
     .then((response: AxiosResponse) => {
       return response.data;
     })
     .catch((error: AxiosError) => {
+      const errorResp = error.response?.data as ErrorResponse;
+      toast.error(errorResp.message);
       return error;
     });
 };

@@ -19,7 +19,7 @@ import {
   ListParamsProps,
 } from 'interfaces';
 import { useRecoilValue } from 'recoil';
-import { slidetSettingState } from 'atom/sliderSetting';
+import { sliderSettingState } from 'atom/sliderSetting';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useGetCountries, useGetPackageFilter, useGetPackageList } from 'hooks';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -39,7 +39,7 @@ const Transition = React.forwardRef(function Transition(
 
 const MListing = () => {
   const navigate = useNavigate();
-  const settings = useRecoilValue(slidetSettingState);
+  const settings = useRecoilValue(sliderSettingState);
   const getFilterLabel = useRecoilValue(filterByState);
   const [searchParams] = useSearchParams();
   const { data, isLoading, fetching } = useGetPackageList();
@@ -174,13 +174,25 @@ const MListing = () => {
               <>
                 {Object.keys(packageData).map((lists, i) => (
                   <div className='listing' key={`${i}-list`}>
-                    <Slider {...settings}>
+                    <Slider
+                      {...settings}
+                      dots={packageData[lists].length > 1 ? true : false}
+                      infinite={packageData[lists].length > 1 ? true : false}
+                    >
                       {packageData[lists].map(
                         (li: PackagesProps, j: number) => (
                           <div key={j}>
                             <div className='shadow listCard border border-roamin-neutral-600 dark:border-roamin-dark-400 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 bg-white dark:bg-roamin-dark-700 rounded-[9px] mt-5'>
                               <div className='cardHeader p-4 flex items-center text-black dark:text-white'>
-                                <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
+                                <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'>
+                                  {li?.pic && (
+                                    <img
+                                      className='object-cover w-[103px] h-[63px] rounded-[9px]'
+                                      src={li?.pic}
+                                      alt=''
+                                    />
+                                  )}
+                                </div>
                                 <h1 className='ml-[20px] text-xl font-extrabold'>
                                   {li.name}
                                 </h1>

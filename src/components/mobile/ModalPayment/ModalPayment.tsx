@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import iconSuccess from '../../../assets/img/icon-success.png';
 import iconFailed from '../../../assets/img/icon-failed.png';
 import iconWaiting from '../../../assets/img/icon-waiting.png';
 import iconExpired from '../../../assets/img/icon-expired.png';
-import { useActivateOrder } from 'hooks';
+import { useNavigate } from 'react-router-dom';
 
 const ModalPayment = ({
   status,
@@ -16,9 +16,10 @@ const ModalPayment = ({
   id: string;
   closeModal: () => void;
 }) => {
-  const { data, fetching: postActivatePackage } = useActivateOrder();
+  const navigate = useNavigate();
+
   const activateOrder = () => {
-    postActivatePackage(id);
+    navigate(`/activate/${id}`);
   };
 
   if (status == 'complete') {
@@ -137,7 +138,7 @@ const ModalPayment = ({
               needed.
             </p>
             <a
-              href=''
+              href='/'
               className='text-roamin-yellow-500 underline decoration-roamin-yellow-500 mb-8'
             >
               Visit our store and choose your next destination!

@@ -12,7 +12,7 @@ case $environment in
         BASE_URL="http://api.roaminrabbit.com"
         ;;
     "staging")
-        BASE_URL="https://dev-api.roaminrabbit.com"
+        BASE_URL="https://dev-api.roaminrabbit.com/api/v1"
         ;;
     "dev")
         BASE_URL="https://e148-2001-448a-5102-3ab-c01-3cf8-d989-9ad3.ngrok-free.app/api/v1"

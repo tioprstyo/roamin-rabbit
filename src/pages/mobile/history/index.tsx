@@ -29,11 +29,20 @@ const MHistory = () => {
             {data.length ? (
               data.map((item, i) => (
                 <div
-                  className='card flex flex-row gap-x-2 items-center bg-white dark:bg-roamin-dark-700 p-4'
+                  className='cursor-pointer card flex flex-row gap-x-2 items-center bg-white dark:bg-roamin-dark-700 p-4'
                   key={i}
+                  onClick={() => navigate(`/detail/order/${item.id}`)}
                 >
                   <div className='paket-square basis-2/12'>
-                    <div className='w-full h-[51px] bg-[#E7E7E7] rounded-[9px]'></div>
+                    <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'>
+                      {item?.pic && (
+                        <img
+                          className='object-cover w-[103px] h-[63px] rounded-[9px]'
+                          src={item?.pic}
+                          alt=''
+                        />
+                      )}
+                    </div>
                   </div>
                   <div className='paket-name basis-3/4 flex flex-row gap-x-2 justify-between'>
                     <div className='left-info'>
@@ -52,12 +61,12 @@ const MHistory = () => {
                         {moment(item.createdAt).format('DD MMM yyyy, hh:mm')}
                       </span>
                       <p
-                        className={`text-xs font-normal ${item.orderStatus == 'complate' ? 'text-[#15DB59]' : item.orderStatus == 'failed' ? 'text-[#FF7245] ' : item.orderStatus == 'pending' ? 'text-[#F8B421]' : item.orderStatus == 'expired' ? 'text-[#B1B1B1]' : 'text-[#F8B421]'}`}
+                        className={`text-xs font-normal ${item.orderStatus == 'complete' ? 'text-[#15DB59]' : item.orderStatus == 'failed' ? 'text-[#FF7245] ' : item.orderStatus == 'pending' ? 'text-[#F8B421]' : item.orderStatus == 'expired' ? 'text-[#B1B1B1]' : 'text-[#F8B421]'}`}
                       >
                         {item.orderStatusString}
                       </p>
                       <b className='text-sm font-black text-black dark:text-white'>
-                        {item.price}
+                        {item?.priceString}
                       </b>
                     </div>
                   </div>
@@ -83,66 +92,12 @@ const MHistory = () => {
               </div>
             )}
           </>
-        ) : null}
-        {isLoading ? (
+        ) : isLoading ? (
           <div className='loading mt-10 flex justify-center'>
             <CircularProgress />
           </div>
         ) : (
-          <>
-            {data ? (
-              <>
-                {data.map((item, i) => (
-                  <div
-                    className='cursor-pointer card flex flex-row gap-x-2 items-center bg-white dark:bg-roamin-dark-700 p-4'
-                    key={i}
-                    onClick={() => navigate(`/detail/order/${item.id}`)}
-                  >
-                    <div className='paket-square basis-2/12'>
-                      <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'>
-                        {item?.pic && (
-                          <img
-                            className='object-cover w-[103px] h-[63px] rounded-[9px]'
-                            src={item?.pic}
-                            alt=''
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <div className='paket-name basis-3/4 flex flex-row gap-x-2 justify-between'>
-                      <div className='left-info'>
-                        <b className='text-xs font-black text-black dark:text-white'>
-                          {item.name}
-                        </b>
-                        <p className='text-xs font-normal text-black dark:text-white'>
-                          {item.caption}
-                        </p>
-                        <p className='text-xs font-normal text-black dark:text-white'>
-                          {item.validity}
-                        </p>
-                      </div>
-                      <div className='right-info text-right'>
-                        <span className='text-xs font-normal text-black dark:text-white'>
-                          {moment(item.createdAt).format('DD MMM yyyy, hh:mm')}
-                        </span>
-                        <p
-                          className={`text-xs font-normal ${item.orderStatus == 'complete' ? 'text-[#15DB59]' : item.orderStatus == 'failed' ? 'text-[#FF7245] ' : item.orderStatus == 'pending' ? 'text-[#F8B421]' : item.orderStatus == 'expired' ? 'text-[#B1B1B1]' : 'text-[#F8B421]'}`}
-                        >
-                          {item.orderStatusString}
-                        </p>
-                        <b className='text-sm font-black text-black dark:text-white'>
-                          {item?.priceString}
-                        </b>
-                      </div>
-                    </div>
-                    <div className='paket-info basis-auto'>
-                      <ChevronRightIcon className='text-black dark:text-white' />
-                    </div>
-                  </div>
-                ))}
-              </>
-            ) : null}
-          </>
+          <></>
         )}
       </div>
     </>

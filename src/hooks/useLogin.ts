@@ -1,13 +1,14 @@
+import { profileState } from 'atom';
 import { inputNumberState } from 'atom/inputNumber';
 import { AuthResponse, AuthProps } from 'interfaces';
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { api } from 'services';
 
 export const useLogin = () => {
   const [data, setData] = useState<AuthProps>();
   const [isLoading, setIsLoading] = useState(false);
-  const [inputNumber, setInputNumber] = useRecoilState(inputNumberState);
+  const setInputNumber = useSetRecoilState(inputNumberState);
 
   const fetching = async (phoneNumber: string) => {
     phoneNumber = `+${phoneNumber}`;
@@ -18,7 +19,6 @@ export const useLogin = () => {
         phoneNumber,
       });
       if (resp?.status === 'success') {
-        console.log(resp)
         setData(resp.data);
         setIsLoading(false);
       }

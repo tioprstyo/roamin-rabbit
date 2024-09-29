@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { ActivePlanProps, HEADER_TYPE } from 'interfaces';
 import { Header } from 'components';
 import ProfileImage from 'assets/img/profile.png';
+import InstagramLogo from 'assets/img/social-ig.png';
+import TiktokLogo from 'assets/img/social-tiktok.png';
+import FacebookLogo from 'assets/img/social-fb.png';
+import XLogo from 'assets/img/social-x.png';
 import DefaultUserPicture from 'assets/img/default_user.png';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import NoSimImage from 'assets/img/no-sim.png';
@@ -14,10 +18,11 @@ import { styled } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDarkMode, useGetProfile } from 'hooks';
 import moment from 'moment-timezone';
-import { useRecoilValue } from 'recoil';
-import { slidetSettingState } from 'atom/sliderSetting';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { sliderSettingState } from 'atom/sliderSetting';
 import Slider from 'react-slick';
 import Cookies from 'js-cookie';
+import { profileState } from 'atom';
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 70,
@@ -65,13 +70,13 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const MProfile = () => {
-  const token = Cookies.get('token');
   const navigate = useNavigate();
-  const { data, isLoading, fetching } = useGetProfile();
   const { data: isDarkMode, fetching: setIsDarkMode } = useDarkMode();
   const [show, setShow] = useState<number>(0);
   const label = { inputProps: { 'aria-label': 'Color switch demo' } };
-  const settings = useRecoilValue(slidetSettingState);
+  const settings = useRecoilValue(sliderSettingState);
+  const [{ isLogin, profile, activePlan, isLoading }, setProfile] =
+    useRecoilState(profileState);
 
   const tab = (value: number) => {
     show == value ? setShow(0) : setShow(value);
@@ -82,9 +87,17 @@ const MProfile = () => {
       : 0;
   };
 
-  useEffect(() => {
-    fetching();
-  }, []);
+  const logout = () => {
+    Cookies.remove('token');
+    setProfile({
+      profile: undefined,
+      token: '',
+      isLogin: false,
+      isLoading: false,
+      activePlan: [],
+    });
+    navigate('/');
+  };
 
   return (
     <>
@@ -107,7 +120,7 @@ const MProfile = () => {
             </>
           ) : (
             <>
-              {data?.profile ? (
+              {profile ? (
                 <div
                   onClick={() => navigate('/profile/edit')}
                   className='cursor-pointer card flex flex-row gap-x-4 items-center rounded-lg bg-white p-4 border border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700'
@@ -115,16 +128,14 @@ const MProfile = () => {
                   <div className='user-profile basis-1/5'>
                     <img
                       className='w-full rounded-full border'
-                      src={data.profile.profilePicture || DefaultUserPicture}
-                      alt={data.profile.profilePicture || DefaultUserPicture}
+                      src={profile?.profilePicture || DefaultUserPicture}
+                      alt={profile?.profilePicture || DefaultUserPicture}
                     />
                   </div>
                   <div className='user-name basis-3/4 flex flex-col gap-y-1 justify-between text-black dark:text-white'>
-                    <b className='text-xl font-extrabold'>
-                      {data.profile.name}
-                    </b>
+                    <b className='text-xl font-extrabold'>{profile?.name}</b>
                     <p className='text-base font-[350]'>
-                      {data.profile.phoneNumber}
+                      {profile?.phoneNumber}
                     </p>
                   </div>
                   <div className='user-info basis-auto text-black dark:text-white'>
@@ -181,99 +192,101 @@ const MProfile = () => {
             </>
           ) : (
             <>
-              {data?.activePlan.length ? (
+              {activePlan.length ? (
                 <>
-                  <Slider {...settings}>
-                    {data?.activePlan.map(
-                      (item: ActivePlanProps, idx: number) => (
-                        <Link
-                          to={`/detail/sim/${item.orderId}`}
-                          type='button'
-                          key={idx}
-                        >
-                          <div className='active-package rounded-lg bg-white border border-roamin-neutral-600 dark:border-roamin-dark-400 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 dark:bg-roamin-dark-700'>
-                            <div className='card p-3 flex flex-row gap-x-4 items-center'>
-                              <div className='square-section basis-1/5'>
-                                <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'>
-                                  {item?.pic && (
-                                    <img
-                                      className='object-cover w-[103px] h-[63px] rounded-[9px]'
-                                      src={item?.pic}
-                                      alt=''
-                                    />
-                                  )}
-                                </div>
-                              </div>
-                              <div className='package-name basis-3/4 flex flex-col gap-y-1 justify-between text-black dark:text-white'>
-                                <b className='text-lg font-extrabold'>
-                                  {item.name}
-                                </b>
-                              </div>
-                              <div className='package-info basis-auto text-black dark:text-white'>
-                                <ChevronRightIcon />
+                  <Slider
+                    {...settings}
+                    dots={activePlan.length > 1 ? true : false}
+                    infinite={activePlan.length > 1 ? true : false}
+                  >
+                    {activePlan.map((item: ActivePlanProps, idx: number) => (
+                      <Link
+                        to={`/detail/sim/${item.orderId}`}
+                        type='button'
+                        key={idx}
+                      >
+                        <div className='active-package rounded-lg bg-white border border-roamin-neutral-600 dark:border-roamin-dark-400 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 dark:bg-roamin-dark-700'>
+                          <div className='card p-3 flex flex-row gap-x-4 items-center'>
+                            <div className='square-section basis-1/5'>
+                              <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'>
+                                {item?.pic && (
+                                  <img
+                                    className='object-cover w-[103px] h-[63px] rounded-[9px]'
+                                    src={item?.pic}
+                                    alt=''
+                                  />
+                                )}
                               </div>
                             </div>
-                            <div className='card p-3 flex flex-row gap-x-2 items-center'>
-                              <div className='square-section basis-2/5'>
-                                <ProgressCircle
-                                  value={usedTotal(item)}
-                                  total={item.quotaData}
-                                />
-                              </div>
-                              <div className='package-name basis-3/5 flex flex-col gap-y-1 justify-between'>
-                                <div className='keterangan-section grid grid-cols-2 gap-1'>
-                                  <div className='keterangan text-black dark:text-white'>
-                                    <span className='block text-[10px] font-light'>
-                                      USED DATA
-                                    </span>
-                                    <b className='text-sm font-extrabold'>
-                                      {item.usedData} MB
-                                    </b>
-                                  </div>
-                                  <div className='keterangan text-black dark:text-white'>
-                                    <span className='block text-[10px] font-light'>
-                                      CALLS
-                                    </span>
-                                    <b className='text-sm font-extrabold'>
-                                      {item.usedCall}/{item.quotaCall} Minutes
-                                    </b>
-                                  </div>
-                                  <div className='keterangan text-black dark:text-white'>
-                                    <span className='block text-[10px] font-light'>
-                                      TOTAL DATA
-                                    </span>
-                                    <b className='text-sm font-extrabold'>
-                                      {item.quotaData} GB
-                                    </b>
-                                  </div>
-                                  <div className='keterangan text-black dark:text-white'>
-                                    <span className='block text-[10px] font-light'>
-                                      TEXT
-                                    </span>
-                                    <b className='text-sm font-extrabold'>
-                                      {item.usedSms}/{item.quotaSms} SMS
-                                    </b>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className='card p-3 flex justify-between items-center text-black dark:text-white'>
-                              <span className='text-sm font-normal'>
-                                <EventIcon />
-                                <span className='self-center ml-2'>
-                                  Expired On
-                                </span>
-                              </span>
-                              <b className='text-sm font-black'>
-                                {moment(item.expiredAt)
-                                  .tz('GMT')
-                                  .format('DD MMMM YYYY | hh:mm (z)')}
+                            <div className='package-name basis-3/4 flex flex-col gap-y-1 justify-between text-black dark:text-white'>
+                              <b className='text-lg font-extrabold'>
+                                {item.name}
                               </b>
                             </div>
+                            <div className='package-info basis-auto text-black dark:text-white'>
+                              <ChevronRightIcon />
+                            </div>
                           </div>
-                        </Link>
-                      ),
-                    )}
+                          <div className='card p-3 flex flex-row gap-x-2 items-center'>
+                            <div className='square-section basis-2/5'>
+                              <ProgressCircle
+                                value={usedTotal(item)}
+                                total={item.quotaData}
+                              />
+                            </div>
+                            <div className='package-name basis-3/5 flex flex-col gap-y-1 justify-between'>
+                              <div className='keterangan-section grid grid-cols-2 gap-1'>
+                                <div className='keterangan text-black dark:text-white'>
+                                  <span className='block text-[10px] font-light'>
+                                    USED DATA
+                                  </span>
+                                  <b className='text-sm font-extrabold'>
+                                    {item.usedData} MB
+                                  </b>
+                                </div>
+                                <div className='keterangan text-black dark:text-white'>
+                                  <span className='block text-[10px] font-light'>
+                                    CALLS
+                                  </span>
+                                  <b className='text-sm font-extrabold'>
+                                    {item.usedCall}/{item.quotaCall} Minutes
+                                  </b>
+                                </div>
+                                <div className='keterangan text-black dark:text-white'>
+                                  <span className='block text-[10px] font-light'>
+                                    TOTAL DATA
+                                  </span>
+                                  <b className='text-sm font-extrabold'>
+                                    {item.quotaData} GB
+                                  </b>
+                                </div>
+                                <div className='keterangan text-black dark:text-white'>
+                                  <span className='block text-[10px] font-light'>
+                                    TEXT
+                                  </span>
+                                  <b className='text-sm font-extrabold'>
+                                    {item.usedSms}/{item.quotaSms} SMS
+                                  </b>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className='card p-3 flex justify-between items-center text-black dark:text-white'>
+                            <span className='text-sm font-normal'>
+                              <EventIcon />
+                              <span className='self-center ml-2'>
+                                Expired On
+                              </span>
+                            </span>
+                            <b className='text-sm font-black'>
+                              {moment(item.expiredAt)
+                                .tz('GMT')
+                                .format('DD MMMM YYYY | hh:mm (z)')}
+                            </b>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
                   </Slider>
                 </>
               ) : (
@@ -302,13 +315,20 @@ const MProfile = () => {
           <h3 className='text-base font-extrabold mb-4 text-black dark:text-white'>
             Order
           </h3>
-          <Link
-            to={`${token ? '/history' : '#'}`}
-            className='order-menu rounded-lg bg-white border p-4 flex justify-between border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700 text-black dark:text-white'
-          >
-            <span className='text-base font-medium'>Order History</span>
-            <ChevronRightIcon />
-          </Link>
+          {isLogin ? (
+            <Link
+              to='/history'
+              className='order-menu rounded-lg bg-white border p-4 flex justify-between border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700 text-black dark:text-white'
+            >
+              <span className='text-base font-medium'>Order History</span>
+              <ChevronRightIcon />
+            </Link>
+          ) : (
+            <div className='cursor-not-allowed order-menu rounded-lg bg-white border p-4 flex justify-between border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700 text-black dark:text-white'>
+              <span className='text-base font-medium'>Order History</span>
+              <ChevronRightIcon />
+            </div>
+          )}
         </div>
         <div className='info-section mb-4'>
           <h3 className='text-base font-extrabold mb-4 text-black dark:text-white'>
@@ -369,19 +389,41 @@ const MProfile = () => {
           <h3 className='text-base font-extrabold mb-4 text-black dark:text-white'>
             Settings
           </h3>
-          <div className='setting-menu bg-white border p-4 flex justify-between rounded-t-[9px] border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700 text-black dark:text-white'>
-            <span className='text-base font-medium'>Languange: English</span>
-            <ChevronRightIcon />
+          <div className='border border-roamin-neutral-600 bg-white dark:bg-roamin-dark-700 dark:border-roamin-dark-400 rounded-[9px] divide-y dark:divide-roamin-dark-400 divide-roamin-neutral-600'>
+            <div className='setting-menu p-4 flex justify-between text-black dark:text-white'>
+              <span className='text-base font-medium'>Languange: English</span>
+              <ChevronRightIcon />
+            </div>
+            <div className='setting-menu p-4 flex justify-between text-black dark:text-white'>
+              <span className='text-base font-medium'>Dark Mode</span>
+              <AntSwitch
+                {...label}
+                checked={isDarkMode}
+                onChange={() => setIsDarkMode(!isDarkMode)}
+                inputProps={{ 'aria-label': 'ant design' }}
+              />
+            </div>
+            {isLogin && (
+              <button
+                className='w-full cursor-pointer setting-menu p-4 flex justify-between text-black dark:text-white'
+                onClick={() => logout()}
+              >
+                <span className='text-base font-medium'>Logout</span>
+              </button>
+            )}
           </div>
-          <div className='setting-menu bg-white border p-4 flex justify-between rounded-b-[9px] border-roamin-neutral-600 dark:border-roamin-dark-400 dark:bg-roamin-dark-700 text-black dark:text-white'>
-            <span className='text-base font-medium'>Dark Mode</span>
-            <AntSwitch
-              {...label}
-              checked={isDarkMode}
-              onChange={() => setIsDarkMode(!isDarkMode)}
-              inputProps={{ 'aria-label': 'ant design' }}
-            />
+        </div>
+        <div className='mb-4'>
+          <div className='settings-section px-2 py-5 mb-4 flex gap-5 dark:text-white text-base'>
+            Connect With Us:
+            <img src={InstagramLogo} alt='instagram-logo' />
+            <img src={TiktokLogo} alt='tiktok-logo' />
+            <img src={FacebookLogo} alt='facebook-logo' />
+            <img src={XLogo} alt='x-logo' />
           </div>
+          <p className='dark:text-white text-center text-sm'>
+            ©Roaming Rabbit 2024. All rights reserved.
+          </p>
         </div>
       </div>
     </>

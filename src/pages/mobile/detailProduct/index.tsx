@@ -8,17 +8,17 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-import { Header } from 'components';
+import { AdditionalInformation, Header } from 'components';
 import { HEADER_TYPE, OtherPackageData } from 'interfaces';
 import { useRecoilValue } from 'recoil';
-import { slidetSettingState } from 'atom/sliderSetting';
+import { sliderSettingState } from 'atom/sliderSetting';
 import { useGetPackageDetail } from 'hooks';
 
 const MDetailProduct = () => {
   const { packageId } = useParams() as { packageId: string };
   const navigate = useNavigate();
   const [show, setShow] = useState<boolean>(false);
-  const settings = useRecoilValue(slidetSettingState);
+  const settings = useRecoilValue(sliderSettingState);
   const { data, fetching } = useGetPackageDetail();
 
   useEffect(() => {
@@ -96,80 +96,25 @@ const MDetailProduct = () => {
               {show ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </div>
             <div className={`contentHide ${show ? 'block' : 'hidden'}`}>
-              <div className='cardContent flex flex-col items-start px-3 py-3'>
-                <p className='text-[12px] font-medium text-[#989898]'>
-                  PLAN TYPE
-                </p>
-                <h6 className='text-[16px] font-medium'>
-                  {data?.package.planType}
-                </h6>
-              </div>
-              <div className='cardContent flex flex-col items-start px-3 py-3'>
-                <p className='text-[12px] font-medium text-[#989898]'>SPEED</p>
-                <h6 className='text-[16px] font-medium'>
-                  {data?.package.speed}
-                </h6>
-                <span className='text-[14px] font-light'>
-                  This data plan is expected to have 5G speed. However, network
-                  coverage and speed may vary by location and time of day.
-                </span>
-              </div>
-              <div className='cardContent flex flex-col items-start px-3 py-3'>
-                <p className='text-[12px] font-medium text-[#989898]'>
-                  INSTALATION
-                </p>
-                <h6 className='text-[16px] font-medium'>
-                  Scan QR or enter code manually
-                </h6>
-              </div>
-              <div className='cardContent flex flex-col items-start px-3 py-3'>
-                <p className='text-[12px] font-medium text-[#989898]'>
-                  ACTIVATION POLICY
-                </p>
-                <h6 className='text-[16px] font-medium'>
-                  The validity period starts when the eSIM connects to any
-                  supported network/s.
-                </h6>
-              </div>
-              <div className='cardContent flex flex-col items-start px-3 py-3'>
-                <p className='text-[12px] font-medium text-[#989898]'>
-                  IP ROUTING
-                </p>
-                <h6 className='text-[16px] font-medium'>
-                  {data?.package.ipRouting ? 'Yes' : 'No'}
-                </h6>
-              </div>
-              <div className='cardContent flex flex-col items-start px-3 py-3'>
-                <p className='text-[12px] font-medium text-[#989898]'>
-                  THETERING
-                </p>
-                <h6 className='text-[16px] font-medium'>
-                  {data?.package.quotaThetering}
-                </h6>
-              </div>
-              <div className='cardContent flex flex-col items-start px-3 py-3'>
-                <p className='text-[12px] font-medium text-[#989898]'>
-                  eKYC (IDENTITY VERIFICATION)
-                </p>
-                <h6 className='text-[16px] font-medium'>
-                  {data?.package.ekyc ? 'Required' : 'Not Required'}
-                </h6>
-              </div>
-              <div className='cardContent flex flex-col items-start px-3 py-3'>
-                <p className='text-[12px] font-medium text-[#989898]'>
-                  Top Up Options
-                </p>
-                <h6 className='text-[16px] font-medium'>
-                  {data?.package.topupOption ? 'Yes' : 'No'}
-                </h6>
-              </div>
+              <AdditionalInformation
+                planType={data?.package.planType || ''}
+                speed={data?.package.speed || ''}
+                quotaTethering={data?.package.quotaTethering || ''}
+                ipRouting={data?.package.ipRouting || false}
+                ekyc={data?.package.ekyc || false}
+                topupOption={data?.package.topupOption || false}
+              />
             </div>
           </div>
           <div className='listing mt-6'>
             <h6 className='text-[18px] font-extrabold dark:text-white'>
               Available Other Package (5)
             </h6>
-            <Slider {...settings}>
+            <Slider
+              {...settings}
+              dots={data && data?.otherPackages.length > 1 ? true : false}
+              infinite={data && data?.otherPackages.length > 1 ? true : false}
+            >
               {data?.otherPackages.map((other: OtherPackageData, i: number) => (
                 <div key={i}>
                   <div className='listCard border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 rounded-[9px] mt-5 dark:text-white'>

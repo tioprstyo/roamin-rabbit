@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { HEADER_TYPE } from 'interfaces';
 import { Header } from 'components';
 import { useRecoilValue } from 'recoil';
-import { slidetSettingState } from 'atom/sliderSetting';
+import { sliderSettingState } from 'atom/sliderSetting';
 import Slider from 'react-slick';
 
 const MTutorial = () => {
-  const settings = useRecoilValue(slidetSettingState);
+  const settings = useRecoilValue(sliderSettingState);
   const navigate = useNavigate();
   const [openTab, setOpenTab] = useState<number>(1);
 

@@ -4,14 +4,14 @@ import { Header } from 'components';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import HowToImage from 'assets/img/howto.png';
 import { useRecoilValue } from 'recoil';
-import { slidetSettingState } from 'atom/sliderSetting';
+import { sliderSettingState } from 'atom/sliderSetting';
 import Slider from 'react-slick';
 import VideoImage from 'assets/img/video.png';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const MSupport = () => {
-  const settings = useRecoilValue(slidetSettingState);
+  const settings = useRecoilValue(sliderSettingState);
   const [show, setShow] = useState<number>(0);
 
   const tab = (value: number) => {
