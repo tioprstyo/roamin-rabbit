@@ -9,13 +9,15 @@ import { parseQueryParams } from 'services';
 import { useGetPackageDetail, useOrder } from 'hooks';
 import Dialog from '@mui/material/Dialog';
 import Cookies from 'js-cookie';
+import { useRecoilValue } from 'recoil';
+import { profileState } from 'atom';
 
 const MConfirm = () => {
-  const token = Cookies.get('token');
   const navigate = useNavigate();
   const { data: packageDetail, fetching: getPackageDetail } =
     useGetPackageDetail();
   const { data, fetching } = useOrder();
+  const { isLogin } = useRecoilValue(profileState);
   const [modal, setModal] = useState(false);
   const [checked, setChecked] = useState({
     compatibles: false,
@@ -68,7 +70,7 @@ const MConfirm = () => {
       },
     };
 
-    if (token) {
+    if (isLogin) {
       fetching(payment);
       setModal(true);
     } else {

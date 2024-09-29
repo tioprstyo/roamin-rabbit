@@ -1,7 +1,6 @@
 export * from './useCreateOrder';
 export * from './useEditPhoneNumber';
 export * from './useEditProfile';
-export * from './useGetActivateOrder';
 export * from './useGetCountries';
 export * from './useGetExpiredOrder';
 export * from './useGetOrderDetail';

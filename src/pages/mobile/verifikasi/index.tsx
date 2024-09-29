@@ -6,7 +6,6 @@ import { HEADER_TYPE } from 'interfaces';
 import { useRecoilState } from 'recoil';
 import { inputNumberState } from 'atom/inputNumber';
 import { useCountdown, useVerifyOTP } from 'hooks';
-import Cookies from 'js-cookie';
 import moment from 'moment';
 
 const MVerification = () => {
@@ -56,7 +55,6 @@ const MVerification = () => {
       if (prevRoute.state?.previousPath == '/change-number') {
         navigate('/profile');
       } else {
-        Cookies.set('token', data.token);
         navigate('/');
       }
     }

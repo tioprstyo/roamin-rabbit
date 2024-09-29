@@ -4,24 +4,22 @@ import { HEADER_TYPE } from 'interfaces';
 import PhoneInput from 'react-phone-input-2';
 import { useEditPhoneNumber, useGetProfile } from 'hooks';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { profileState } from 'atom';
 
 const MChangeNumber = () => {
   const navigate = useNavigate();
-  const { data: dataProfile, fetching: fetchingProfile } = useGetProfile();
+  const { profile } = useRecoilValue(profileState);
   const { data, fetching } = useEditPhoneNumber();
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   useEffect(() => {
-    if (!dataProfile) {
-      fetchingProfile();
-    }
-
     if (data) {
       navigate('/verifikasi', { state: { previousPath: location.pathname } });
     }
 
-    setPhoneNumber(dataProfile?.profile.phoneNumber || '');
-  }, [dataProfile, data, navigate]);
+    setPhoneNumber(profile?.phoneNumber || '');
+  }, [profile, data, navigate]);
 
   return (
     <>

@@ -8,7 +8,7 @@ import EventIcon from '@mui/icons-material/Event';
 import InsertChartOutlinedTwoToneIcon from '@mui/icons-material/InsertChartOutlinedTwoTone';
 import { useGetOrderDetail, useGetPlanDetail } from 'hooks';
 import { Link, useParams } from 'react-router-dom';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 const MDetail = () => {
   const { data: orderDetail, fetching: getOrderDetail } = useGetOrderDetail();

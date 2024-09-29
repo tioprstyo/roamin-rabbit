@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const slidetSettingState = atom({
+export const sliderSettingState = atom({
   key: 'sliderSettingAtom',
   default: {
     dots: true,

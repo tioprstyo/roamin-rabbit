@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HEADER_TYPE, HeaderProps } from 'interfaces';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
+import { useGetProfile } from 'hooks';
 
 const Header = ({
   headerType,
@@ -10,6 +11,11 @@ const Header = ({
   classname,
 }: HeaderProps) => {
   const navigate = useNavigate();
+  const { fetching } = useGetProfile();
+
+  useEffect(() => {
+    fetching();
+  }, []);
 
   if (headerType === HEADER_TYPE.DEFAULT) {
     return (

@@ -4,7 +4,7 @@ export interface PackageDetailData {
   slug: string;
   planType: string;
   quotaData: string;
-  quotaThetering: string;
+  quotaTethering: string;
   speed: string;
   network: string;
   country: string;

@@ -147,7 +147,7 @@ const MEsim = () => {
                               </h3>
                               <a
                                 className='text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
-                                href=''
+                                href='/'
                               >
                                 Visit our store and choose one!
                               </a>
@@ -252,7 +252,7 @@ const MEsim = () => {
                               </h3>
                               <a
                                 className='text-[#5F97BC] dark:text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
-                                href=''
+                                href='/'
                               >
                                 Visit our store and choose your next
                                 destination!
