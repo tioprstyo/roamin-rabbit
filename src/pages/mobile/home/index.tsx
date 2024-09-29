@@ -5,7 +5,7 @@ import { CountriesProps, CountriesSelect, HEADER_TYPE } from 'interfaces';
 import ReactFlagsSelect from 'react-flags-select';
 import { useGetCountries } from 'hooks';
 import { parseQueryParams } from 'services';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const MHome = () => {
   const navigate = useNavigate();

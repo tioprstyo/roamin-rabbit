@@ -10,7 +10,7 @@ export const useRegister = () => {
   const [inputNumber, setInputNumber] = useRecoilState(inputNumberState);
 
   const fetching = async ({ fullName, phoneNumber }: UserRegisterRequest) => {
-    phoneNumber = '+'+phoneNumber
+    phoneNumber = '+' + phoneNumber;
     setInputNumber(phoneNumber);
     setIsLoading(true);
     try {

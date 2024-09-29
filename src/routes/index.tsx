@@ -89,7 +89,7 @@ const Router = () => {
           children: [
             {
               element: windowSize > 768 ? <MDetail /> : <MDetail />,
-              path: '',
+              path: 'expired/:id',
               key: 'detail-page',
             },
             {
@@ -105,7 +105,7 @@ const Router = () => {
             },
             {
               element: windowSize > 768 ? <MOrderDetail /> : <MOrderDetail />,
-              path: 'order',
+              path: 'order/:id',
               key: 'detail-order',
             },
           ],

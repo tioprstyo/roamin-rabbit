@@ -1,21 +1,17 @@
 import React, { useEffect } from 'react';
-import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import FlagImage from 'assets/img/flag.png';
 import { useGetOrderDetail } from 'hooks';
 
 const MStatus = () => {
   const { id } = useParams() as { id: string };
-  const navigate = useNavigate();
   const { data, fetching } = useGetOrderDetail();
 
   useEffect(() => {
-    if (!data) {
-      fetching(id);
-    }
-  }, [data]);
+    fetching(id);
+  }, []);
 
   return (
     <>
@@ -31,11 +27,19 @@ const MStatus = () => {
             <span
               className={`px-4 py-2 rounded-[9px] text-xs text-black font-extrabold ${data?.orderStatus == 'expired' ? 'bg-[#79747E]' : data?.orderStatus == 'active' ? 'bg-[#10E85A]' : 'bg-[#FFEC69] dark:bg-roamin-yellow-500'}`}
             >
-              {data?.orderStatus}
+              {!data?.isActivated ? 'Not ' : ''}Active
             </span>
           </div>
           <div className='paket-square'>
-            <div className='w-[157px] h-[97px] bg-roamin-neutral-500 rounded-[9px]' />
+            <div className='w-[157px] h-[97px] bg-[#E7E7E7] rounded-[9px]'>
+              {data?.pic && (
+                <img
+                  className='object-cover w-[157px] h-[97px] rounded-[9px]'
+                  src={data?.pic}
+                  alt=''
+                />
+              )}
+            </div>
           </div>
           <div className='paket-info flex flex-col justify-center text-black dark:text-white'>
             <h6 className='text-base font-extrabold'>
@@ -98,10 +102,10 @@ const MStatus = () => {
             </div>
             <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
               <p className='text-[12px] font-medium text-[#989898]'>
-                THETERING
+                TETHERING
               </p>
               <h6 className='text-[16px] font-medium'>
-                {data?.quotaThetering}
+                {data?.quotaTethering}
               </h6>
             </div>
             <div className='cardContent flex flex-col items-start px-3 py-3 text-black dark:text-white'>
@@ -121,7 +125,7 @@ const MStatus = () => {
               </h6>
             </div>
           </div>
-          {data?.orderStatus == 'not active' && (
+          {!data?.isActivated && (
             <div className='form-activate'>
               <button
                 className='bg-[#FFEC69] text-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]'

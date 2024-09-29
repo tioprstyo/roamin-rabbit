@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Header, ModalPayment } from 'components';
 import { HEADER_TYPE } from 'interfaces';
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import LanguageIcon from '@mui/icons-material/Language';
-import PublicIcon from '@mui/icons-material/Public';
 import VisaImage from 'assets/img/visa.png';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
-import Checkbox from '@mui/material/Checkbox';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ListParamsProps } from 'interfaces';
 import { parseQueryParams } from 'services';
-import { useOrder } from 'hooks';
+import { useGetPackageDetail, useOrder } from 'hooks';
 import Dialog from '@mui/material/Dialog';
 import Cookies from 'js-cookie';
 
 const MConfirm = () => {
-  const token = Cookies.get('token')
+  const token = Cookies.get('token');
   const navigate = useNavigate();
-  const {data, fetching} = useOrder();
-  const [modal, setModal] = useState(false)
+  const { data: packageDetail, fetching: getPackageDetail } =
+    useGetPackageDetail();
+  const { data, fetching } = useOrder();
+  const [modal, setModal] = useState(false);
   const [checked, setChecked] = useState({
     compatibles: false,
     terms: false,
@@ -27,13 +24,13 @@ const MConfirm = () => {
   const [order, setOrder] = useState({
     packageId: '',
     promoCode: '',
-    paymentMethod: 'applepay'
-  })
+    paymentMethod: 'applepay',
+  });
   const [paymentMeta, setPaymentMeta] = useState({
     in: '',
     work: '',
-    progress: ''
-  })
+    progress: '',
+  });
   const { compatibles, terms } = checked;
   const [searchParams] = useSearchParams();
   const params: ListParamsProps = {};
@@ -46,9 +43,10 @@ const MConfirm = () => {
     setOrder({
       ...order,
       packageId: params.packageId,
-      promoCode: params?.promoCode?.toLocaleUpperCase() || 'Coupon'
-    })
-  }, [searchParams])
+      promoCode: params?.promoCode?.toLocaleUpperCase() || 'Coupon',
+    });
+    getPackageDetail(params.packageId);
+  }, [searchParams]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked({
@@ -59,55 +57,78 @@ const MConfirm = () => {
 
   const handleClose = () => {
     setModal(false);
-    navigate('/history')
+    navigate('/history');
   };
 
   const submit = () => {
     const payment = {
       ...order,
       paymentMetadata: {
-        ...paymentMeta
-      }
-    }
+        ...paymentMeta,
+      },
+    };
 
-    if(token){
+    if (token) {
       fetching(payment);
       setModal(true);
     } else {
-      navigate('/login')
+      navigate('/login');
     }
-  }
+  };
 
   return (
     <>
-      <Header headerType={HEADER_TYPE.DETAIL} headerTitle='Order Details' />
+      <Header
+        headerType={HEADER_TYPE.DETAIL}
+        headerTitle='Order Confirmation'
+      />
       <div className='content-wrapper p-4 bg-[#FFF7DA] dark:bg-roamin-dark-700 min-h-[calc(100vh-4rem)] pb-28'>
         <div className='package-plan mt-4'>
-          <h2 className='text-lg font-extrabold mb-2 dark:text-white'>Package Plan</h2>
+          <h2 className='text-lg font-extrabold mb-2 dark:text-white'>
+            Package Plan
+          </h2>
           <div className='listCard border border-[#E2DFDF] bg-white dark:bg-roamin-dark-700 dark:text-white rounded-[9px]'>
             <div className='cardHeader p-4 grid grid-cols-4 gap-2 items-center'>
               <div className='square-section'>
-                <div className='w-full h-[63px] bg-[#E7E7E7] rounded-[9px]'></div>
+                <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'>
+                  {packageDetail?.package?.pic && (
+                    <img
+                      className='object-cover w-[103px] h-[63px] rounded-[9px]'
+                      src={packageDetail?.package?.pic}
+                      alt=''
+                    />
+                  )}
+                </div>
               </div>
               <div className='detail-section col-span-2'>
-                <b className='text-[13px] font-black'>Sobat Halo</b>
+                <b className='text-[13px] font-black'>
+                  {packageDetail?.package.name}
+                </b>
                 <p className='text-[13px] font-normal'>
-                  20 GB - Data, Calls, Text
+                  {packageDetail?.package.planType}
                 </p>
-                <p className='text-[13px] font-normal'>30 Days - Validity</p>
+                <p className='text-[13px] font-normal'>
+                  {packageDetail?.package.validity} - Validity
+                </p>
               </div>
-              <div className='price-section'>
-                <b className='text-[15px] font-black'>$ 500.00</b>
+              <div className='price-section ml-auto'>
+                <b className='text-[15px] font-black'>
+                  {packageDetail?.package.priceString}
+                </b>
               </div>
             </div>
           </div>
         </div>
         <div className='order-infomation mt-4'>
-          <h2 className='text-lg font-extrabold mb-2 dark:text-white'>Order Summary</h2>
+          <h2 className='text-lg font-extrabold mb-2 dark:text-white'>
+            Order Summary
+          </h2>
           <div className='card border border-[#E2DFDF] bg-white dark:bg-roamin-dark-700 dark:text-white rounded-[9px] mb-3'>
             <div className='cardContent flex flex-row justify-between items-start px-3 py-3'>
               <p className='text-sm font-medium'>Subtotal</p>
-              <h6 className='text-base font-medium'>$ 50.00</h6>
+              <h6 className='text-base font-medium'>
+                {packageDetail?.package.priceString}
+              </h6>
             </div>
             <div className='cardContent flex flex-row justify-between items-start px-3 py-3'>
               <p className='text-sm font-medium'>Taxes & Service Fee</p>
@@ -115,12 +136,16 @@ const MConfirm = () => {
             </div>
             <div className='cardContent flex flex-row justify-between items-start border-t border-t-[#E2DFDF] px-3 py-3'>
               <p className='text-base font-medium'>Total</p>
-              <h6 className='text-base font-medium'>$ 50.00</h6>
+              <h6 className='text-base font-medium'>
+                {packageDetail?.package.priceString}
+              </h6>
             </div>
           </div>
         </div>
         <div className='payment-detail mt-4'>
-          <h2 className='text-lg font-extrabold mb-2 dark:text-white'>Payment Details</h2>
+          <h2 className='text-lg font-extrabold mb-2 dark:text-white'>
+            Payment Details
+          </h2>
           <div className='listCard border border-[#E2DFDF] bg-white dark:bg-roamin-dark-700 dark:text-white rounded-[9px]'>
             <div className='cardContent flex justify-between p-4 items-center'>
               <span className='text-base font-medium'>Credit Card</span>
@@ -133,7 +158,10 @@ const MConfirm = () => {
         </div>
         <div className='promo mt-4'>
           <h2 className='text-lg font-extrabold mb-2 dark:text-white'>Promo</h2>
-          <div onClick={() => navigate(`/coupon${parseQueryParams(params)}`)} className='listCard border border-[#E2DFDF] bg-white dark:bg-roamin-dark-700 dark:text-white rounded-[9px]'>
+          <div
+            onClick={() => navigate(`/coupon${parseQueryParams(params)}`)}
+            className='listCard border border-[#E2DFDF] bg-white dark:bg-roamin-dark-700 dark:text-white rounded-[9px]'
+          >
             <div className='cardContent flex justify-between p-4 items-center'>
               <span className='text-base font-medium'>{order.promoCode}</span>
               <ChevronRightOutlinedIcon />
@@ -146,8 +174,17 @@ const MConfirm = () => {
               htmlFor='check1'
               className='flex items-center text-sm font-[350] dark:text-white'
             >
-              By proceeding with this order, I acknowledge that I have accepted
-              and read the device compatible
+              <span>
+                By proceeding with this order, I acknowledge that I have
+                accepted and read{' '}
+                <a
+                  href='/compatible'
+                  className='text-[#5F97BC] dark:text-roamin-yellow-500'
+                  rel='noopener noreferrer'
+                >
+                  the device compatible
+                </a>
+              </span>
             </label>
             <input
               checked={compatibles}
@@ -163,7 +200,25 @@ const MConfirm = () => {
               htmlFor='check2'
               className='flex items-center text-sm font-[350] dark:text-white'
             >
-              I agree to Terms & Conditions and Refund Policy.
+              <span>
+                I agree to
+                <a
+                  href=''
+                  className='text-[#5F97BC] dark:text-roamin-yellow-500'
+                  rel='noopener noreferrer'
+                >
+                  Terms & Conditions
+                </a>{' '}
+                and{' '}
+                <a
+                  href=''
+                  className='text-[#5F97BC] dark:text-roamin-yellow-500'
+                  rel='noopener noreferrer'
+                >
+                  Refund Policy
+                </a>
+                .
+              </span>
             </label>
             <input
               checked={terms}
@@ -178,7 +233,9 @@ const MConfirm = () => {
       </div>
       <div className='max-w-inherit mx-auto fromBuy grid grid-cols-2 items-center justify-center border border-t-[#E2DFDF] p-4 fixed bottom-0 left-0 right-0 bg-white dark:bg-roamin-dark-800'>
         <div className='buyPrice text-center'>
-          <h6 className='text-xl font-black dark:text-white'>US $ 50.00</h6>
+          <h6 className='text-xl font-black dark:text-white'>
+            {packageDetail?.package.priceString}
+          </h6>
         </div>
         <div className='buyButton text-center'>
           <button
@@ -191,13 +248,12 @@ const MConfirm = () => {
           </button>
         </div>
       </div>
-
       <Dialog
         fullScreen
         open={modal}
         onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
         className='max-w-screen-md mx-auto'
         sx={{
           '& .MuiDialog-container': {
@@ -208,7 +264,12 @@ const MConfirm = () => {
           },
         }}
       >
-        <ModalPayment status={data?.status || ''} message={data?.data.message} closeModal={handleClose} />
+        <ModalPayment
+          status={data?.data?.orderStatus || ''}
+          message={data?.data.message}
+          id={data?.data?.orderId || ''}
+          closeModal={handleClose}
+        />
       </Dialog>
     </>
   );

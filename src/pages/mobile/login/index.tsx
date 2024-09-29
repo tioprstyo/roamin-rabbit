@@ -79,7 +79,7 @@ const MLogin = () => {
           <span className='text-sm font-medium text-black dark:text-white'>
             Don’t have an account?{' '}
             <Link
-              to='register'
+              to='/register'
               className='text-[#538EB6] dark:text-roamin-yellow-500'
             >
               Register

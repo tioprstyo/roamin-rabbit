@@ -6,6 +6,7 @@ export interface HistoryOrderProps {
   orderStatus: string;
   orderStatusString: string;
   pic: string;
-  price: string;
+  price: number;
+  priceString: string;
   validity: string;
 }

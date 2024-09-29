@@ -9,7 +9,8 @@ export interface PackageDetailData {
   network: string;
   country: string;
   validity: string;
-  price: string;
+  price: number;
+  priceString: string;
   ipRouting: boolean;
   ekyc: boolean;
   topupOption: boolean;

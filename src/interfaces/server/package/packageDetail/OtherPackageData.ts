@@ -1,6 +1,7 @@
 export interface OtherPackageData {
   id: string;
   quotaData: string;
-  price: string;
+  price: number;
+  priceString: string;
   validity: string;
 }
