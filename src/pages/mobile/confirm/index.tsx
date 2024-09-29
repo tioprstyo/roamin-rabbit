@@ -178,9 +178,8 @@ const MConfirm = () => {
                 By proceeding with this order, I acknowledge that I have
                 accepted and read{' '}
                 <a
-                  href=''
-                  target='_blank'
-                  className='dark:text-roamin-yellow-500'
+                  href='/compatible'
+                  className='text-[#5F97BC] dark:text-roamin-yellow-500'
                   rel='noopener noreferrer'
                 >
                   the device compatible
@@ -205,8 +204,7 @@ const MConfirm = () => {
                 I agree to
                 <a
                   href=''
-                  target='_blank'
-                  className='dark:text-roamin-yellow-500'
+                  className='text-[#5F97BC] dark:text-roamin-yellow-500'
                   rel='noopener noreferrer'
                 >
                   Terms & Conditions
@@ -214,8 +212,7 @@ const MConfirm = () => {
                 and{' '}
                 <a
                   href=''
-                  target='_blank'
-                  className='dark:text-roamin-yellow-500'
+                  className='text-[#5F97BC] dark:text-roamin-yellow-500'
                   rel='noopener noreferrer'
                 >
                   Refund Policy
