@@ -23,10 +23,8 @@ const MDetailProduct = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!data) {
-      fetching(packageId);
-    }
-  }, [data, navigate]);
+    fetching(packageId);
+  }, [navigate, packageId]);
 
   return (
     <div className='relative max-w-inherit'>
@@ -34,12 +32,20 @@ const MDetailProduct = () => {
       <div className='content-wrapper bg-[#FFF7DA] dark:bg-roamin-dark-600 min-h-[calc(100vh-4rem)] pb-28'>
         <div className='listCard bg-white dark:bg-roamin-dark-700 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 text-black dark:text-white'>
           <div className='cardHeader p-4 flex items-center'>
-            <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'></div>
+            <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'>
+              {data?.package?.pic && (
+                <img
+                  className='object-cover w-[103px] h-[63px] rounded-[9px]'
+                  src={data?.package?.pic}
+                  alt=''
+                />
+              )}
+            </div>
             <h1 className='ml-[20px] text-xl font-extrabold'>
               {data?.package.name}
             </h1>
           </div>
-          <div className='cardContent flex justify-between px-4 py-6 items-center'>
+          <div className='cardContent flex justify-between px-8 py-6 items-center'>
             <span className='flex'>
               <SignalCellularAltIcon className='mr-3' />
               Data
@@ -48,26 +54,28 @@ const MDetailProduct = () => {
               {data?.package.quotaData}
             </h3>
           </div>
-          <div className='cardContent flex justify-between px-4 py-6 items-center'>
+          <div className='cardContent flex justify-between px-8 py-6 items-center'>
             <span className='flex'>
               <CalendarMonthIcon className='mr-3' />
               Validity
             </span>
             <h3 className='text-[16px] font-black'>{data?.package.validity}</h3>
           </div>
-          <div className='cardContent flex justify-between px-4 py-6 items-center'>
+          <div className='cardContent flex justify-between px-8 py-6 items-center'>
             <span className='flex'>
               <LanguageIcon className='mr-3' />
               Network
             </span>
             <h3 className='text-[16px] font-black'>{data?.package.network}</h3>
           </div>
-          <div className='cardContent flex justify-between px-4 py-6 items-center'>
+          <div className='cardContent flex justify-between px-8 py-6 items-center'>
             <span className='flex'>
               <PaymentsOutlinedIcon className='mr-3' />
               Price
             </span>
-            <h3 className='text-[16px] font-black'>{data?.package.price}</h3>
+            <h3 className='text-[16px] font-black'>
+              {data?.package.priceString}
+            </h3>
           </div>
         </div>
         <div className='detail-content p-4'>
@@ -166,9 +174,17 @@ const MDetailProduct = () => {
                 <div key={i}>
                   <div className='listCard border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400 rounded-[9px] mt-5 dark:text-white'>
                     <div className='cardHeader p-4 flex items-center'>
-                      <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'></div>
+                      <div className='w-[103px] h-[63px] bg-[#E7E7E7] rounded-[9px]'>
+                        {data?.package?.pic && (
+                          <img
+                            className='object-cover w-[103px] h-[63px] rounded-[9px]'
+                            src={data?.package?.pic}
+                            alt=''
+                          />
+                        )}
+                      </div>
                       <h1 className='ml-[20px] text-xl font-extrabold'>
-                        Sobat Halo
+                        {data?.package?.name}
                       </h1>
                     </div>
                     <div className='cardContent flex justify-between px-4 py-6 items-center'>
@@ -191,7 +207,9 @@ const MDetailProduct = () => {
                     </div>
                     <div className='cardFooter grid grid-cols-2 items-center justify-center p-4'>
                       <div className='cardPrice text-center'>
-                        <h6 className='text-xl font-black'>{other.price}</h6>
+                        <h6 className='text-xl font-black'>
+                          {other.priceString}
+                        </h6>
                       </div>
                       <div className='cardButton text-center'>
                         <button
@@ -215,12 +233,12 @@ const MDetailProduct = () => {
       <div className='max-w-inherit mx-auto fromBuy grid grid-cols-2 items-center justify-center border-t-roamin-neutral-600 dark:border-t-roamin-dark-400 p-4 fixed bottom-0 left-0 right-0 bg-white dark:bg-roamin-dark-800'>
         <div className='buyPrice text-center'>
           <h6 className='text-xl font-black dark:text-white'>
-            {data?.package.price}
+            {data?.package.priceString}
           </h6>
         </div>
         <div className='buyButton text-center'>
           <button
-          onClick={()=> navigate(`/confirmasi?packageId=${packageId}`)}
+            onClick={() => navigate(`/confirmasi?packageId=${packageId}`)}
             className='bg-[#FFEC69] color-[#000000] font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] w-9/12 text-[14px]'
             type='button'
           >

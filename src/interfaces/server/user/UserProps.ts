@@ -3,5 +3,5 @@ import { ProfileProps } from './ProfileProps';
 
 export interface UserProps {
   profile: ProfileProps;
-  activePlan: ActivePlanProps;
+  activePlan: ActivePlanProps[];
 }

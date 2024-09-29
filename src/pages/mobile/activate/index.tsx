@@ -1,6 +1,6 @@
 import React, { LegacyRef, useEffect, useRef } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { HEADER_TYPE } from 'interfaces';
 import { Header } from 'components';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
@@ -9,14 +9,13 @@ import SimCardAlertOutlinedIcon from '@mui/icons-material/SimCardAlertOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { useGetActivateOrder } from 'hooks';
+import { useGetOrderDetail } from 'hooks';
 import copy from 'copy-to-clipboard';
-import { QRCode } from 'react-qrcode-logo';
 
 const MActivate = () => {
-  const { id } = useParams() as { id: string };
+  const { orderId } = useParams() as { orderId: string };
   const [openTab, setOpenTab] = useState<number>(1);
-  const { data, fetching } = useGetActivateOrder();
+  const { data, fetching } = useGetOrderDetail();
   const addressRef = useRef<HTMLInputElement>();
   const codeRef = useRef<HTMLInputElement>();
   const qrStyle: React.CSSProperties = {
@@ -62,13 +61,13 @@ const MActivate = () => {
 
   useEffect(() => {
     if (!data) {
-      fetching(id);
+      fetching(orderId);
     }
   }, [data]);
 
   return (
     <>
-      <Header headerType={HEADER_TYPE.DETAIL} headerTitle='Order Details' />
+      <Header headerType={HEADER_TYPE.DETAIL} headerTitle='Active eSIM' />
       <div className='content-wrapper min-h-[calc(100vh-4rem)]'>
         <div className='flex flex-wrap'>
           <div className='w-full'>
@@ -79,7 +78,7 @@ const MActivate = () => {
               <li className='-mb-px last:mr-0 flex-auto text-center'>
                 <a
                   className={
-                    'text-xs font-bold uppercase px-5 py-3 block leading-normal ' +
+                    'text-xs font-bold px-5 py-3 block leading-normal ' +
                     (openTab === 1
                       ? 'text-[#1D1B20] dark:text-roamin-yellow-500 border-b-2 border-[#FFDE95]'
                       : 'text-[#B3B3B3] border-b-2')
@@ -92,13 +91,13 @@ const MActivate = () => {
                   href='#link1'
                   role='tablist'
                 >
-                  Active
+                  QR Code
                 </a>
               </li>
               <li className='-mb-px last:mr-0 flex-auto text-center'>
                 <a
                   className={
-                    'text-xs font-bold uppercase px-5 py-3 block leading-normal ' +
+                    'text-xs font-bold px-5 py-3 block leading-normal ' +
                     (openTab === 2
                       ? 'text-[#1D1B20] dark:text-roamin-yellow-500 border-b-2 border-[#FFDE95]'
                       : 'text-[#B3B3B3] border-b-2')
@@ -111,7 +110,7 @@ const MActivate = () => {
                   href='#link2'
                   role='tablist'
                 >
-                  Deactive
+                  Activation Code
                 </a>
               </li>
             </ul>
@@ -142,12 +141,14 @@ const MActivate = () => {
                       <h2 className='text-medium font-extrabold mb-2 dark:text-white'>
                         eSIM Installation
                       </h2>
-                      <div className='listCard flex justify-between p-4 items-center border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 rounded-[9px] dark:text-white'>
-                        <span className='text-sm font-medium'>
-                          <TextSnippetOutlinedIcon /> View Instruction
-                        </span>
-                        <ChevronRightOutlinedIcon />
-                      </div>
+                      <Link to='/tutorial'>
+                        <div className='listCard flex justify-between p-4 items-center border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 rounded-[9px] dark:text-white'>
+                          <span className='text-sm font-medium'>
+                            <TextSnippetOutlinedIcon /> View Instruction
+                          </span>
+                          <ChevronRightOutlinedIcon />
+                        </div>
+                      </Link>
                     </div>
                     <div className='qr-section mt-4 p-4'>
                       <div className='qr text-center mb-4 dark:text-white'>
@@ -158,11 +159,7 @@ const MActivate = () => {
                           Download QR code below or display on the another
                           device to install eSIM.
                         </p>
-                        <QRCode
-                          id='qrCode'
-                          style={qrStyle}
-                          value={data?.qrCode}
-                        />
+                        <img style={qrStyle} src={data?.qrCode} alt='' />
                       </div>
                       <div className='download grid grid-cols-4 gap-3 items-end p-2'>
                         <div className='form col-span-3'>
@@ -209,12 +206,14 @@ const MActivate = () => {
                       <h2 className='text-medium font-extrabold mb-2 dark:text-white'>
                         eSIM Installation
                       </h2>
-                      <div className='listCard flex justify-between p-4 items-center border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 rounded-[9px] dark:text-white'>
-                        <span className='text-sm font-medium'>
-                          <TextSnippetOutlinedIcon /> View Instruction
-                        </span>
-                        <ChevronRightOutlinedIcon />
-                      </div>
+                      <Link to='/tutorial'>
+                        <div className='listCard flex justify-between p-4 items-center border border-roamin-neutral-600 dark:border-roamin-dark-400 bg-white dark:bg-roamin-dark-700 rounded-[9px] dark:text-white'>
+                          <span className='text-sm font-medium'>
+                            <TextSnippetOutlinedIcon /> View Instruction
+                          </span>
+                          <ChevronRightOutlinedIcon />
+                        </div>
+                      </Link>
                     </div>
                     <div className='code-section bg-white dark:bg-roamin-dark-700 border border-roamin-neutral-600 dark:border-roamin-dark-400 rounded-[9px] mt-4 dark:text-white divide-y divide-roamin-neutral-600 dark:divide-roamin-dark-400'>
                       <div className='card'>

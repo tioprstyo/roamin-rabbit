@@ -30,7 +30,7 @@ const Header = ({
         className={`header p-4 flex items-center bg-white dark:bg-roamin-dark-800 ${classname}`}
       >
         <ArrowBackIcon
-          className='text-black dark:text-white'
+          className='cursor-pointer text-black dark:text-white'
           onClick={() => (handleBackButton ? handleBackButton() : navigate(-1))}
         />
         <h1 className='text-2xl font-extrabold mx-auto text-black dark:text-roamin-yellow-500'>

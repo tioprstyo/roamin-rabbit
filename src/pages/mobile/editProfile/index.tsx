@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Header } from 'components';
 import { HEADER_TYPE, ProfileProps, UserRequest } from 'interfaces';
 import FlagImage from 'assets/img/flag.png';
-import ManImage from 'assets/img/man.png';
+import DefaultUserPicture from 'assets/img/default_user.png';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import { useGetProfile } from 'hooks';
 import { useNavigate } from 'react-router-dom';
@@ -27,8 +27,8 @@ const MEditProfile = () => {
             >
               <img
                 className='w-full rounded-full'
-                src={data?.profile.profilePicture || ManImage}
-                alt={data?.profile.profilePicture || ManImage}
+                src={data?.profile.profilePicture || DefaultUserPicture}
+                alt={data?.profile.profilePicture || DefaultUserPicture}
               />
               <input className='hidden' type='file' name='' id='file' />
               <div className='icon-wrapper absolute bg-[#717171] h-[43px] w-[43px] flex justify-center items-center rounded-full'>

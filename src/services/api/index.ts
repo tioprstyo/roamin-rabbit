@@ -15,7 +15,7 @@ const get = async (url: string, body?: object) => {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: Cookies.get('token'),
+        Authorization: `Bearer ${Cookies.get('token')}`,
       },
       params: body,
     })
@@ -33,7 +33,7 @@ const post = async (url: string, body?: object) => {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: Cookies.get('token'),
+        Authorization: `Bearer ${Cookies.get('token')}`,
       },
     })
     .then((response: AxiosResponse) => {
@@ -50,7 +50,7 @@ const put = async (url: string, body: object) => {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: Cookies.get('token'),
+        Authorization: `Bearer ${Cookies.get('token')}`,
       },
     })
     .then((response: AxiosResponse) => {

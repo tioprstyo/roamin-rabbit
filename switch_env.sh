@@ -12,10 +12,10 @@ case $environment in
         BASE_URL="http://api.roaminrabbit.com"
         ;;
     "staging")
-        BASE_URL="http://api-dev.roaminrabbit.com"
+        BASE_URL="https://dev-api.roaminrabbit.com"
         ;;
     "dev")
-        BASE_URL="https://stoplight.io/mocks/roamin-rabbit/roaming-rabbit-api/19100496"
+        BASE_URL="https://e148-2001-448a-5102-3ab-c01-3cf8-d989-9ad3.ngrok-free.app/api/v1"
         ;;
     *)
         echo "Invalid environment"

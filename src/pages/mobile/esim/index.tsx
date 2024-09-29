@@ -8,13 +8,9 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PublicIcon from '@mui/icons-material/Public';
 import SimCardDownloadOutlinedIcon from '@mui/icons-material/SimCardDownloadOutlined';
 import { useGetExpiredOrder, useGetUpcomingOrders } from 'hooks';
-import { useRecoilValue } from 'recoil';
-import { slidetSettingState } from 'atom/sliderSetting';
-import Slider from 'react-slick';
 
 const MEsim = () => {
   const navigate = useNavigate();
-  const settings = useRecoilValue(slidetSettingState);
   const [openTab, setOpenTab] = useState<number>(1);
   const { data: dataUpcoming, fetching: fetchingUpComing } =
     useGetUpcomingOrders();
@@ -87,167 +83,100 @@ const MEsim = () => {
                     }
                     id='link1'
                   >
-                    {dataUpcoming?.data ? (
+                    {dataUpcoming?.data && (
                       <>
-                        {dataUpcoming.data.length > 1 ? (
-                          <>
-                            <Slider {...settings}>
-                              {dataUpcoming?.data.map((data, i) => (
-                                <div key={i}>
-                                  <div className='active'>
-                                    <div className='list-active shadow'>
-                                      <div className='listCard  border border-roamin-neutral-600 dark:border-roamin-neutral-800 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
-                                        <div className='cardHeader p-4 py-6 flex items-center text-black dark:text-white'>
-                                          <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
-                                          <h1 className='ml-[20px] text-xl font-extrabold'>
-                                            {data.name}
-                                          </h1>
-                                        </div>
-                                        <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
-                                          <span className='flex'>
-                                            <PublicIcon className='mr-3' />
-                                            Coverage
-                                          </span>
-                                          <h3 className='text-[16px] font-black'>
-                                            {data.country}
-                                          </h3>
-                                        </div>
-                                        <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
-                                          <span className='flex'>
-                                            <SimCardDownloadOutlinedIcon className='mr-3' />
-                                            ICCID
-                                          </span>
-                                          <h3 className='text-[16px] font-black'>
-                                            {data.iccid}
-                                          </h3>
-                                        </div>
-                                        <div className='cardFooter grid grid-cols-2 gap-2 items-center p-4 py-6 text-black dark:text-white'>
-                                          <button
-                                            onClick={() =>
-                                              navigate(`/activate/${data.id}`)
-                                            }
-                                            className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
-                                            type='button'
-                                          >
-                                            Active
-                                          </button>
-                                          <button
-                                            onClick={() =>
-                                              navigate(`/detail/sim/${data.id}`)
-                                            }
-                                            className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
-                                            type='button'
-                                          >
-                                            View Detail
-                                          </button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className='caption-active py-7'>
-                                      <h3 className='text-xl font-semibold text-black dark:text-white'>
-                                        Are you looking to buy <br /> a new
-                                        eSIM?
-                                      </h3>
-                                      <a
-                                        className='text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
-                                        href=''
-                                      >
-                                        Visit our store and choose one!
-                                      </a>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                            </Slider>
-                          </>
-                        ) : (
+                        {dataUpcoming.data.length > 0 ? (
                           <>
                             {dataUpcoming?.data.map((data, i) => (
-                              <div className='active' key={i}>
-                                <div className='list-active shadow'>
-                                  <div className='listCard border border-roamin-neutral-600 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
-                                    <div className='cardHeader p-4 py-6 flex items-center text-black dark:text-white'>
-                                      <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
-                                      <h1 className='ml-[20px] text-xl font-extrabold'>
-                                        {data.name}
-                                      </h1>
-                                    </div>
-                                    <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
-                                      <span className='flex'>
-                                        <PublicIcon className='mr-3' />
-                                        Coverage
-                                      </span>
-                                      <h3 className='text-[16px] font-black'>
-                                        {data.country}
-                                      </h3>
-                                    </div>
-                                    <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
-                                      <span className='flex'>
-                                        <SimCardDownloadOutlinedIcon className='mr-3' />
-                                        ICCID
-                                      </span>
-                                      <h3 className='text-[16px] font-black'>
-                                        {data.iccid}
-                                      </h3>
-                                    </div>
-                                    <div className='cardFooter grid grid-cols-2 gap-2 items-center p-4 py-6 text-black dark:text-white'>
-                                      <button
-                                        onClick={() =>
-                                          navigate(`/activate/${data.id}`)
-                                        }
-                                        className='text-black dark:text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-black dark:border-[#FFEC69] rounded-[9px] w-full text-[14px]'
-                                        type='button'
-                                      >
-                                        Active
-                                      </button>
-                                      <button
-                                        onClick={() =>
-                                          navigate(`/detail/sim/${data.id}`)
-                                        }
-                                        className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
-                                        type='button'
-                                      >
-                                        View Detail
-                                      </button>
+                              <div key={i}>
+                                <div className='active mb-5'>
+                                  <div className='list-active shadow'>
+                                    <div className='listCard  border border-roamin-neutral-600 dark:border-roamin-neutral-800 divide-y divide-roamin-neutral-600 dark:divide-roamin-neutral-800 dark:bg-roamin-dark-700 rounded-[9px]'>
+                                      <div className='cardHeader p-4 py-6 flex items-center text-black dark:text-white'>
+                                        <div className='w-[103px] h-[63px] bg-roamin-neutral-500 rounded-[9px]' />
+                                        <h1 className='ml-[20px] text-xl font-extrabold'>
+                                          {data.name}
+                                        </h1>
+                                      </div>
+                                      <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
+                                        <span className='flex'>
+                                          <PublicIcon className='mr-3' />
+                                          Coverage
+                                        </span>
+                                        <h3 className='text-[16px] font-black'>
+                                          {data.country}
+                                        </h3>
+                                      </div>
+                                      <div className='cardContent flex justify-between px-4 py-6 items-center text-black dark:text-white'>
+                                        <span className='flex'>
+                                          <SimCardDownloadOutlinedIcon className='mr-3' />
+                                          ICCID
+                                        </span>
+                                        <h3 className='text-[16px] font-black'>
+                                          {data.iccid}
+                                        </h3>
+                                      </div>
+                                      <div className='cardFooter grid grid-cols-2 gap-2 items-center p-4 py-6 text-black dark:text-white'>
+                                        <button
+                                          onClick={() =>
+                                            navigate(`/activate/${data.id}`)
+                                          }
+                                          className='text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-[#FFEC69] rounded-[9px] w-full text-[14px]'
+                                          type='button'
+                                        >
+                                          Active
+                                        </button>
+                                        <button
+                                          onClick={() =>
+                                            navigate(`/detail/sim/${data.id}`)
+                                          }
+                                          className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
+                                          type='button'
+                                        >
+                                          View Detail
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                                <div className='caption-active py-7'>
-                                  <h3 className='text-xl font-semibold text-black dark:text-white'>
-                                    Are you looking to buy <br /> a new eSIM?
-                                  </h3>
-                                  <a
-                                    className='text-[#5F97BC] dark:text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
-                                    href=''
-                                  >
-                                    Visit our store and choose one!
-                                  </a>
                                 </div>
                               </div>
                             ))}
+                            <div className='caption-active py-7'>
+                              <h3 className='text-xl font-semibold text-black dark:text-white'>
+                                Are you looking to buy <br /> a new eSIM?
+                              </h3>
+                              <a
+                                className='text-[#FFEC69] text-sm font-normal underline underline-offset-1 mt-5 block'
+                                href=''
+                              >
+                                Visit our store and choose one!
+                              </a>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className='text-black dark:text-white'>
+                              <img
+                                className='mx-auto mt-10'
+                                src={NoSimImage}
+                                alt=''
+                              />
+                              <p className='my-7'>
+                                You don't have an active
+                                <br />
+                                data plan
+                              </p>
+                              <button
+                                onClick={() => navigate('/')}
+                                className='bg-roamin-yellow-500 text-black font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 mt-3 w-full text-[14px]'
+                                type='button'
+                              >
+                                Buy Now
+                              </button>
+                            </div>
                           </>
                         )}
                       </>
-                    ) : (
-                      <div className='text-black dark:text-white'>
-                        <img
-                          className='mx-auto mt-10'
-                          src={NoSimImage}
-                          alt=''
-                        />
-                        <p className='my-7'>
-                          You don't have an active
-                          <br />
-                          data plan
-                        </p>
-                        <button
-                          onClick={() => navigate('/listing')}
-                          className='bg-roamin-yellow-500 text-black font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 mt-3 w-full text-[14px]'
-                          type='button'
-                        >
-                          Buy Now
-                        </button>
-                      </div>
                     )}
                   </div>
                   <div
@@ -256,7 +185,7 @@ const MEsim = () => {
                     }
                     id='link2'
                   >
-                    {dataExpired.data ? (
+                    {dataExpired.data.length > 0 ? (
                       <>
                         {dataExpired.data.map((data, i) => (
                           <div className='active' key={i}>
@@ -296,15 +225,20 @@ const MEsim = () => {
                                   </h3>
                                 </div>
                                 <div className='cardFooter grid grid-cols-2 gap-2 items-center border border-t-[#E2DFDF] p-4 py-6'>
-                                  <button
-                                    className='text-black dark:text-[#FFEC69] font-extrabold text-sm px-2 py-3 border border-black dark:border-[#FFEC69] rounded-[9px] w-full text-[14px]'
+                                  <Link
+                                    to={`/detail/expired/${data.id}`}
                                     type='button'
                                   >
-                                    Active
-                                  </button>
+                                    <button
+                                      className='text-black font-extrabold text-sm px-2 py-3 border border-black dark:border-[#FFEC69] dark:bg-roamin-yellow-500 rounded-[9px] w-full text-[14px]'
+                                      type='button'
+                                    >
+                                      Reactivated
+                                    </button>
+                                  </Link>
                                   <Link
                                     to={`/detail/sim/${data.id}`}
-                                    className='text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
+                                    className='dark:text-white text-black font-extrabold text-sm px-2 py-3 border border-[E2DFDF] dark:bg-transparent dark:border-white bg-[#E2DFDF] rounded-[9px] w-full text-[14px]'
                                     type='button'
                                   >
                                     View Detail
@@ -340,7 +274,7 @@ const MEsim = () => {
                           data plan
                         </p>
                         <button
-                          onClick={() => navigate('/listing')}
+                          onClick={() => navigate('/')}
                           className='bg-roamin-yellow-500 text-black font-extrabold uppercase text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 mt-3 w-full text-[14px]'
                           type='button'
                         >

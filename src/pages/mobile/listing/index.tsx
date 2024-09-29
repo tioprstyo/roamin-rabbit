@@ -17,7 +17,6 @@ import {
   FilterProps,
   HEADER_TYPE,
   ListParamsProps,
-  PackageFilterProps,
 } from 'interfaces';
 import { useRecoilValue } from 'recoil';
 import { slidetSettingState } from 'atom/sliderSetting';

@@ -16,8 +16,8 @@ export const useOrder = () => {
         paymentMetadata: {
           in: order.paymentMetadata.in,
           work: order.paymentMetadata.work,
-          progress: order.paymentMetadata.progress
-        }
+          progress: order.paymentMetadata.progress,
+        },
       });
       if (resp?.status === 'success') {
         setData(resp);
