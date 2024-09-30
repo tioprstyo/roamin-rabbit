@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from 'hooks';
 import PhoneInput from 'react-phone-input-2';
+import AppleImg from 'assets/img/Apple.png';
+import GoogleImg from 'assets/img/Google.png';
 
 const MLogin = () => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const MLogin = () => {
 
   useEffect(() => {
     if (data) {
-      navigate('/verifikasi');
+      navigate('/verifikasi/choose-verifikasi');
     }
   }, [data, navigate]);
 
@@ -73,9 +75,22 @@ const MLogin = () => {
             >
               Login
             </button>
+
+            <span className='text-white my-7 text-or'></span>
+
+            <button className='bg-white font-extrabold text-sm px-3 py-3 rounded-[9px] my-3 w-full text-[14px]'>
+              <img className='inline mr-3' src={GoogleImg} alt={GoogleImg} />
+              Sign In With Google
+            </button>
+            {/iPad|iPhone|iPod/.test(navigator.userAgent) && (
+              <button className='bg-white font-extrabold text-sm px-3 py-3 rounded-[9px] my-3 w-full text-[14px]'>
+                <img className='inline mr-3' src={AppleImg} alt={AppleImg} />
+                Sign In With Apple
+              </button>
+            )}
           </div>
         </div>
-        <div className='registrer mt-16 text-center'>
+        <div className='registrer my-7 text-center'>
           <span className='text-sm font-medium text-black dark:text-white'>
             Don’t have an account?{' '}
             <Link

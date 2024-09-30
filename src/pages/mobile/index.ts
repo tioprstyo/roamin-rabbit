@@ -19,3 +19,4 @@ export { default as MCompatible } from './compatible';
 export { default as MConfirm } from './confirm';
 export { default as MActivate } from './activate';
 export { default as MTutorial } from './tutorial';
+export { default as MChooseOtp } from './chooseOtp';
