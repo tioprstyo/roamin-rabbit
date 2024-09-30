@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2';
 import { useRegister } from 'hooks';
+import AppleImg from 'assets/img/Apple.png';
+import GoogleImg from 'assets/img/Google.png';
 
 const MRegister = () => {
   const navigate = useNavigate();
@@ -92,6 +94,19 @@ const MRegister = () => {
             >
               Register
             </button>
+
+            <span className='text-white my-8 text-register'></span>
+
+            <div className='button-container flex justify-center'>
+              <button className='bg-white font-extrabold text-sm px-3 py-3 rounded-[9px] mx-3 text-[14px]'>
+                <img className='inline' src={GoogleImg} alt={GoogleImg} />
+              </button>
+              {/iPad|iPhone|iPod/.test(navigator.userAgent) && (
+                <button className='bg-white font-extrabold text-sm px-3 py-3 rounded-[9px] mx-3 text-[14px]'>
+                  <img className='inline' src={AppleImg} alt={AppleImg} />
+                </button>
+              )}
+            </div>
           </div>
           <div className='registrer mb-7 text-center'>
             <span className='text-sm font-medium dark:text-white'>

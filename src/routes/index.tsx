@@ -21,6 +21,7 @@ import {
   MConfirm,
   MActivate,
   MTutorial,
+  MChooseOtp,
 } from 'pages/mobile';
 import { MobileLayout } from 'components';
 import { RouteObjectProps } from 'interfaces';
@@ -61,9 +62,21 @@ const Router = () => {
           key: 'register',
         },
         {
-          element: windowSize > 768 ? <MVerification /> : <MVerification />,
+          element: '',
           path: 'verifikasi',
           key: 'verifikasi',
+          children: [
+            {
+              element: windowSize > 768 ? <MVerification /> : <MVerification />,
+              path: '',
+              key: 'verifikasi-otp',
+            },
+            {
+              element: windowSize > 768 ? <MChooseOtp /> : <MChooseOtp />,
+              path: 'choose-verifikasi',
+              key: 'choose-verifikasi',
+            },
+          ],
         },
         {
           element: windowSize > 768 ? <MEsim /> : <MEsim />,
