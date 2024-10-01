@@ -19,3 +19,4 @@ export * from './useOrder';
 export * from './useOrder';
 export * from './useActivateOrder';
 export * from './useGetPlanDetail';
+export * from './userEditPicture';

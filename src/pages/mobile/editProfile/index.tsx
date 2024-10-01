@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from 'components';
 import { HEADER_TYPE } from 'interfaces';
 import FlagImage from 'assets/img/flag.png';
@@ -7,10 +7,36 @@ import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import { useNavigate } from 'react-router-dom';
 import { profileState } from 'atom';
 import { useRecoilValue } from 'recoil';
+import userEditPicture from 'hooks/userEditPicture';
 
 const MEditProfile = () => {
   const navigate = useNavigate();
+  const [Foto, setFoto] = useState<File | string>('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { profile } = useRecoilValue(profileState);
+  const { data, fetching } = userEditPicture();
+
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setFoto(URL.createObjectURL(event.target.files[0]));
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
+  const submit = () => {
+    const formData = new FormData();
+    formData.append('profilePicture', selectedFile as File);
+
+    fetching(formData);
+
+    console.log(data);
+  };
+
+  useEffect(() => {
+    profile?.profilePicture
+      ? setFoto(profile?.profilePicture)
+      : setFoto(DefaultUserPicture);
+  }, [profile]);
 
   return (
     <>
@@ -18,16 +44,19 @@ const MEditProfile = () => {
       <div className='content-wrapper p-4 bg-[#FFF7DA] dark:bg-roamin-dark-600 min-h-[calc(100vh-4rem)]'>
         <div className='form-account'>
           <div className='avatar-section flex justify-center'>
-            <label
-              className='w-[169px] h-[169px] rounded-full block border-4 border-[#9C9C9C] relative'
-              htmlFor='file'
-            >
+            <label className='relative' htmlFor='file'>
               <img
-                className='w-full rounded-full'
-                src={profile?.profilePicture || DefaultUserPicture}
-                alt={profile?.profilePicture || DefaultUserPicture}
+                className='w-[169px] h-[169px] rounded-full block border-4 border-[#9C9C9C]'
+                src={Foto as string}
+                alt={Foto as string}
               />
-              <input className='hidden' type='file' name='' id='file' />
+              <input
+                className='hidden'
+                type='file'
+                name=''
+                id='file'
+                onChange={handleFileSelect}
+              />
               <div className='icon-wrapper absolute bg-[#717171] h-[43px] w-[43px] flex justify-center items-center rounded-full'>
                 <CameraAltOutlinedIcon sx={{ color: 'white', fontSize: 30 }} />
               </div>
@@ -95,6 +124,14 @@ const MEditProfile = () => {
               placeholder='Email'
               className='px-3 py-3 mt-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded-lg text-sm border border-[#BEBEBE] w-full'
             />
+          </div>
+          <div className='form mb-6'>
+            <button
+              className='bg-[#FFEC69] color-[#000000] font-extrabold text-sm px-4 py-4 rounded-[9px] mr-1 mb-1 w-full text-[14px]'
+              onClick={submit}
+            >
+              save
+            </button>
           </div>
         </div>
       </div>
