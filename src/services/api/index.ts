@@ -53,7 +53,8 @@ const post = async (url: string, body?: object) => {
     });
 };
 
-const put = async (url: string, body: object) => {
+const put = async (url: string, body: object, type?: string) => {
+  console.log(body);
   return await axios
     .put(`${process.env.REACT_APP_BASE_URL}${url}`, body, {
       ...config,
@@ -62,6 +63,8 @@ const put = async (url: string, body: object) => {
         Authorization: Cookies.get('token')
           ? `Bearer ${Cookies.get('token')}`
           : '',
+        'Content-Type':
+          type == 'media' ? 'multipart/form-data' : 'application/json',
       },
     })
     .then((response: AxiosResponse) => {
